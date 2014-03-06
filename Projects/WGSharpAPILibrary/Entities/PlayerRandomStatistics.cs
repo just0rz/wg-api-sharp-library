@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WGSharpAPI.Interfaces
+namespace WGSharpAPI.Entities
 {
-    public interface IWGResponse<T>
+    public class PlayerRandomStatistics : Statistics
     {
     }
 }

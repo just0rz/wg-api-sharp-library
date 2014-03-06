@@ -43,6 +43,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Player.cs" />
+    <Compile Include="Entities\PlayerAchievements.cs" />
+    <Compile Include="Entities\PlayerClan.cs" />
+    <Compile Include="Entities\PlayerClanStatistics.cs" />
+    <Compile Include="Entities\PlayerCompaniesStatistics.cs" />
+    <Compile Include="Entities\PlayerRandomStatistics.cs" />
+    <Compile Include="Entities\PlayerStatistics.cs" />
+    <Compile Include="Entities\Statistics.cs" />
+    <Compile Include="Enums\WGLanguageField.cs" />
+    <Compile Include="Enums\WGPlayerListField.cs" />
     <Compile Include="Interfaces\IWGApplication.cs" />
     <Compile Include="Interfaces\IWGRequest.cs" />
     <Compile Include="Interfaces\IWGResponse.cs" />
@@ -50,8 +60,10 @@
     <Compile Include="WGApplication.cs" />
     <Compile Include="Enums\WGRequestMethod.cs" />
     <Compile Include="Enums\WGRequestProtocol.cs" />
+    <Compile Include="WGRawResponse.cs" />
     <Compile Include="WGRequest.cs" />
     <Compile Include="WGResponse.cs" />
+    <Compile Include="WGSettings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="license.txt">

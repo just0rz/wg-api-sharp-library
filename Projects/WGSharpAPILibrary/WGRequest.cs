@@ -6,7 +6,10 @@ using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPI
 {
-    public class WGRequest : IWGRequest
+    /// <summary>
+    /// WILL BE USED IN THE FUTURE
+    /// </summary>
+    class WGRequest : IWGRequest
     {
     }
 }

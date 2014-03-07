@@ -2,6 +2,9 @@
 
 namespace WGSharpAPI.Enums
 {
+    /// <summary>
+    /// THIS WILL MOST PROBABLY BE REMOVED IN THE FUTURE
+    /// </summary>
     [Flags]
     public enum WGPlayerListField
     {

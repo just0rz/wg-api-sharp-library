@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace WGSharpAPI.Interfaces
+﻿namespace WGSharpAPI.Interfaces
 {
-    public interface IWGRequest
+    /// <summary>
+    /// WILL BE USED IN THE FUTURE
+    /// </summary>
+    interface IWGRequest
     {
     }
 }

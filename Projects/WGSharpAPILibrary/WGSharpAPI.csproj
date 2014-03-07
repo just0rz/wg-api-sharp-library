@@ -44,13 +44,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\PlayerAchievements.cs" />
-    <Compile Include="Entities\PlayerClan.cs" />
-    <Compile Include="Entities\PlayerClanStatistics.cs" />
-    <Compile Include="Entities\PlayerCompaniesStatistics.cs" />
-    <Compile Include="Entities\PlayerRandomStatistics.cs" />
+    <Compile Include="Entities\Achievements.cs" />
+    <Compile Include="Entities\Clan.cs" />
+    <Compile Include="Entities\ClanStatistics.cs" />
+    <Compile Include="Entities\CompanyStatistics.cs" />
+    <Compile Include="Entities\OverallStatistics.cs" />
+    <Compile Include="Entities\PrivateData.cs" />
     <Compile Include="Entities\PlayerStatistics.cs" />
-    <Compile Include="Entities\Statistics.cs" />
+    <Compile Include="Entities\BaseStatistics.cs" />
+    <Compile Include="Entities\Tank.cs" />
+    <Compile Include="Entities\TankStatistics.cs" />
     <Compile Include="Enums\WGLanguageField.cs" />
     <Compile Include="Enums\WGPlayerListField.cs" />
     <Compile Include="Interfaces\IWGApplication.cs" />

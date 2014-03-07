@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities
 {
-    public class PlayerStatistics
+    public class Statistics
     {
         [JsonProperty("clan")]
-        public PlayerClanStatistics Clan { get; set; }
+        public ClanStatistics Clan { get; set; }
 
         [JsonProperty("all")]
-        public PlayerRandomStatistics Random { get; set; }
+        public OverallStatistics Overall { get; set; }
 
         [JsonProperty("company")]
-        public PlayerCompaniesStatistics Companies { get; set; }
+        public CompanyStatistics Company { get; set; }
 
         [JsonProperty("max_xp")]
         public long MaxXp { get; set; }

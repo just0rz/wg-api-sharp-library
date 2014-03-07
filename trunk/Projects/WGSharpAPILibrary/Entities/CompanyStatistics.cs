@@ -5,7 +5,7 @@ using System.Text;
 
 namespace WGSharpAPI.Entities
 {
-    public class PlayerClanStatistics : Statistics
+    public class CompanyStatistics : BaseStatistics
     {
     }
 }

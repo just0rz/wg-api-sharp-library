@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using WGSharpAPI.Interfaces;
-using WGSharpAPI.Entities;
-using Newtonsoft.Json;
+﻿using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPI
 {

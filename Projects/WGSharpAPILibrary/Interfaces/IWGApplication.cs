@@ -44,12 +44,14 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
         WGResponse<List<Player>> GetPlayerInfo(long accountId);
+
         /// <summary>
         /// Method returns player details.
         /// </summary>
         /// <param name="accountId">list of player account ids</param>
         /// <returns></returns>
         WGResponse<List<Player>> GetPlayerInfo(long[] accountIds);
+
         /// <summary>
         /// Method returns player details.
         /// </summary>
@@ -59,7 +61,6 @@ namespace WGSharpAPI.Interfaces
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
         WGResponse<List<Player>> GetPlayerInfo(long[] accountIds, WGLanguageField language, string accessToken, string responseFields);
-
 
         #endregion Player Info
 
@@ -102,12 +103,14 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
         WGResponse<List<Tank>> GetPlayerVehicles(long accountId);
+
         /// <summary>
         /// Method returns details on player's vehicles.
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
         WGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds);
+
         /// <summary>
         /// Method returns details on player's vehicles.
         /// </summary>
@@ -128,12 +131,14 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
         WGResponse<object> GetPlayerAchievements(long accountId);
+
         /// <summary>
         /// Warning. This method runs in test mode. Throws NotImplementedException
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
         WGResponse<object> GetPlayerAchievements(long[] accountId);
+
         /// <summary>
         /// Warning. This method runs in test mode. Throws NotImplementedException
         /// </summary>

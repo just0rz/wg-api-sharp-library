@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using Newtonsoft.Json;
 
-namespace WGSharpAPI.Entities
+namespace WGSharpAPI.Entities.PlayerDetails
 {
     public class PrivateData
     {

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace WGSharpAPI.Entities
+namespace WGSharpAPI.Entities.PlayerDetails
 {
-    public class OverallStatistics : BaseStatistics
+    public class ClanStatistics : BaseStatistics
     {
     }
 }

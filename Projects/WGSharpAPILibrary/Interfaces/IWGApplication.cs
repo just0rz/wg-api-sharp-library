@@ -1,7 +1,8 @@
-﻿using System.Collections.Generic;
-using WGSharpAPI.Entities;
+﻿using System;
+using System.Collections.Generic;
 using WGSharpAPI.Enums;
-using System;
+using WGSharpAPI.Entities.ClanDetails;
+using WGSharpAPI.Entities.PlayerDetails;
 
 namespace WGSharpAPI.Interfaces
 {
@@ -150,5 +151,65 @@ namespace WGSharpAPI.Interfaces
         WGResponse<object> GetPlayerAchievements(long[] accountIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Player Achievements
+
+        #region Authentication
+
+        /// <summary>
+        /// Method authenticates user based on Wargaming.net ID (OpenID). To log in, player must enter email and password used for creating account.
+        /// The way I want to implement this might not be accepted. This will, most probably, be dropped in the future.
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <returns></returns>
+        string AccessToken(string username, string password);
+
+        /// <summary>
+        /// Method generates new access_token based on the current token.
+        /// This method is used when the player is still using the application but the current access_token is about to expire.
+        /// </summary>
+        /// <param name="accessToken">access token</param>
+        /// <returns></returns>
+        string ProlongToken(string accessToken);
+
+        /// <summary>
+        /// Method deletes user's access_token.
+        /// After this method is called, access_token becomes invalid.
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <returns></returns>
+        string Logout(string accessToken);
+
+        #endregion Authentication
+
+        #region Search Clans
+
+        /// <summary>
+        /// Method returns partial list of clans filtered by initial characters of clan name or tag. The list is sorted by clan nameby default.
+        /// </summary>
+        /// <param name="searchTerm">search string</param>
+        /// <returns></returns>
+        WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm);
+
+        /// <summary>
+        /// Method returns partial list of clans filtered by initial characters of clan name or tag. The list is sorted by clan nameby default.
+        /// </summary>
+        /// <param name="searchTerm">search string</param>
+        /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
+        /// <returns></returns>
+        WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, int limit);
+
+        /// <summary>
+        /// Method returns partial list of clans filtered by initial characters of clan name or tag. 
+        /// </summary>
+        /// <param name="searchTerm">search string</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
+        /// <param name="orderby">The list is sorted by clan name (default), creation date, tag, or size.</param>
+        /// <returns></returns>
+        WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby);
+
+        #endregion Search Clans
     }
 }

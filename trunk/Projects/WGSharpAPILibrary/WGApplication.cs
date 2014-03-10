@@ -5,7 +5,7 @@ using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using WGSharpAPI.Entities;
+using WGSharpAPI.Entities.PlayerDetails;
 using WGSharpAPI.Enums;
 using WGSharpAPI.Interfaces;
 
@@ -223,7 +223,7 @@ namespace WGSharpAPI
         [Obsolete("Method is deprecated and will be removed soon.")]
         public WGResponse<object> GetPlayerRatings(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
         {
-            return null;
+            throw new NotImplementedException();
         }
 
         private string CreatePlayerRatingsRequestURI(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
@@ -394,6 +394,118 @@ namespace WGSharpAPI
         }
 
         #endregion Player Achievements
+
+        #region Authentication
+
+        /// <summary>
+        /// Method authenticates user based on Wargaming.net ID (OpenID). To log in, player must enter email and password used for creating account.
+        /// The way I want to implement this might not be accepted. This will, most probably, be dropped in the future.
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <returns></returns>
+        public string AccessToken(string username, string password)
+        {
+            var target = "auth/login";
+            var accessToken = string.Empty;
+
+            throw new NotImplementedException("This feature has not been implemented yet");
+        }
+
+        /// <summary>
+        /// Method generates new access_token based on the current token.
+        /// This method is used when the player is still using the application but the current access_token is about to expire.
+        /// </summary>
+        /// <param name="accessToken">access token</param>
+        /// <returns></returns>
+        public string ProlongToken(string accessToken)
+        {
+            var target = "auth/prolongate";
+
+            throw new NotImplementedException("This feature has not been implemented yet");
+        }
+
+        /// <summary>
+        /// Method deletes user's access_token.
+        /// After this method is called, access_token becomes invalid.
+        /// </summary>
+        /// <param name="username">username</param>
+        /// <param name="password">password</param>
+        /// <returns></returns>
+        public string Logout(string accessToken)
+        {
+            var target = "auth/logout";
+
+            throw new NotImplementedException("This feature has not been implemented yet");
+        }
+
+        #endregion Authentication
+
+        #region Clans
+
+        /// <summary>
+        /// Method returns partial list of clans filtered by initial characters of clan name or tag. The list is sorted by clan nameby default.
+        /// </summary>
+        /// <param name="searchTerm">search string</param>
+        /// <returns></returns>
+        public WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm)
+        {
+            return SearchClans(searchTerm, WGLanguageField.EN, null, 100, null);
+        }
+
+        /// <summary>
+        /// Method returns partial list of clans filtered by initial characters of clan name or tag. The list is sorted by clan nameby default.
+        /// </summary>
+        /// <param name="searchTerm">search string</param>
+        /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
+        /// <returns></returns>
+        public WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, int limit)
+        {
+            return SearchClans(searchTerm, WGLanguageField.EN, null, limit, null);
+        }
+
+        /// <summary>
+        /// Method returns partial list of clans filtered by initial characters of clan name or tag. 
+        /// </summary>
+        /// <param name="searchTerm">search string</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
+        /// <param name="orderby">The list is sorted by clan name (default), creation date, tag, or size.</param>
+        /// <returns></returns>
+        public WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby)
+        {
+            var requestURI = CreateClanSearchRequestURI(searchTerm, language, responseFields, limit, orderby);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var obj = JsonConvert.DeserializeObject<WGResponse<List<Entities.ClanDetails.Clan>>>(output);
+
+            return obj;
+        }
+
+        private string CreateClanSearchRequestURI(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby)
+        {
+            var target = "clan/list";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            sb.AppendFormat("&search={0}&limit={1}", searchTerm, limit);
+
+            if (!string.IsNullOrWhiteSpace(orderby))
+                sb.AppendFormat("&order_by={0}", orderby);
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Clans
 
         #region General methods
 

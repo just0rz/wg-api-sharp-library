@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace WGSharpAPI.Entities
+namespace WGSharpAPI.Entities.PlayerDetails
 {
     public class Player
     {

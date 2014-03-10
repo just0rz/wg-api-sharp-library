@@ -43,23 +43,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Entities\Player.cs" />
-    <Compile Include="Entities\Achievements.cs" />
-    <Compile Include="Entities\Clan.cs" />
-    <Compile Include="Entities\ClanStatistics.cs" />
-    <Compile Include="Entities\CompanyStatistics.cs" />
-    <Compile Include="Entities\OverallStatistics.cs" />
-    <Compile Include="Entities\PrivateData.cs" />
-    <Compile Include="Entities\PlayerStatistics.cs" />
+    <Compile Include="Entities\ClanDetails\Clan.cs" />
+    <Compile Include="Entities\ClanDetails\Emblem.cs" />
+    <Compile Include="Entities\PlayerDetails\Player.cs" />
+    <Compile Include="Entities\PlayerDetails\Achievements.cs" />
+    <Compile Include="Entities\PlayerDetails\Clan.cs" />
+    <Compile Include="Entities\PlayerDetails\ClanStatistics.cs" />
+    <Compile Include="Entities\PlayerDetails\CompanyStatistics.cs" />
+    <Compile Include="Entities\PlayerDetails\OverallStatistics.cs" />
+    <Compile Include="Entities\PlayerDetails\PrivateData.cs" />
+    <Compile Include="Entities\PlayerDetails\PlayerStatistics.cs" />
     <Compile Include="Entities\BaseStatistics.cs" />
-    <Compile Include="Entities\Tank.cs" />
-    <Compile Include="Entities\TankStatistics.cs" />
+    <Compile Include="Entities\PlayerDetails\Tank.cs" />
+    <Compile Include="Entities\PlayerDetails\TankStatistics.cs" />
     <Compile Include="Enums\WGLanguageField.cs" />
     <Compile Include="Enums\WGPlayerListField.cs" />
     <Compile Include="Interfaces\IWGApplication.cs" />
     <Compile Include="Interfaces\IWGRequest.cs" />
     <Compile Include="Interfaces\IWGResponse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tools\DateTimeTools.cs" />
     <Compile Include="WGApplication.cs" />
     <Compile Include="Enums\WGRequestMethod.cs" />
     <Compile Include="Enums\WGRequestProtocol.cs" />
@@ -72,6 +75,9 @@
     <Content Include="license.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\EncyclopediaDetails\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

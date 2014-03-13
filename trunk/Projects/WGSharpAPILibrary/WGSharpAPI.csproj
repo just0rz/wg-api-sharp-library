@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Entities\ClanDetails\Clan.cs" />
     <Compile Include="Entities\ClanDetails\Emblem.cs" />
+    <Compile Include="Entities\ClanDetails\Member.cs" />
     <Compile Include="Entities\PlayerDetails\Player.cs" />
     <Compile Include="Entities\PlayerDetails\Achievements.cs" />
     <Compile Include="Entities\PlayerDetails\Clan.cs" />

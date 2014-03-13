@@ -46,7 +46,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="searchTerm">search string</param>
         /// <returns></returns>
-        public WGResponse<List<Player>> SearchPlayers(string searchTerm)
+        public IWGResponse<List<Player>> SearchPlayers(string searchTerm)
         {
             return SearchPlayers(searchTerm, WGPlayerListField.All, WGLanguageField.EN, 100);
         }
@@ -57,7 +57,7 @@ namespace WGSharpAPI
         /// <param name="searchTerm">search string</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        public WGResponse<List<Player>> SearchPlayers(string searchTerm, int limit)
+        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, int limit)
         {
             return SearchPlayers(searchTerm, WGPlayerListField.All, WGLanguageField.EN, limit);
         }
@@ -70,7 +70,7 @@ namespace WGSharpAPI
         /// <param name="language">language</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        public WGResponse<List<Player>> SearchPlayers(string searchTerm, WGPlayerListField responseFields, WGLanguageField language, int limit)
+        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, WGPlayerListField responseFields, WGLanguageField language, int limit)
         {
             var fields = new StringBuilder();
 
@@ -117,7 +117,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        public WGResponse<List<Player>> GetPlayerInfo(long accountId)
+        public IWGResponse<List<Player>> GetPlayerInfo(long accountId)
         {
             return GetPlayerInfo(new[] { accountId }, WGLanguageField.EN, null, null);
         }
@@ -127,7 +127,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountId">list of player account ids</param>
         /// <returns></returns>
-        public WGResponse<List<Player>> GetPlayerInfo(long[] accountIds)
+        public IWGResponse<List<Player>> GetPlayerInfo(long[] accountIds)
         {
             return GetPlayerInfo(accountIds, WGLanguageField.EN, null, null);
         }
@@ -140,7 +140,7 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGResponse<List<Player>> GetPlayerInfo(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<Player>> GetPlayerInfo(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreatePlayerDataRequestURI(accountIds, language, accessToken, responseFields);
 
@@ -196,7 +196,7 @@ namespace WGSharpAPI
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
         [Obsolete("Method is deprecated and will be removed soon.")]
-        public WGResponse<object> GetPlayerRatings(long accountId)
+        public IWGResponse<object> GetPlayerRatings(long accountId)
         {
             return GetPlayerRatings(new[] { accountId });
         }
@@ -207,7 +207,7 @@ namespace WGSharpAPI
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
         [Obsolete("Method is deprecated and will be removed soon.")]
-        public WGResponse<object> GetPlayerRatings(long[] accountIds)
+        public IWGResponse<object> GetPlayerRatings(long[] accountIds)
         {
             return GetPlayerRatings(accountIds, WGLanguageField.EN, null, null);
         }
@@ -221,7 +221,7 @@ namespace WGSharpAPI
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
         [Obsolete("Method is deprecated and will be removed soon.")]
-        public WGResponse<object> GetPlayerRatings(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<object> GetPlayerRatings(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
         {
             throw new NotImplementedException();
         }
@@ -256,7 +256,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        public WGResponse<List<Tank>> GetPlayerVehicles(long accountId)
+        public IWGResponse<List<Tank>> GetPlayerVehicles(long accountId)
         {
             return GetPlayerVehicles(new[] { accountId }, WGLanguageField.EN, null, null);
         }
@@ -266,7 +266,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
-        public WGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds)
+        public IWGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds)
         {
             return GetPlayerVehicles(accountIds, WGLanguageField.EN, null, null);
         }
@@ -279,7 +279,7 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreatePlayerVehiclesRequestURI(accountIds, language, accessToken, responseFields);
 
@@ -342,7 +342,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        public WGResponse<object> GetPlayerAchievements(long accountId)
+        public IWGResponse<object> GetPlayerAchievements(long accountId)
         {
             return GetPlayerAchievements(new[] { accountId });
         }
@@ -352,7 +352,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
-        public WGResponse<object> GetPlayerAchievements(long[] accountIds)
+        public IWGResponse<object> GetPlayerAchievements(long[] accountIds)
         {
             return GetPlayerAchievements(accountIds, WGLanguageField.EN, null, null);
         }
@@ -365,7 +365,7 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGResponse<object> GetPlayerAchievements(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<object> GetPlayerAchievements(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreatePlayerAchievementsRequestURI(accountIds, language, accessToken, responseFields);
 
@@ -441,14 +441,14 @@ namespace WGSharpAPI
 
         #endregion Authentication
 
-        #region Clans
+        #region Search Clans
 
         /// <summary>
         /// Method returns partial list of clans filtered by initial characters of clan name or tag. The list is sorted by clan nameby default.
         /// </summary>
         /// <param name="searchTerm">search string</param>
         /// <returns></returns>
-        public WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm)
+        public IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm)
         {
             return SearchClans(searchTerm, WGLanguageField.EN, null, 100, null);
         }
@@ -459,7 +459,7 @@ namespace WGSharpAPI
         /// <param name="searchTerm">search string</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        public WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, int limit)
+        public IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, int limit)
         {
             return SearchClans(searchTerm, WGLanguageField.EN, null, limit, null);
         }
@@ -473,7 +473,7 @@ namespace WGSharpAPI
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <param name="orderby">The list is sorted by clan name (default), creation date, tag, or size.</param>
         /// <returns></returns>
-        public WGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby)
+        public IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby)
         {
             var requestURI = CreateClanSearchRequestURI(searchTerm, language, responseFields, limit, orderby);
 
@@ -505,7 +505,83 @@ namespace WGSharpAPI
             return requestURI;
         }
 
-        #endregion Clans
+        #endregion Search Clans
+
+        #region Clan Details
+
+        /// <summary>
+        /// Method returns clan details.
+        /// </summary>
+        /// <param name="clanId">clan id</param>
+        /// <returns></returns>
+        public IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long clanId)
+        {
+            return GetClanDetails(new long[] { clanId }, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns clan details.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <returns></returns>
+        public IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long[] clanIds)
+        {
+            return GetClanDetails(clanIds, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns clan details.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        public IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var requestURI = CreateClanInfoRequestURI(clanIds, language, accessToken, responseFields);
+
+            var output = GetRequestResponse(requestURI);
+
+
+            var obj = new WGResponse<List<Entities.ClanDetails.Clan>>();
+
+            var jObject = JsonConvert.DeserializeObject<WGRawResponse>(output).Data as JObject;
+
+            // TODO:
+            // We have a problem deserializing this json due to the fact that we get an array of id fields under members
+            // this can be avoided by implementing a JsonConverter and use that do parse the data correctly
+            //
+            // This will be done in the future because I want to see what other methods need this kind of approach
+            // for the momnet it will throw a NotImplementedException
+
+            throw new NotImplementedException();
+
+            return obj;
+        }
+
+        private string CreateClanInfoRequestURI(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var target = "clan/info";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+                sb.AppendFormat("&access_token={0}", accessToken);
+
+            sb.AppendFormat("&clan_id={0}", string.Join(",", clanIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Clan Details
 
         #region General methods
 
@@ -533,16 +609,9 @@ namespace WGSharpAPI
 
         private string GetRequestResponse(string requestURI)
         {
-            var webRequest = HttpWebRequest.Create(requestURI);
-            var response = webRequest.GetResponse();
+            IWGRequest request = new WGRequest(requestURI);
 
-            var responseStream = response.GetResponseStream();
-            string output = string.Empty;
-            using (StreamReader reader = new StreamReader(responseStream))
-            {
-                output = reader.ReadToEnd();
-            }
-            response.Close();
+            var output = request.GetResponse();
 
             return output;
         }

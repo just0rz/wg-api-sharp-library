@@ -37,5 +37,8 @@ namespace WGSharpAPI.Entities.ClanDetails
 
         [JsonProperty("emblems")]
         public Emblem Emblems { get; set; }
+
+        //[JsonProperty("members")]
+        //public List<Member> Members { get; set; }
     }
 }

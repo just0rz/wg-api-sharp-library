@@ -239,5 +239,136 @@ namespace WGSharpAPI.Interfaces
         IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Clan Details
+
+        #region Clan's Battles
+
+        /// <summary>
+        /// Method returns list of clan's battles.
+        /// </summary>
+        /// <param name="clanId">clan id</param>
+        /// <returns></returns>
+        WGRawResponse GetClansBattles(long clanId);
+
+        /// <summary>
+        /// Method returns list of clan's battles.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <returns></returns>
+        WGRawResponse GetClansBattles(long[] clanIds);
+
+        /// <summary>
+        /// Method returns list of clan's battles.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        WGRawResponse GetClansBattles(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
+
+        #endregion Clan's Battles
+
+        #region Top Clans by Victory Points
+
+        /// <summary>
+        /// Method returns top 100 clans sorted by rating.
+        /// </summary>
+        /// <returns></returns>
+        WGRawResponse GetTopClansByVictoryPoints();
+
+        /// <summary>
+        /// Method returns top 100 clans sorted by rating.
+        /// </summary>
+        /// <param name="time">Time delta. Valid values: current_season (default), current_step</param>
+        /// <returns></returns>
+        WGRawResponse GetTopClansByVictoryPoints(string time);
+
+        /// <summary>
+        /// Method returns top 100 clans sorted by rating.
+        /// </summary>
+        /// <param name="time">Time delta. Valid values: current_season (default), current_step</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        WGRawResponse GetTopClansByVictoryPoints(string time, WGLanguageField language, string responseFields);
+
+        #endregion Top Clans by Victory Points
+
+        #region Clan's Provinces
+
+        /// <summary>
+        /// Method returns list of clan's provinces.
+        /// </summary>
+        /// <param name="clanId">clan id</param>
+        /// <returns></returns>
+        WGRawResponse GetClansProvinces(long clanId);
+
+        /// <summary>
+        /// Method returns list of clan's provinces.
+        /// </summary>
+        /// <param name="clanIds">clan id</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        WGRawResponse GetClansProvinces(long clanId, WGLanguageField language, string accessToken, string responseFields);
+
+        #endregion Clan's Provinces
+
+        #region Clan's Victory Points
+
+        /// <summary>
+        /// Method returns number of clan victory points.
+        /// </summary>
+        /// <param name="clanId">clan id</param>
+        /// <returns></returns>
+        WGRawResponse GetClansVictoryPoints(long clanId);
+
+        /// <summary>
+        /// Method returns number of clan victory points.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <returns></returns>
+        WGRawResponse GetClansVictoryPoints(long[] clanIds);
+
+        /// <summary>
+        /// Method returns number of clan victory points.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        WGRawResponse GetClansVictoryPoints(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
+
+        #endregion Clan's Victory Points
+
+        #region Clan Member Details
+
+        /// <summary>
+        /// Method returns clan member info.
+        /// </summary>
+        /// <param name="clanId">member id</param>
+        /// <returns></returns>
+        WGRawResponse GetClanMemberInfo(long memberId);
+
+        /// <summary>
+        /// Method returns clan member info.
+        /// </summary>
+        /// <param name="clanIds">list of clan member ids</param>
+        /// <returns></returns>
+        WGRawResponse GetClanMemberInfo(long[] memberIds);
+
+        /// <summary>
+        /// Method returns clan member info.
+        /// </summary>
+        /// <param name="clanIds">list of clan member ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        WGRawResponse GetClanMemberInfo(long[] memberIds, WGLanguageField language, string accessToken, string responseFields);
+
+        #endregion Clan Member Details
     }
 }

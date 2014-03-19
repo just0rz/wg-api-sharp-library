@@ -583,6 +583,312 @@ namespace WGSharpAPI
 
         #endregion Clan Details
 
+        #region Clan's Battles
+
+        /// <summary>
+        /// Method returns list of clan's battles.
+        /// </summary>
+        /// <param name="clanId">clan id</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansBattles(long clanId)
+        {
+            return GetClansBattles(new long[] { clanId }, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns list of clan's battles.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansBattles(long[] clanIds)
+        {
+            return GetClansBattles(clanIds, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns list of clan's battles.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansBattles(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var requestURI = CreateClanBattlesRequestURI(clanIds, language, accessToken, responseFields);
+
+            var output = GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            return wgRawResponse;
+        }
+
+        private string CreateClanBattlesRequestURI(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var target = "clan/battles";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+                sb.AppendFormat("&access_token={0}", accessToken);
+
+            sb.AppendFormat("&clan_id={0}", string.Join(",", clanIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Clan's Battles
+
+        #region Top Clans by Victory Points
+
+        /// <summary>
+        /// Method returns top 100 clans sorted by rating.
+        /// </summary>
+        /// <returns></returns>
+        public WGRawResponse GetTopClansByVictoryPoints()
+        {
+            return GetTopClansByVictoryPoints(null);
+        }
+
+        /// <summary>
+        /// Method returns top 100 clans sorted by rating.
+        /// </summary>
+        /// <param name="time">Time delta. Valid values: current_season (default), current_step</param>
+        /// <returns></returns>
+        public WGRawResponse GetTopClansByVictoryPoints(string time)
+        {
+            return GetTopClansByVictoryPoints(time, WGLanguageField.EN, null);
+        }
+
+        /// <summary>
+        /// Method returns top 100 clans sorted by rating.
+        /// </summary>
+        /// <param name="time">Time delta. Valid values: current_season (default), current_step</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        public WGRawResponse GetTopClansByVictoryPoints(string time, WGLanguageField language, string responseFields)
+        {
+            var requestURI = CreateTopClansByVictoryPointsRequestURI(time, language, responseFields);
+
+            var output = GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            return wgRawResponse;
+        }
+
+        private string CreateTopClansByVictoryPointsRequestURI(string time, WGLanguageField language, string responseFields)
+        {
+            var target = "clan/top";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(time))
+                sb.AppendFormat("&time={0}", time);
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Top Clans by Victory Points
+
+        #region Clan's Provinces
+
+        /// <summary>
+        /// Method returns list of clan's provinces.
+        /// </summary>
+        /// <param name="clanId">clan id</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansProvinces(long clanId)
+        {
+            return GetClansProvinces(clanId, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns list of clan's provinces.
+        /// </summary>
+        /// <param name="clanIds">clan id</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansProvinces(long clanId, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var requestURI = CreateClansProvincesRequestURI(clanId, language, accessToken, responseFields);
+
+            var output = GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            return wgRawResponse;
+        }
+
+        private string CreateClansProvincesRequestURI(long clanId, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var target = "clan/provinces";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+                sb.AppendFormat("&access_token={0}", accessToken);
+
+            sb.AppendFormat("&clan_id={0}", clanId);
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Clan's Provinces
+
+        #region Clan's Victory Points
+
+        /// <summary>
+        /// Method returns number of clan victory points.
+        /// </summary>
+        /// <param name="clanId">clan id</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansVictoryPoints(long clanId)
+        {
+            return GetClansVictoryPoints(new long[] { clanId }, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns number of clan victory points.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansVictoryPoints(long[] clanIds)
+        {
+            return GetClansVictoryPoints(clanIds, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns number of clan victory points.
+        /// </summary>
+        /// <param name="clanIds">list of clan ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        public WGRawResponse GetClansVictoryPoints(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var requestURI = CreateClansVictoryPointsRequestURI(clanIds, language, accessToken, responseFields);
+
+            var output = GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            return wgRawResponse;
+        }
+
+        private string CreateClansVictoryPointsRequestURI(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var target = "clan/victorypoints";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+                sb.AppendFormat("&access_token={0}", accessToken);
+
+            sb.AppendFormat("&clan_id={0}", string.Join(",", clanIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Clan's Victory Points
+
+        #region Clan Member Details
+
+        /// <summary>
+        /// Method returns clan member info.
+        /// </summary>
+        /// <param name="clanId">member id</param>
+        /// <returns></returns>
+        public WGRawResponse GetClanMemberInfo(long memberId)
+        {
+            return GetClanMemberInfo(new long[] { memberId }, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns clan member info.
+        /// </summary>
+        /// <param name="clanIds">list of clan member ids</param>
+        /// <returns></returns>
+        public WGRawResponse GetClanMemberInfo(long[] memberIds)
+        {
+            return GetClanMemberInfo(memberIds, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns clan member info.
+        /// </summary>
+        /// <param name="clanIds">list of clan member ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        public WGRawResponse GetClanMemberInfo(long[] memberIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var requestURI = CreateClansVictoryPointsRequestURI(memberIds, language, accessToken, responseFields);
+
+            var output = GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            return wgRawResponse;
+        }
+
+        private string CreateClanMemberInfoRequestURI(long[] memberIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var target = "clan/membersinfo";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+                sb.AppendFormat("&access_token={0}", accessToken);
+
+            sb.AppendFormat("&member_id={0}", string.Join(",", memberIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Clan Member Details
+
         #region General methods
 
         private string GetGeneralUri(string target, WGLanguageField language)

@@ -37,6 +37,12 @@ namespace WGSharpAPI.Entities.ClanDetails
         [JsonProperty("account_name")]
         public string Name { get; set; }
 
+        [JsonProperty("clan_id")]
+        public long ClanId { get; set; }
+
+        [JsonProperty("clan_name")]
+        public string ClanName { get; set; }
+
         [JsonProperty("created_at")]
         public long DateJoined { get; set; }
 
@@ -49,5 +55,8 @@ namespace WGSharpAPI.Entities.ClanDetails
         [Obsolete("Warning. The field will be disabled.")]
         [JsonProperty("updated_at")]
         public long DateDetailsUpdated { get; set; }
+
+        [JsonProperty("since")]
+        public long Since { get; set; }
     }
 }

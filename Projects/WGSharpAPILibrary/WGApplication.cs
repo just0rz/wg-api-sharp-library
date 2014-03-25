@@ -23,18 +23,14 @@ THE SOFTWARE.
  */
 using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Net;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using WGSharpAPI.Entities.ClanDetails;
 using WGSharpAPI.Entities.PlayerDetails;
 using WGSharpAPI.Enums;
 using WGSharpAPI.Interfaces;
-using System.Xml.Linq;
-using Newtonsoft.Json.Schema;
 using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
-using WGSharpAPI.Entities.ClanDetails;
 
 namespace WGSharpAPI
 {
@@ -628,10 +624,10 @@ namespace WGSharpAPI
                     foreach (var member in listOfActualMembers)
                     {
                         // get the json string
-                        var memberJsonString = member.First.ToString();
+                        var memberJsonString = member.First;
 
                         // parse the json string and get a Member entity
-                        var parsedMember = JsonConvert.DeserializeObject<Member>(memberJsonString);
+                        var parsedMember = memberJsonString.ToObject<Member>();
 
                         // add each parsed member to our clan list
                         clan.Members.Add(parsedMember);
@@ -881,7 +877,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        public WGRawResponse GetClansVictoryPoints(long clanId)
+        public IWGResponse<List<long>> GetClansVictoryPoints(long clanId)
         {
             return GetClansVictoryPoints(new long[] { clanId }, WGLanguageField.EN, null, null);
         }
@@ -891,7 +887,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanIds">list of clan ids</param>
         /// <returns></returns>
-        public WGRawResponse GetClansVictoryPoints(long[] clanIds)
+        public IWGResponse<List<long>> GetClansVictoryPoints(long[] clanIds)
         {
             return GetClansVictoryPoints(clanIds, WGLanguageField.EN, null, null);
         }
@@ -904,7 +900,7 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGRawResponse GetClansVictoryPoints(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<long>> GetClansVictoryPoints(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreateClansVictoryPointsRequestURI(clanIds, language, accessToken, responseFields);
 
@@ -912,7 +908,28 @@ namespace WGSharpAPI
 
             var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
 
-            return wgRawResponse;
+            var obj = new WGResponse<List<long>>
+            {
+                Count = wgRawResponse.Count,
+                Status = wgRawResponse.Status,
+                Data = new List<long>(wgRawResponse.Count)
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var clanId in clanIds)
+            {
+                var clanIdString = clanId.ToString();
+
+                var victoryPoints = jObject[clanIdString]["points"].ToObject<long>();
+
+                obj.Data.Add(victoryPoints);
+            }
+
+            return obj;
         }
 
         private string CreateClansVictoryPointsRequestURI(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
@@ -945,7 +962,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanId">member id</param>
         /// <returns></returns>
-        public WGRawResponse GetClanMemberInfo(long memberId)
+        public IWGResponse<List<Member>> GetClanMemberInfo(long memberId)
         {
             return GetClanMemberInfo(new long[] { memberId }, WGLanguageField.EN, null, null);
         }
@@ -955,7 +972,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanIds">list of clan member ids</param>
         /// <returns></returns>
-        public WGRawResponse GetClanMemberInfo(long[] memberIds)
+        public IWGResponse<List<Member>> GetClanMemberInfo(long[] memberIds)
         {
             return GetClanMemberInfo(memberIds, WGLanguageField.EN, null, null);
         }
@@ -968,7 +985,7 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGRawResponse GetClanMemberInfo(long[] memberIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<Member>> GetClanMemberInfo(long[] memberIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreateClansVictoryPointsRequestURI(memberIds, language, accessToken, responseFields);
 
@@ -976,7 +993,28 @@ namespace WGSharpAPI
 
             var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
 
-            return wgRawResponse;
+            var obj = new WGResponse<List<Member>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<Member>(wgRawResponse.Count)
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var memberId in memberIds)
+            {
+                var memberIdString = memberId.ToString();
+
+                var member = jObject[memberIdString].First.ToObject<Member>();
+
+                obj.Data.Add(member);
+            }
+
+            return obj;
         }
 
         private string CreateClanMemberInfoRequestURI(long[] memberIds, WGLanguageField language, string accessToken, string responseFields)

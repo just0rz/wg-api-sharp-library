@@ -26,7 +26,6 @@ using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.ClanDetails
 {
-    [JsonArray("members")]
     public class Member
     {
         /// <summary>

@@ -346,14 +346,14 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        WGRawResponse GetClansVictoryPoints(long clanId);
+        IWGResponse<List<long>> GetClansVictoryPoints(long clanId);
 
         /// <summary>
         /// Method returns number of clan victory points.
         /// </summary>
         /// <param name="clanIds">list of clan ids</param>
         /// <returns></returns>
-        WGRawResponse GetClansVictoryPoints(long[] clanIds);
+        IWGResponse<List<long>> GetClansVictoryPoints(long[] clanIds);
 
         /// <summary>
         /// Method returns number of clan victory points.
@@ -363,7 +363,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        WGRawResponse GetClansVictoryPoints(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
+        IWGResponse<List<long>> GetClansVictoryPoints(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Clan's Victory Points
 
@@ -374,14 +374,14 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="clanId">member id</param>
         /// <returns></returns>
-        WGRawResponse GetClanMemberInfo(long memberId);
+        IWGResponse<List<Member>> GetClanMemberInfo(long memberId);
 
         /// <summary>
         /// Method returns clan member info.
         /// </summary>
         /// <param name="clanIds">list of clan member ids</param>
         /// <returns></returns>
-        WGRawResponse GetClanMemberInfo(long[] memberIds);
+        IWGResponse<List<Member>> GetClanMemberInfo(long[] memberIds);
 
         /// <summary>
         /// Method returns clan member info.
@@ -391,7 +391,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        WGRawResponse GetClanMemberInfo(long[] memberIds, WGLanguageField language, string accessToken, string responseFields);
+        IWGResponse<List<Member>> GetClanMemberInfo(long[] memberIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Clan Member Details
     }

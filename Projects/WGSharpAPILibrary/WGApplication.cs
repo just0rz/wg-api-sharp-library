@@ -484,7 +484,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="searchTerm">search string</param>
         /// <returns></returns>
-        public IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm)
+        public IWGResponse<List<Clan>> SearchClans(string searchTerm)
         {
             return SearchClans(searchTerm, WGLanguageField.EN, null, 100, null);
         }
@@ -495,7 +495,7 @@ namespace WGSharpAPI
         /// <param name="searchTerm">search string</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        public IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, int limit)
+        public IWGResponse<List<Clan>> SearchClans(string searchTerm, int limit)
         {
             return SearchClans(searchTerm, WGLanguageField.EN, null, limit, null);
         }
@@ -509,13 +509,13 @@ namespace WGSharpAPI
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <param name="orderby">The list is sorted by clan name (default), creation date, tag, or size.</param>
         /// <returns></returns>
-        public IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby)
+        public IWGResponse<List<Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby)
         {
             var requestURI = CreateClanSearchRequestURI(searchTerm, language, responseFields, limit, orderby);
 
             var output = this.GetRequestResponse(requestURI);
 
-            var obj = JsonConvert.DeserializeObject<WGResponse<List<Entities.ClanDetails.Clan>>>(output);
+            var obj = JsonConvert.DeserializeObject<WGResponse<List<Clan>>>(output);
 
             return obj;
         }
@@ -801,7 +801,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        public WGRawResponse GetClansProvinces(long clanId)
+        public IWGResponse<List<Province>> GetClansProvinces(long clanId)
         {
             return GetClansProvinces(clanId, WGLanguageField.EN, null, null);
         }
@@ -814,15 +814,41 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGRawResponse GetClansProvinces(long clanId, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<Province>> GetClansProvinces(long clanId, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreateClansProvincesRequestURI(clanId, language, accessToken, responseFields);
 
             var output = GetRequestResponse(requestURI);
 
+            // get the raw response
             var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
 
-            return wgRawResponse;
+            // this is the response we will return
+            var obj = new WGResponse<List<Province>>()
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<Province>(wgRawResponse.Count)
+            };
+
+            // any errors? stop what we're doing and return the object
+            if (wgRawResponse.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            // nasty parsing, again :(
+            if (jObject.HasValues)
+                foreach (var province in jObject.Children())
+                {
+                    var provinceJsonString = province.First;
+
+                    var provinceObj = provinceJsonString.ToObject<Province>();
+
+                    obj.Data.Add(provinceObj);
+                }
+
+            return obj;
         }
 
         private string CreateClansProvincesRequestURI(long clanId, WGLanguageField language, string accessToken, string responseFields)

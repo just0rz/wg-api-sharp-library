@@ -26,6 +26,7 @@ using System.Collections.Generic;
 using WGSharpAPI.Enums;
 using WGSharpAPI.Entities.ClanDetails;
 using WGSharpAPI.Entities.PlayerDetails;
+using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
 
 namespace WGSharpAPI.Interfaces
 {
@@ -212,7 +213,7 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="searchTerm">search string</param>
         /// <returns></returns>
-        IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm);
+        IWGResponse<List<Clan>> SearchClans(string searchTerm);
 
         /// <summary>
         /// Method returns partial list of clans filtered by initial characters of clan name or tag. The list is sorted by clan nameby default.
@@ -220,7 +221,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="searchTerm">search string</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, int limit);
+        IWGResponse<List<Clan>> SearchClans(string searchTerm, int limit);
 
         /// <summary>
         /// Method returns partial list of clans filtered by initial characters of clan name or tag. 
@@ -231,7 +232,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <param name="orderby">The list is sorted by clan name (default), creation date, tag, or size.</param>
         /// <returns></returns>
-        IWGResponse<List<Entities.ClanDetails.Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby);
+        IWGResponse<List<Clan>> SearchClans(string searchTerm, WGLanguageField language, string responseFields, int limit, string orderby);
 
         #endregion Search Clans
 
@@ -242,14 +243,14 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long clanId);
+        IWGResponse<List<Clan>> GetClanDetails(long clanId);
 
         /// <summary>
         /// Method returns clan details.
         /// </summary>
         /// <param name="clanIds">list of clan ids</param>
         /// <returns></returns>
-        IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long[] clanIds);
+        IWGResponse<List<Clan>> GetClanDetails(long[] clanIds);
 
         /// <summary>
         /// Method returns clan details.
@@ -259,7 +260,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
+        IWGResponse<List<Clan>> GetClanDetails(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Clan Details
 
@@ -324,7 +325,7 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        WGRawResponse GetClansProvinces(long clanId);
+        IWGResponse<List<Province>> GetClansProvinces(long clanId);
 
         /// <summary>
         /// Method returns list of clan's provinces.
@@ -334,7 +335,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        WGRawResponse GetClansProvinces(long clanId, WGLanguageField language, string accessToken, string responseFields);
+        IWGResponse<List<Province>> GetClansProvinces(long clanId, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Clan's Provinces
 

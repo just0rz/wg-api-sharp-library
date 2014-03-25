@@ -21,10 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.ClanDetails
@@ -37,11 +34,20 @@ namespace WGSharpAPI.Entities.ClanDetails
         [JsonProperty("clan_id")]
         public long Id { get; set; }
 
-        [JsonProperty("color")]
+        [JsonProperty("clan_color")]
         public string Color { get; set; }
 
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; }
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
+        [JsonProperty("description_html")]
+        public string DescriptionHtml { get; set; }
+
+        [JsonProperty("is_clan_disbanded")]
+        public string IsDisbanded { get; set; }
 
         [JsonProperty("members_count")]
         public long MembersCount { get; set; }
@@ -57,6 +63,15 @@ namespace WGSharpAPI.Entities.ClanDetails
 
         [JsonProperty("owner_name")]
         public string CommanderName { get; set; }
+
+        /// <summary>
+        /// Clan can invite players
+        /// </summary>
+        [JsonProperty("request_availability")]
+        public string CanInvite { get; set; }
+
+        [JsonProperty("updated_at")]
+        public long UpdatedAt { get; set; }
 
         [JsonProperty("emblems")]
         public Emblem Emblems { get; set; }

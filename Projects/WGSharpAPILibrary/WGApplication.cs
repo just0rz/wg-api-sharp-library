@@ -31,9 +31,16 @@ using Newtonsoft.Json.Linq;
 using WGSharpAPI.Entities.PlayerDetails;
 using WGSharpAPI.Enums;
 using WGSharpAPI.Interfaces;
+using System.Xml.Linq;
+using Newtonsoft.Json.Schema;
+using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
+using WGSharpAPI.Entities.ClanDetails;
 
 namespace WGSharpAPI
 {
+    /// <summary>
+    /// Represents your application identified by application id received from WG
+    /// </summary>
     public class WGApplication : IWGApplication
     {
         private string _defaultApiURI = @"api.worldoftanks.eu/wot";
@@ -52,6 +59,12 @@ namespace WGSharpAPI
             : this(applicationId)
         {
             _settings = settings;
+        }
+
+        public WGApplication(string applicationId, string apiURI)
+            : this(applicationId)
+        {
+            _defaultApiURI = apiURI;
         }
 
         public WGApplication(string applicationId, WGSettings settings, string apiURI)
@@ -537,7 +550,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        public IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long clanId)
+        public IWGResponse<List<Clan>> GetClanDetails(long clanId)
         {
             return GetClanDetails(new long[] { clanId }, WGLanguageField.EN, null, null);
         }
@@ -547,7 +560,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanIds">list of clan ids</param>
         /// <returns></returns>
-        public IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long[] clanIds)
+        public IWGResponse<List<Clan>> GetClanDetails(long[] clanIds)
         {
             return GetClanDetails(clanIds, WGLanguageField.EN, null, null);
         }
@@ -560,25 +573,76 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public IWGResponse<List<Entities.ClanDetails.Clan>> GetClanDetails(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<Clan>> GetClanDetails(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreateClanInfoRequestURI(clanIds, language, accessToken, responseFields);
 
             var output = GetRequestResponse(requestURI);
 
+            // this is our raw response which we will parse later on
+            var rawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
 
-            var obj = new WGResponse<List<Entities.ClanDetails.Clan>>();
+            // JObject accepts Language-INtegrated Queries over it, so it's our friend
+            var jObject = rawResponse.Data as JObject;
 
-            var jObject = JsonConvert.DeserializeObject<WGRawResponse>(output).Data as JObject;
+            // copy the response details from the raw response to an actual response
+            var obj = new WGResponse<List<Clan>>()
+            {
+                Status = rawResponse.Status,
+                Count = rawResponse.Count,
+                Data = new List<Clan>(rawResponse.Count)
+            };
 
-            // TODO:
-            // We have a problem deserializing this json due to the fact that we get an array of id fields under members
-            // this can be avoided by implementing a JsonConverter and use that do parse the data correctly
-            //
-            // This will be done in the future because I want to see what other methods need this kind of approach
-            // for the momnet it will throw a NotImplementedException
+            // were there any problems?
+            if (obj.Status != "ok")
+                return obj;
 
-            throw new NotImplementedException();
+            // everything went fine
+            // let's begin with some nasty parsing :(
+            foreach (var clanId in clanIds)
+            {
+                // I don't really like calling methods in the indexer - this should improve readability
+                var stringClanId = clanId.ToString();
+
+                // create our empty clan entity
+                var clan = new Clan();
+
+                // get the json string for the clan id
+                var clanJsonString = jObject[stringClanId];
+
+                // parse the json string and retrieve all the fields that we can
+                clan = clanJsonString.ToObject<Clan>();
+
+                #region parse members in clan
+
+                // get the list of members array
+                var listOfMembers = clanJsonString["members"];
+
+                // any members? -> the answer is expected to be true, but we ask anyway
+                if (listOfMembers.HasValues)
+                {
+                    // get the children json strings for each member
+                    var listOfActualMembers = listOfMembers.Children();
+
+                    // go through our list
+                    foreach (var member in listOfActualMembers)
+                    {
+                        // get the json string
+                        var memberJsonString = member.First.ToString();
+
+                        // parse the json string and get a Member entity
+                        var parsedMember = JsonConvert.DeserializeObject<Member>(memberJsonString);
+
+                        // add each parsed member to our clan list
+                        clan.Members.Add(parsedMember);
+                    }
+                }
+
+                #endregion parse members in clan
+
+                // add the clan to the our actual response data
+                obj.Data.Add(clan);
+            }
 
             return obj;
         }

@@ -1,0 +1,5 @@
+#summary A library which make calls to WarGaming's API
+
+= Details =
+
+This will contain the basics about what the library does.

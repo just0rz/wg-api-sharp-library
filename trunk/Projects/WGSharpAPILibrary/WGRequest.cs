@@ -40,6 +40,7 @@ namespace WGSharpAPI
         private WGRequest() { }
 
         public WGRequest(string requestURI)
+            : this()
         {
             _webrequest = HttpWebRequest.Create(requestURI);
         }

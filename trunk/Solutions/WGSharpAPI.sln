@@ -1,7 +1,13 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual C# Express 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WGSharpAPI", "..\Projects\WGSharpAPILibrary\WGSharpAPI.csproj", "{61032D9F-AB26-47F8-9E29-E4BE46C5B709}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Project", "Project", "{629A6E09-B321-40D7-B08B-B9A997F92C3C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{5D8257C7-0A46-4CC2-9B30-DAAC4C0DCCA7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WGSharpAPITests", "..\Tests\WGSharpAPITests\WGSharpAPITests.csproj", "{8AEC8BC1-F8CB-470F-A489-761D69A41D33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,8 +19,16 @@ Global
 		{61032D9F-AB26-47F8-9E29-E4BE46C5B709}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{61032D9F-AB26-47F8-9E29-E4BE46C5B709}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{61032D9F-AB26-47F8-9E29-E4BE46C5B709}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AEC8BC1-F8CB-470F-A489-761D69A41D33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AEC8BC1-F8CB-470F-A489-761D69A41D33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AEC8BC1-F8CB-470F-A489-761D69A41D33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AEC8BC1-F8CB-470F-A489-761D69A41D33}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{61032D9F-AB26-47F8-9E29-E4BE46C5B709} = {629A6E09-B321-40D7-B08B-B9A997F92C3C}
+		{8AEC8BC1-F8CB-470F-A489-761D69A41D33} = {5D8257C7-0A46-4CC2-9B30-DAAC4C0DCCA7}
 	EndGlobalSection
 EndGlobal

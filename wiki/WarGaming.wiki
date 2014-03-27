@@ -4,4 +4,4 @@
 
 [http://www.wargaming.com/ WarGaming] is a game development company.
 
-[http://www.wargaming.com/ WarGaming] is the developer of [http://wargaming.com/en/games/world_of_tanks/ World of Tanks] and [http://wargaming.com/en/games/world_of_warplanes/ World of Warplanes], which are the two games, for the moment, for which the API was created for.
+[http://www.wargaming.com/ WarGaming] is the developer of [http://wargaming.com/en/games/world_of_tanks/ World of Tanks] and [http://wargaming.com/en/games/world_of_warplanes/ World of Warplanes], which are the two games, for the moment, for which the [http://wargaming.net/developers/ API] was created for.

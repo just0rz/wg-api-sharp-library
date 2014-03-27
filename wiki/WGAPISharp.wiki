@@ -2,6 +2,6 @@
 
 = Details =
 
-The full name should be: *W*ar*G*aming's *API* *C#* library
+The full name should be: *W*ar *G*aming's *API* *C#* library
 
 This will contain the basics about what the library does.

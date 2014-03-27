@@ -1,4 +1,4 @@
-#summary A library which make calls to WarGaming's API
+#summary A library which makes calls to WarGaming's API
 
 = Details =
 

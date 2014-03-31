@@ -1,7 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010 Express
+# Visual Studio 2010
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WGSharpAPI", "..\Projects\WGSharpAPILibrary\WGSharpAPI.csproj", "{61032D9F-AB26-47F8-9E29-E4BE46C5B709}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WGSharpAPITests", "..\Tests\WGSharpAPITests\WGSharpAPITests.csproj", "{8AEC8BC1-F8CB-470F-A489-761D69A41D33}"
 EndProject
 Global

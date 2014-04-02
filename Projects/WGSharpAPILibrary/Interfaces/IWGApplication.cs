@@ -271,14 +271,14 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        WGRawResponse GetClansBattles(long clanId);
+        IWGResponse<List<Battle>> GetClansBattles(long clanId);
 
         /// <summary>
         /// Method returns list of clan's battles.
         /// </summary>
         /// <param name="clanIds">list of clan ids</param>
         /// <returns></returns>
-        WGRawResponse GetClansBattles(long[] clanIds);
+        IWGResponse<List<Battle>> GetClansBattles(long[] clanIds);
 
         /// <summary>
         /// Method returns list of clan's battles.
@@ -288,7 +288,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        WGRawResponse GetClansBattles(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
+        IWGResponse<List<Battle>> GetClansBattles(long[] clanIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Clan's Battles
 
@@ -298,14 +298,14 @@ namespace WGSharpAPI.Interfaces
         /// Method returns top 100 clans sorted by rating.
         /// </summary>
         /// <returns></returns>
-        WGRawResponse GetTopClansByVictoryPoints();
+        IWGResponse<List<Clan>> GetTopClansByVictoryPoints();
 
         /// <summary>
         /// Method returns top 100 clans sorted by rating.
         /// </summary>
         /// <param name="time">Time delta. Valid values: current_season (default), current_step</param>
         /// <returns></returns>
-        WGRawResponse GetTopClansByVictoryPoints(string time);
+        IWGResponse<List<Clan>> GetTopClansByVictoryPoints(WGTimeDelta time);
 
         /// <summary>
         /// Method returns top 100 clans sorted by rating.
@@ -314,7 +314,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="language">language</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        WGRawResponse GetTopClansByVictoryPoints(string time, WGLanguageField language, string responseFields);
+        IWGResponse<List<Clan>> GetTopClansByVictoryPoints(WGTimeDelta time, WGLanguageField language, string responseFields);
 
         #endregion Top Clans by Victory Points
 

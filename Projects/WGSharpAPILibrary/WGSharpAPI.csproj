@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\ClanDetails\Clan.cs" />
+    <Compile Include="Entities\ClanDetails\Battle.cs" />
     <Compile Include="Entities\ClanDetails\Emblem.cs" />
     <Compile Include="Entities\ClanDetails\Member.cs" />
     <Compile Include="Entities\ClanDetails\Province.cs" />
@@ -58,8 +59,10 @@
     <Compile Include="Entities\BaseStatistics.cs" />
     <Compile Include="Entities\PlayerDetails\Tank.cs" />
     <Compile Include="Entities\PlayerDetails\TankStatistics.cs" />
+    <Compile Include="Enums\WGBattleType.cs" />
     <Compile Include="Enums\WGLanguageField.cs" />
     <Compile Include="Enums\WGPlayerListField.cs" />
+    <Compile Include="Enums\WGTimeDelta.cs" />
     <Compile Include="Interfaces\IWGApplication.cs" />
     <Compile Include="Interfaces\IWGRequest.cs" />
     <Compile Include="Interfaces\IWGResponse.cs" />

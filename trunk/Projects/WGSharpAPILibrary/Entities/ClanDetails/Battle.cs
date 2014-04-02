@@ -21,48 +21,25 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Newtonsoft.Json;
+using System.Collections.Generic;
+using WGSharpAPI.Enums;
 
 namespace WGSharpAPI.Entities.ClanDetails
 {
-    public class Province
+    public class Battle
     {
-        [JsonProperty("arena_id")]
-        public long ArenaId { get; set; }
+        public Clan Clan { get; set; }
 
-        [JsonProperty("arena_name")]
-        public string ArenaName { get; set; }
+        private IList<Province> _provinces = new List<Province>();
+        public IList<Province> Provinces { get { return _provinces; } set { _provinces = value; } }
 
-        public string ArenaNameLocalized { get; set; }
+        public bool Started { get; set; }
 
-        [JsonProperty("attacked")]
-        public bool IsAttacked { get; set; }
+        public long StartTime { get; set; }
 
-        [JsonProperty("combats_running")]
-        public bool IsCombatRunning { get; set; }
+        private IList<Province> _arenas = new List<Province>();
+        public IList<Province> Arenas { get { return _arenas; } set { _arenas = value; } }
 
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        /// <summary>
-        /// Province owned (days)
-        /// </summary>
-        [JsonProperty("occupancy_time")]
-        public long OccupancyTime { get; set; }
-
-        /// <summary>
-        /// Prime Time
-        /// </summary>
-        [JsonProperty("prime_time")]
-        public long PrimeTime { get; set; }
-
-        [JsonProperty("province_id")]
-        public string Id { get; set; }
-
-        [JsonProperty("revenue")]
-        public long Revenue { get; set; }
-
-        [JsonProperty("type")]
-        public string Type { get; set; }
+        public WGBattleType Type { get; set; }
     }
 }

@@ -673,7 +673,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
-        public WGRawResponse GetClansBattles(long clanId)
+        public IWGResponse<List<Battle>> GetClansBattles(long clanId)
         {
             return GetClansBattles(new long[] { clanId }, WGLanguageField.EN, null, null);
         }
@@ -683,7 +683,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanIds">list of clan ids</param>
         /// <returns></returns>
-        public WGRawResponse GetClansBattles(long[] clanIds)
+        public IWGResponse<List<Battle>> GetClansBattles(long[] clanIds)
         {
             return GetClansBattles(clanIds, WGLanguageField.EN, null, null);
         }
@@ -696,7 +696,7 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGRawResponse GetClansBattles(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<Battle>> GetClansBattles(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreateClanBattlesRequestURI(clanIds, language, accessToken, responseFields);
 
@@ -704,7 +704,57 @@ namespace WGSharpAPI
 
             var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
 
-            return wgRawResponse;
+
+            var obj = new WGResponse<List<Battle>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<Battle>(wgRawResponse.Count)
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            // nastiest parsing so far
+            foreach (var clanId in clanIds)
+            {
+                var clanBattle = new Battle { Clan = new Clan { Id = clanId } };
+                var clanIdString = clanId.ToString();
+                var clanBattleJObject = jObject[clanIdString].First;
+
+                foreach (var provinceJObject in clanBattleJObject["provinces"])
+                {
+                    var province = new Province { Name = provinceJObject.ToString() };
+
+                    clanBattle.Provinces.Add(province);
+                }
+
+                clanBattle.Started = clanBattleJObject["started"].ToObject<bool>();
+
+                clanBattle.StartTime = clanBattleJObject["time"].ToObject<long>();
+
+                foreach (var arenaJObject in clanBattleJObject["arenas"])
+                {
+                    var arena = new Province { ArenaNameLocalized = arenaJObject["name_i18n"].ToString(), ArenaName = arenaJObject["name"].ToString() };
+
+                    clanBattle.Arenas.Add(arena);
+                }
+
+                var battleType = clanBattleJObject["type"].ToString();
+
+                if (battleType == "for_province")
+                    clanBattle.Type = WGBattleType.Province;
+                else if (battleType == "meeting_engagement")
+                    clanBattle.Type = WGBattleType.Encounter;
+                else
+                    clanBattle.Type = WGBattleType.Landing;
+
+                obj.Data.Add(clanBattle);
+            }
+
+            return obj;
         }
 
         private string CreateClanBattlesRequestURI(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
@@ -736,9 +786,9 @@ namespace WGSharpAPI
         /// Method returns top 100 clans sorted by rating.
         /// </summary>
         /// <returns></returns>
-        public WGRawResponse GetTopClansByVictoryPoints()
+        public IWGResponse<List<Clan>> GetTopClansByVictoryPoints()
         {
-            return GetTopClansByVictoryPoints(null);
+            return GetTopClansByVictoryPoints(WGTimeDelta.Season);
         }
 
         /// <summary>
@@ -746,7 +796,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="time">Time delta. Valid values: current_season (default), current_step</param>
         /// <returns></returns>
-        public WGRawResponse GetTopClansByVictoryPoints(string time)
+        public IWGResponse<List<Clan>> GetTopClansByVictoryPoints(WGTimeDelta time)
         {
             return GetTopClansByVictoryPoints(time, WGLanguageField.EN, null);
         }
@@ -758,18 +808,18 @@ namespace WGSharpAPI
         /// <param name="language">language</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public WGRawResponse GetTopClansByVictoryPoints(string time, WGLanguageField language, string responseFields)
+        public IWGResponse<List<Clan>> GetTopClansByVictoryPoints(WGTimeDelta time, WGLanguageField language, string responseFields)
         {
             var requestURI = CreateTopClansByVictoryPointsRequestURI(time, language, responseFields);
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<WGResponse<List<Clan>>>(output);
 
             return wgRawResponse;
         }
 
-        private string CreateTopClansByVictoryPointsRequestURI(string time, WGLanguageField language, string responseFields)
+        private string CreateTopClansByVictoryPointsRequestURI(WGTimeDelta time, WGLanguageField language, string responseFields)
         {
             var target = "clan/top";
 
@@ -780,8 +830,10 @@ namespace WGSharpAPI
             if (!string.IsNullOrWhiteSpace(responseFields))
                 sb.AppendFormat("&fields={0}", responseFields);
 
-            if (!string.IsNullOrWhiteSpace(time))
-                sb.AppendFormat("&time={0}", time);
+            if (time == WGTimeDelta.Step)
+                sb.AppendFormat("&time={0}", "current_step");
+            else
+                sb.AppendFormat("&time={0}", "current_season");
 
             var requestURI = sb.ToString();
 

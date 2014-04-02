@@ -65,6 +65,30 @@ namespace WGSharpAPI.Entities.ClanDetails
         public string CommanderName { get; set; }
 
         /// <summary>
+        /// Position in rating -- populated only if clan is returned by top 100 method
+        /// </summary>
+        [JsonProperty("rating_position")]
+        public string RatingPosition { get; set; }
+
+        /// <summary>
+        /// Victory points for the entire campaign -- populated only if clan is returned by top 100 method
+        /// </summary>
+        [JsonProperty("victory_points")]
+        public string VictoryPoints { get; set; }
+
+        /// <summary>
+        /// Victory points for the current stage -- populated only if clan is returned by top 100 method
+        /// </summary>
+        [JsonProperty("victory_points_step_delta")]
+        public string VictoryPointsStage { get; set; }
+
+        /// <summary>
+        /// Victory points for the latest turn -- populated only if clan is returned by top 100 method
+        /// </summary>
+        [JsonProperty("victory_points_turn_delta")]
+        public string VictoryPointsTurn { get; set; }
+
+        /// <summary>
         /// Clan can invite players
         /// </summary>
         [JsonProperty("request_availability")]

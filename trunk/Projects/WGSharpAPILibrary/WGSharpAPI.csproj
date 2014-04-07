@@ -69,6 +69,7 @@
     <Compile Include="Entities\PlayerDetails\TankStatistics.cs" />
     <Compile Include="Enums\WGBattleType.cs" />
     <Compile Include="Enums\WGLanguageField.cs" />
+    <Compile Include="Enums\WGNation.cs" />
     <Compile Include="Enums\WGPlayerListField.cs" />
     <Compile Include="Enums\WGTimeDelta.cs" />
     <Compile Include="Interfaces\IWGApplication.cs" />

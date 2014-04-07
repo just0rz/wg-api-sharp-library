@@ -1244,6 +1244,471 @@ namespace WGSharpAPI
 
         #endregion Vehicle Details
 
+        #region Engines
+
+        /// <summary>
+        /// Method returns list of engines.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines()
+        {
+            return GetEngines(new long[0], WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of engines.
+        /// </summary>
+        /// <param name="moduleIds">module id - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines(long moduleId)
+        {
+            return GetEngines(new[] { moduleId });
+        }
+
+        /// <summary>
+        /// Method returns list of engines.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines(long[] moduleIds)
+        {
+            return GetEngines(moduleIds, WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of engines.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <param name="language">language</param>
+        /// <param name="nation">nation</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var requestURI = CreateEnginesRequestURI(moduleIds, language, nation, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var engineJsonString in jObject.Children())
+            {
+                var engine = engineJsonString.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>();
+
+                obj.Data.Add(engine);
+            }
+
+            return obj;
+        }
+
+        private string CreateEnginesRequestURI(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var target = "encyclopedia/tankengines";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (nation != WGNation.All)
+                sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
+
+            if (moduleIds.Length > 0)
+                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Engines
+
+        #region Turrets
+
+        /// <summary>
+        /// Method returns list of turrets.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets()
+        {
+            return GetTurrets(new long[0], WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of turrets.
+        /// </summary>
+        /// <param name="moduleIds">module id - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets(long moduleId)
+        {
+            return GetTurrets(new[] { moduleId });
+        }
+
+        /// <summary>
+        /// Method returns list of turrets.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets(long[] moduleIds)
+        {
+            return GetTurrets(moduleIds, WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of turrets.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <param name="language">language</param>
+        /// <param name="nation">nation</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var requestURI = CreateTurretsRequestURI(moduleIds, language, nation, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var turretJsonString in jObject.Children())
+            {
+                var turret = turretJsonString.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>();
+
+                obj.Data.Add(turret);
+            }
+
+            return obj;
+        }
+
+        private string CreateTurretsRequestURI(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var target = "encyclopedia/tankturrets";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (nation != WGNation.All)
+                sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
+
+            if (moduleIds.Length > 0)
+                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Turrets
+
+        #region Radios
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios()
+        {
+            return GetRadios(new long[0], WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <param name="moduleIds">module id - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios(long moduleId)
+        {
+            return GetRadios(new[] { moduleId });
+        }
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios(long[] moduleIds)
+        {
+            return GetRadios(moduleIds, WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <param name="language">language</param>
+        /// <param name="nation">nation</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var requestURI = CreateRadiosRequestURI(moduleIds, language, nation, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var radioJsonString in jObject.Children())
+            {
+                var radio = radioJsonString.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>();
+
+                obj.Data.Add(radio);
+            }
+
+            return obj;
+        }
+
+        private string CreateRadiosRequestURI(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var target = "encyclopedia/tankradios";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (nation != WGNation.All)
+                sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
+
+            if (moduleIds.Length > 0)
+                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Radios
+
+        #region Suspensions
+
+        /// <summary>
+        /// Method returns list of suspensions.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions()
+        {
+            return GetSuspensions(new long[0], WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of suspensions.
+        /// </summary>
+        /// <param name="moduleIds">module id - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions(long moduleId)
+        {
+            return GetSuspensions(new[] { moduleId });
+        }
+
+        /// <summary>
+        /// Method returns list of suspensions.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions(long[] moduleIds)
+        {
+            return GetSuspensions(moduleIds, WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of suspensions.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <param name="language">language</param>
+        /// <param name="nation">nation</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var requestURI = CreateSuspensionsRequestURI(moduleIds, language, nation, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var suspensionJsonString in jObject.Children())
+            {
+                var suspension = suspensionJsonString.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>();
+
+                obj.Data.Add(suspension);
+            }
+
+            return obj;
+        }
+
+        private string CreateSuspensionsRequestURI(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var target = "encyclopedia/tankchassis";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (nation != WGNation.All)
+                sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
+
+            if (moduleIds.Length > 0)
+                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Suspensions
+
+        #region Guns
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns()
+        {
+            return GetGuns(new long[0], WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <param name="moduleIds">module id - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns(long moduleId)
+        {
+            return GetGuns(new[] { moduleId });
+        }
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns(long[] moduleIds)
+        {
+            return GetGuns(moduleIds, WGLanguageField.EN, WGNation.All, null);
+        }
+
+        /// <summary>
+        /// Method returns list of radios.
+        /// </summary>
+        /// <param name="moduleIds">list of modules - not mandatory</param>
+        /// <param name="language">language</param>
+        /// <param name="nation">nation</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var requestURI = CreateGunsRequestURI(moduleIds, language, nation, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var gubJsonString in jObject.Children())
+            {
+                var gun = gubJsonString.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>();
+
+                obj.Data.Add(gun);
+            }
+
+            return obj;
+        }
+
+        private string CreateGunsRequestURI(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields)
+        {
+            var target = "encyclopedia/tankguns";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (nation != WGNation.All)
+                sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
+
+            if (moduleIds.Length > 0)
+                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Guns
+
         #endregion Encyclopedia
 
         #region General methods

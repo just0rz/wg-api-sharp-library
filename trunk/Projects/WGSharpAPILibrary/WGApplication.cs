@@ -1709,6 +1709,10 @@ namespace WGSharpAPI
 
         #endregion Guns
 
+        #region Achievements
+
+        #endregion Achievements
+
         #endregion Encyclopedia
 
         #region General methods

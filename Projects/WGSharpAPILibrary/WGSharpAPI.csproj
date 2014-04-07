@@ -49,6 +49,7 @@
     <Compile Include="Entities\ClanDetails\Member.cs" />
     <Compile Include="Entities\ClanDetails\Province.cs" />
     <Compile Include="Entities\EncyclopediaDetails\Module.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Achievement.cs" />
     <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Chassis.cs" />
     <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Engine.cs" />
     <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Gun.cs" />

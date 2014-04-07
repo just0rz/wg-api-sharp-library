@@ -48,6 +48,14 @@
     <Compile Include="Entities\ClanDetails\Emblem.cs" />
     <Compile Include="Entities\ClanDetails\Member.cs" />
     <Compile Include="Entities\ClanDetails\Province.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\Module.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Chassis.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Engine.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Gun.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Radio.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Tank.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Turret.cs" />
+    <Compile Include="Entities\EncyclopediaDetails\Vehicle.cs" />
     <Compile Include="Entities\PlayerDetails\Player.cs" />
     <Compile Include="Entities\PlayerDetails\Achievements.cs" />
     <Compile Include="Entities\PlayerDetails\Clan.cs" />
@@ -82,7 +90,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Entities\EncyclopediaDetails\" />
+    <Folder Include="Entities\EncyclopediaDetails\WorldOfWarplanes\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

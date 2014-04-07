@@ -71,6 +71,8 @@ namespace WGSharpAPI
 
         #endregion Constructors
 
+        #region Account
+
         #region Search Players
 
         /// <summary>
@@ -427,6 +429,8 @@ namespace WGSharpAPI
 
         #endregion Player Achievements
 
+        #endregion Account
+
         #region Authentication
 
         /// <summary>
@@ -472,6 +476,8 @@ namespace WGSharpAPI
         }
 
         #endregion Authentication
+
+        #region Clans
 
         #region Search Clans
 
@@ -1091,6 +1097,154 @@ namespace WGSharpAPI
         }
 
         #endregion Clan Member Details
+
+        #endregion Clans
+
+        #region Encyclopedia
+
+        #region List Vehicles
+
+        /// <summary>
+        /// Method returns list of all vehicles from Tankopedia.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetAllVehicles()
+        {
+            return GetAllVehicles(WGLanguageField.EN, null);
+        }
+
+        /// <summary>
+        /// Method returns list of all vehicles from Tankopedia.
+        /// </summary>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetAllVehicles(WGLanguageField language, string responseFields)
+        {
+            var requestURI = CreateAllVehiclesRequestURI(language, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var tankJObject in jObject.Children())
+            {
+                var tank = tankJObject.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>();
+
+                obj.Data.Add(tank);
+            }
+
+            return obj;
+        }
+
+        private string CreateAllVehiclesRequestURI(WGLanguageField language, string responseFields)
+        {
+            var target = "encyclopedia/tanks";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion List Vehicles
+
+        #region Vehicle Details
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="tankId"></param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetVehicleDetails(long tankId)
+        {
+            return GetVehicleDetails(new[] { tankId }, WGLanguageField.EN, null);
+        }
+
+        /// <summary>
+        /// Method returns list of all vehicles from Tankopedia.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetVehicleDetails(long[] tankIds)
+        {
+            return GetVehicleDetails(tankIds, WGLanguageField.EN, null);
+        }
+
+        /// <summary>
+        /// Method returns list of all vehicles from Tankopedia.
+        /// </summary>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetVehicleDetails(long[] tankIds, WGLanguageField language, string responseFields)
+        {
+            var requestURI = CreateVehicleDetailssRequestURI(tankIds, language, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var tankJObject in jObject.Children())
+            {
+                var tank = tankJObject.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>();
+
+                obj.Data.Add(tank);
+            }
+
+            return obj;
+        }
+
+        private string CreateVehicleDetailssRequestURI(long[] tankIds, WGLanguageField language, string responseFields)
+        {
+            var target = "encyclopedia/tankinfo";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            sb.AppendFormat("&tank_id={0}", string.Join(",", tankIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Vehicle Details
+
+        #endregion Encyclopedia
 
         #region General methods
 

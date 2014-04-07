@@ -23,15 +23,17 @@ THE SOFTWARE.
  */
 using System;
 using System.Collections.Generic;
-using WGSharpAPI.Enums;
 using WGSharpAPI.Entities.ClanDetails;
 using WGSharpAPI.Entities.PlayerDetails;
+using WGSharpAPI.Enums;
 using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
 
 namespace WGSharpAPI.Interfaces
 {
     public interface IWGApplication
     {
+        #region Account
+
         #region Search Players
 
         /// <summary>
@@ -176,6 +178,8 @@ namespace WGSharpAPI.Interfaces
 
         #endregion Player Achievements
 
+        #endregion Account
+
         #region Authentication
 
         /// <summary>
@@ -205,6 +209,8 @@ namespace WGSharpAPI.Interfaces
         string Logout(string accessToken);
 
         #endregion Authentication
+
+        #region Clans
 
         #region Search Clans
 
@@ -394,5 +400,29 @@ namespace WGSharpAPI.Interfaces
         IWGResponse<List<Member>> GetClanMemberInfo(long[] memberIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Clan Member Details
+
+        #endregion Clans
+
+        #region Encyclopedia
+
+        #region All Vehicles
+
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetAllVehicles();
+
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetAllVehicles(WGLanguageField language, string responseFields);
+
+        #endregion All Vehicles
+
+        #region Vehicle Details
+
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetVehicleDetails(long tankId);
+
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetVehicleDetails(long[] tankId);
+
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetVehicleDetails(long[] tankId, WGLanguageField language, string responseFields);
+
+        #endregion Vehicle Details
+
+        #endregion Encyclopedia
     }
 }

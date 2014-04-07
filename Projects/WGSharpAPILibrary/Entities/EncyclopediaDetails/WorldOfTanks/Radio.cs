@@ -25,10 +25,30 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
 {
     public class Radio : Module
     {
+        /// <summary>
+        /// Signal range
+        /// </summary>
+        [JsonProperty("distance")]
+        public long Distance { get; set; }
+
+        /// <summary>
+        /// Cost of research in experience
+        /// </summary>
+        [JsonProperty("price_xp")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public long? PriceXp { get; set; }
+
+        /// <summary>
+        /// Cost of research in experience
+        /// </summary>
+        [JsonProperty("weight")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public decimal? Weight { get; set; }
     }
 }

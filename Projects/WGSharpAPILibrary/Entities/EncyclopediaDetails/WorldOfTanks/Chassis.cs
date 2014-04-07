@@ -22,14 +22,30 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
 {
     public class Chassis : Module
     {
+        /// <summary>
+        /// Maximum load capacity
+        /// </summary>
+        [JsonProperty("max_load")]
+        public decimal MaxLoad { get; set; }
 
+        /// <summary>
+        /// Cost of research in experience
+        /// </summary>
+        [JsonProperty("price_xp")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public long? PriceXp { get; set; }
+
+        /// <summary>
+        /// Cost of research in experience
+        /// </summary>
+        [JsonProperty("weight")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public decimal? Weight { get; set; }
     }
 }

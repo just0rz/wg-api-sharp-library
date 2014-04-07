@@ -23,8 +23,6 @@ THE SOFTWARE.
  */
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
@@ -165,10 +163,10 @@ namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
         public long TurretArmorFront { get; set; }
 
         /// <summary>
-        /// Standard turret armor: sides
+        /// Standard turret armor: rear
         /// </summary>
         [JsonProperty("turret_armor_fedd")]
-        public long TurretArmorSides { get; set; }
+        public long TurretArmorRear { get; set; }
 
         /// <summary>
         /// Standard turret armor: sides
@@ -192,7 +190,7 @@ namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
         /// Hull armor: rear
         /// </summary>
         [JsonProperty("vehicle_armor_fedd")]
-        public long ArmorSides2 { get; set; }
+        public long ArmorRear { get; set; }
 
         /// <summary>
         /// Hull armor: front
@@ -212,7 +210,7 @@ namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
         /// </summary>
         [JsonProperty("price_xp")]
         [Obsolete("Warning. The field will be disabled.")]
-        public long PriceXp { get; set; }
+        public long? PriceXp { get; set; }
 
         /// <summary>
         /// Weight

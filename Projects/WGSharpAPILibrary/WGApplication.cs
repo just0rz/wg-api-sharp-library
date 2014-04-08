@@ -292,7 +292,7 @@ namespace WGSharpAPI
         /// <returns></returns>
         public IWGResponse<List<Tank>> GetPlayerVehicles(long accountId)
         {
-            return GetPlayerVehicles(new[] { accountId }, WGLanguageField.EN, null, null);
+            return GetPlayerVehicles(new[] { accountId }, new long[0], WGLanguageField.EN, null, null);
         }
 
         /// <summary>
@@ -302,20 +302,21 @@ namespace WGSharpAPI
         /// <returns></returns>
         public IWGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds)
         {
-            return GetPlayerVehicles(accountIds, WGLanguageField.EN, null, null);
+            return GetPlayerVehicles(accountIds, new long[0], WGLanguageField.EN, null, null);
         }
 
         /// <summary>
         /// Method returns details on player's vehicles.
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
+        /// <param name="tankIds">list of tank ids</param>
         /// <param name="language">language</param>
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        public IWGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        public IWGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds, long[] tankIds, WGLanguageField language, string accessToken, string responseFields)
         {
-            var requestURI = CreatePlayerVehiclesRequestURI(accountIds, language, accessToken, responseFields);
+            var requestURI = CreatePlayerVehiclesRequestURI(accountIds, tankIds, language, accessToken, responseFields);
 
             var output = GetRequestResponse(requestURI);
 
@@ -346,7 +347,7 @@ namespace WGSharpAPI
             return response;
         }
 
-        private string CreatePlayerVehiclesRequestURI(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        private string CreatePlayerVehiclesRequestURI(long[] accountIds, long[] tankIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var target = "account/tanks";
 
@@ -361,6 +362,9 @@ namespace WGSharpAPI
                 sb.AppendFormat("&access_token={0}", accessToken);
 
             sb.AppendFormat("&account_id={0}", string.Join(",", accountIds));
+
+            if (tankIds.Length > 0)
+                sb.AppendFormat("&tank_id={0}", string.Join(",", tankIds));
 
             var requestURI = sb.ToString();
 
@@ -935,6 +939,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanId">clan id</param>
         /// <returns></returns>
+        [Obsolete("Warning. This method is deprecated and will be removed soon.")]
         public IWGResponse<List<long>> GetClansVictoryPoints(long clanId)
         {
             return GetClansVictoryPoints(new long[] { clanId }, WGLanguageField.EN, null, null);
@@ -945,6 +950,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="clanIds">list of clan ids</param>
         /// <returns></returns>
+        [Obsolete("Warning. This method is deprecated and will be removed soon.")]
         public IWGResponse<List<long>> GetClansVictoryPoints(long[] clanIds)
         {
             return GetClansVictoryPoints(clanIds, WGLanguageField.EN, null, null);
@@ -958,6 +964,7 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
+        [Obsolete("Warning. This method is deprecated and will be removed soon.")]
         public IWGResponse<List<long>> GetClansVictoryPoints(long[] clanIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var requestURI = CreateClansVictoryPointsRequestURI(clanIds, language, accessToken, responseFields);

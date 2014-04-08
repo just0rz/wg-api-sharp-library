@@ -29,8 +29,6 @@ namespace WGSharpAPI.Entities.PlayerDetails
 {
     public class Player
     {
-        #region JSON Properties
-
         [JsonProperty("account_id")]
         public long AccountId { get; set; }
 
@@ -38,10 +36,11 @@ namespace WGSharpAPI.Entities.PlayerDetails
         public string Nickname { get; set; }
 
         [JsonProperty("clan")]
-        [Obsolete("This field will be removed")]
+        [Obsolete("This field has been removed")]
         public Clan Clan { get; set; }
 
         [JsonProperty("achievements")]
+        [Obsolete("Method is deprecated and will be removed soon.")]
         public Achievements Achievements { get; set; }
 
         [JsonProperty("statistics")]
@@ -50,13 +49,20 @@ namespace WGSharpAPI.Entities.PlayerDetails
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; }
 
+        [JsonProperty("global_rating")]
+        public decimal GlobalRating { get; set; }
+
+        [JsonProperty("last_battle_time")]
+        public long LastBattleTime { get; set; }
+
+        [JsonProperty("logout_at")]
+        public long LastLogout { get; set; }
+
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; }
 
         [JsonProperty("private")]
         public PrivateData Private { get; set; }
-
-        #endregion JSON Properties
 
         /// <summary>
         /// List of tanks

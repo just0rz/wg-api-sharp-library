@@ -34,7 +34,7 @@ namespace WGSharpAPI.Entities.PlayerDetails
         public Player Player { get; set; }
 
         [JsonProperty("achievements")]
-        [Obsolete("Method is deprecated and will be removed soon.")]
+        [Obsolete("Method is deprecated and has been removed.")]
         public Achievements Achievements { get; set; }
 
         [JsonProperty("statistics")]
@@ -44,11 +44,11 @@ namespace WGSharpAPI.Entities.PlayerDetails
         public long MasteryBadge { get; set; }
 
         [JsonProperty("last_battle_time")]
-        [Obsolete("Method is deprecated and will be removed soon.")]
+        [Obsolete("Method is deprecated and has been removed.")]
         public long LastTimeInBattle { get; set; }
 
         [JsonProperty("in_garage")]
-        [Obsolete("Method is deprecated and will be removed soon.")]
+        [Obsolete("Method is deprecated and has been removed.")]
         public long InGarage { get; set; }
 
         [JsonProperty("tank_id")]

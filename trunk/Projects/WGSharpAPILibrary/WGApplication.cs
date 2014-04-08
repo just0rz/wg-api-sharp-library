@@ -1711,6 +1711,67 @@ namespace WGSharpAPI
 
         #region Achievements
 
+        /// <summary>
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>> GetAchievements()
+        {
+            return GetAchievements(WGLanguageField.EN, null);
+        }
+
+        /// <summary>
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>> GetAchievements(WGLanguageField language, string responseFields)
+        {
+            var requestURI = CreateAchievementsRequestURI(language, responseFields);
+
+            var output = this.GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+
+            var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>>
+            {
+                Status = wgRawResponse.Status,
+                Count = wgRawResponse.Count,
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>(wgRawResponse.Count),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var achievementJsonString in jObject.Children())
+            {
+                var achievement = achievementJsonString.First.ToObject<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>();
+
+                obj.Data.Add(achievement);
+            }
+
+            return obj;
+        }
+
+        private string CreateAchievementsRequestURI(WGLanguageField language, string responseFields)
+        {
+            var target = "encyclopedia/achievements";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
         #endregion Achievements
 
         #endregion Encyclopedia

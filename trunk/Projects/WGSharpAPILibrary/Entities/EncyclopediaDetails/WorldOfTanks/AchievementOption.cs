@@ -21,19 +21,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
 {
-    public class Achievement
+    public class AchievementOption
     {
-        /// <summary>
-        /// Description
-        /// </summary>
-        [JsonProperty("description")]
-        public string Description { get; set; }
-
         /// <summary>
         /// Image
         /// </summary>
@@ -41,55 +34,16 @@ namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
         public string ImageURI { get; set; }
 
         /// <summary>
-        /// Achievement name
-        /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        /// <summary>
         /// Localized name field
         /// </summary>
         [JsonProperty("name_i18n")]
         public string LocalizedName { get; set; }
 
-        /// <summary>
-        /// Achievement order
-        /// </summary>
-        [JsonProperty("order")]
-        public long Order { get; set; }
-
-        /// <summary>
-        /// Section
-        /// </summary>
-        [JsonProperty("section")]
-        public string Section { get; set; }
-
-        /// <summary>
-        /// Section order
-        /// </summary>
-        [JsonProperty("section_order")]
-        public long SectionOrder { get; set; }
-
-        /// <summary>
-        /// Type
-        /// </summary>
-        [JsonProperty("type")]
-        public string Type { get; set; }
-
-        /// <summary>
-        /// Service Record
-        /// </summary>
-        [JsonProperty("options")]
-        public List<AchievementOption> Options { get; set; }
-
         #region Overrides
 
         public override string ToString()
         {
-            if (string.IsNullOrWhiteSpace(LocalizedName))
-                return string.IsNullOrWhiteSpace(Name) ? base.ToString() : Name;
-
-            return LocalizedName;
+            return string.IsNullOrWhiteSpace(LocalizedName) ? base.ToString() : LocalizedName;
         }
 
         #endregion Overrides

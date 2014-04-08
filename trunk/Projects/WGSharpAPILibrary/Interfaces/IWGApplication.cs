@@ -618,6 +618,24 @@ namespace WGSharpAPI.Interfaces
 
         #endregion Guns
 
+        #region Achievements
+
+        /// <summary>
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <returns></returns>
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>> GetAchievements();
+
+        /// <summary>
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned.</param>
+        /// <returns></returns>
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>> GetAchievements(WGLanguageField language, string responseFields);
+
+        #endregion Achievements
+
         #endregion Encyclopedia
     }
 }

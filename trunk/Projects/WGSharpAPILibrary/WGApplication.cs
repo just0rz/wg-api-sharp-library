@@ -1335,7 +1335,7 @@ namespace WGSharpAPI
                 sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
 
             if (moduleIds.Length > 0)
-                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+                sb.AppendFormat("&module_id={0}", string.Join(",", moduleIds));
 
             var requestURI = sb.ToString();
 
@@ -1428,7 +1428,7 @@ namespace WGSharpAPI
                 sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
 
             if (moduleIds.Length > 0)
-                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+                sb.AppendFormat("&module_id={0}", string.Join(",", moduleIds));
 
             var requestURI = sb.ToString();
 
@@ -1521,7 +1521,7 @@ namespace WGSharpAPI
                 sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
 
             if (moduleIds.Length > 0)
-                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+                sb.AppendFormat("&module_id={0}", string.Join(",", moduleIds));
 
             var requestURI = sb.ToString();
 
@@ -1614,7 +1614,7 @@ namespace WGSharpAPI
                 sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
 
             if (moduleIds.Length > 0)
-                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+                sb.AppendFormat("&module_id={0}", string.Join(",", moduleIds));
 
             var requestURI = sb.ToString();
 
@@ -1782,6 +1782,72 @@ namespace WGSharpAPI
         #endregion Achievements
 
         #endregion Encyclopedia
+
+        #region Player's vehicles
+
+        #region Vehicle statistics
+
+        /// <summary>
+        /// Method returns overall statistics, Tank Company statistics, and clan statistics per each vehicle for each user.
+        /// 
+        /// </summary>
+        /// <param name="accountId">account id</param>
+        /// <param name="tankIds">list of player vehicle ids</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="inGarage">Filter by vehicle availability in the Garage. If the parameter is not specified, all vehicles are returned. Valid values: "1" — Return vehicles available in the Garage. "0" — Return vehicles that are no longer in the Garage.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankStats(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage)
+        {
+            return GetTankStats(new[] { accountId }, new long[0], WGLanguageField.EN, null, null, null);
+        }
+
+        /// <summary>
+        /// Method returns overall statistics, Tank Company statistics, and clan statistics per each vehicle for each user.
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <param name="accountId">account id</param>
+        /// <param name="tankIds">list of player vehicle ids</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="inGarage">Filter by vehicle availability in the Garage. If the parameter is not specified, all vehicles are returned. Valid values: "1" — Return vehicles available in the Garage. "0" — Return vehicles that are no longer in the Garage.</param>
+        /// <returns></returns>
+        public IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankStats(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage)
+        {
+            return GetAchievements(WGLanguageField.EN, null);
+        }
+
+        private string CreateTankStatsRequestURI(long accountId, long[] tankIds, WGLanguageField language, string accessToken, string responseFields, bool inGarage)
+        {
+            var target = "tanks/stats";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+                sb.AppendFormat("&access_token={0}", accessToken);
+
+            sb.AppendFormat("&account_id={0}", accountId);
+
+            if (tankIds.Length > 0)
+                sb.AppendFormat("&tank_id={0}", string.Join(",", tankIds));
+
+            sb.AppendFormat("&in_garage={0}", inGarage ? 1 : 0);
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Vehicle statistics
+
+        #endregion Player's vehicles
 
         #region General methods
 

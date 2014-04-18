@@ -5,12 +5,12 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("WGSharpAPITests")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("WarGaming API Sharp Library - Unit Tests")]
+[assembly: AssemblyDescription("WarGaming API Sharp Library - Unit Tests")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Microsoft")]
-[assembly: AssemblyProduct("WGSharpAPITests")]
-[assembly: AssemblyCopyright("Copyright © Microsoft 2014")]
+[assembly: AssemblyCompany("Personal")]
+[assembly: AssemblyProduct("WarGaming API Sharp Library - Unit Tests")]
+[assembly: AssemblyCopyright("Copyright © Iulian Grosu 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

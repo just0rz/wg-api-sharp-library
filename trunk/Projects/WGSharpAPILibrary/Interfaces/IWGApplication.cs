@@ -637,5 +637,59 @@ namespace WGSharpAPI.Interfaces
         #endregion Achievements
 
         #endregion Encyclopedia
+
+        #region Player's vehicles
+
+        #region Vehicle statistics
+
+        /// <summary>
+        /// Method returns overall statistics, Tank Company statistics, and clan statistics per each vehicle for a user.
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <param name="accountId">account id</param>
+        /// <returns></returns>
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankStats(long accountId);
+
+        /// <summary>
+        /// Method returns overall statistics, Tank Company statistics, and clan statistics per each vehicle for each user.
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <param name="accountId">account id</param>
+        /// <param name="tankIds">list of player vehicle ids</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="inGarage">Filter by vehicle availability in the Garage. If the parameter is not specified, all vehicles are returned. Valid values: "1" — Return vehicles available in the Garage. "0" — Return vehicles that are no longer in the Garage.</param>
+        /// <returns></returns>
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankStats(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage);
+
+        #endregion Vehicle statistics
+
+        #region Vehicle achievements
+
+        /// <summary>
+        /// Method returns list of vehicles and achievements per vehicle for a user.
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <param name="accountId">account id</param>
+        /// <returns></returns>
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankAchievements(long accountId);
+
+        /// <summary>
+        /// Method returns list of vehicles and achievements per vehicle a user.
+        /// Warning. This method runs in test mode.
+        /// </summary>
+        /// <param name="accountId">account id</param>
+        /// <param name="tankIds">list of player vehicle ids</param>
+        /// <param name="language">language</param>
+        /// <param name="responseFields">fields to be returned</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="inGarage">Filter by vehicle availability in the Garage. If the parameter is not specified, all vehicles are returned. Valid values: "1" — Return vehicles available in the Garage. "0" — Return vehicles that are no longer in the Garage.</param>
+        /// <returns></returns>
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankAchievements(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage);
+
+        #endregion Vehicle achievements
+
+        #endregion Player's vehicles
     }
 }

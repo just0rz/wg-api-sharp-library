@@ -28,34 +28,47 @@ namespace WGSharpAPI.Entities.PlayerDetails
 {
     public class TankStatistics
     {
+
+        [JsonProperty("clan")]
+        public ClanStatistics Clan { get; set; }
+
+        [JsonProperty("all")]
+        public OverallStatistics Overall { get; set; }
+
+        /// <summary>
+        /// Player Owner
+        /// </summary>
+        [JsonProperty("account_id")]
+        public long AccountId { get; set; }
+
+        [JsonProperty("max_xp")]
+        public long MaxXp { get; set; }
+
+        [JsonProperty("company")]
+        public CompanyStatistics Company { get; set; }
+
         [JsonProperty("battles")]
+        [Obsolete("Method is deprecated and has been removed.")]
         public long Battles { get; set; }
 
         [JsonProperty("max_frags")]
-        [Obsolete("Method is deprecated and has been removed.")]
         public long MaxFrags { get; set; }
 
-        [JsonProperty("max_xp")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public long MaxXp { get; set; }
+        [JsonProperty("mark_of_mastery")]
+        public long MarkOfMastery { get; set; }
+
+        [JsonProperty("in_garage")]
+        public bool InGarage { get; set; }
+
+        [JsonProperty("tank_id")]
+        public bool TankId { get; set; }
 
         [JsonProperty("win_and_survived")]
         [Obsolete("Method is deprecated and has been removed.")]
         public long WinAndSurvived { get; set; }
 
         [JsonProperty("wins")]
+        [Obsolete("Method is deprecated and has been removed.")]
         public long Wins { get; set; }
-
-        [JsonProperty("clan")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public ClanStatistics Clan { get; set; }
-
-        [JsonProperty("all")]
-        [Obsolete("Method is deprecated and will be removed soon.")]
-        public OverallStatistics Overall { get; set; }
-
-        [JsonProperty("company")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public CompanyStatistics Company { get; set; }
     }
 }

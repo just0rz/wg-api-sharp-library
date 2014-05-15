@@ -84,7 +84,7 @@ namespace WGSharpAPI
         /// <returns></returns>
         public IWGResponse<List<Player>> SearchPlayers(string searchTerm)
         {
-            return SearchPlayers(searchTerm, WGPlayerListField.All, WGLanguageField.EN, 100);
+            return SearchPlayers(searchTerm, null, WGLanguageField.EN, 100);
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace WGSharpAPI
         /// <returns></returns>
         public IWGResponse<List<Player>> SearchPlayers(string searchTerm, int limit)
         {
-            return SearchPlayers(searchTerm, WGPlayerListField.All, WGLanguageField.EN, limit);
+            return SearchPlayers(searchTerm, null, WGLanguageField.EN, limit);
         }
 
         /// <summary>
@@ -106,18 +106,9 @@ namespace WGSharpAPI
         /// <param name="language">language</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, WGPlayerListField responseFields, WGLanguageField language, int limit)
+        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, string responseFields, WGLanguageField language, int limit)
         {
-            var fields = new StringBuilder();
-
-            if (responseFields == WGPlayerListField.AccountId)
-                fields.Append("account_id");
-            else if (responseFields == WGPlayerListField.Nickname)
-                fields.Append("nickname");
-            else
-                fields.Clear();
-
-            var requestURI = CreatePlayerSearchRequestURI(searchTerm, language, fields.ToString(), limit);
+            var requestURI = CreatePlayerSearchRequestURI(searchTerm, language, responseFields, limit);
 
             var output = GetRequestResponse(requestURI);
 

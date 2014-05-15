@@ -24,59 +24,38 @@ THE SOFTWARE.
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace WGSharpAPI.Entities.EncyclopediaDetails
+namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules
 {
-    /// <summary>
-    /// Base vehciel module
-    /// </summary>
-    public class Module
+    public class TankModule : Module
     {
         /// <summary>
-        /// Is standard module
+        /// Module ID
         /// </summary>
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
+        [JsonProperty("module_id")]
+        public long Id { get; set; }
 
         /// <summary>
-        /// Tier
+        /// Nation
         /// </summary>
-        [JsonProperty("level")]
-        public long Tier { get; set; }
+        [JsonProperty("nation")]
+        public string Nation { get; set; }
 
         /// <summary>
-        /// Name
+        /// Localized nation
         /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("nation_i18n")]
+        public string LocalizedNation { get; set; }
 
         /// <summary>
-        /// Localized name
+        /// Purchase cost in gold
         /// </summary>
-        [JsonProperty("name_i18n")]
-        public string LocalizedName { get; set; }
+        [JsonProperty("price_gold")]
+        public string Gold { get; set; }
 
         /// <summary>
-        /// Purchase cost in credits
+        /// Compatible vehicles IDs
         /// </summary>
-        [JsonProperty("price_credit")]
-        public string Credits { get; set; }
-
-        #region Overrides
-
-        public override string ToString()
-        {
-            var result = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(LocalizedName))
-                result = LocalizedName;
-            else if (!string.IsNullOrWhiteSpace(Name))
-                result = Name;
-            else
-                result = base.ToString();
-
-            return result;
-        }
-
-        #endregion Overrides
+        [JsonProperty("tanks")]
+        public List<long> CompatibleTankIds { get; set; }
     }
 }

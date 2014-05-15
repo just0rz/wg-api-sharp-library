@@ -24,11 +24,18 @@ THE SOFTWARE.
 using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks
 {
     public class Tank : Vehicle
     {
+        /// <summary>
+        /// Tank id
+        /// </summary>
+        [JsonProperty("tank_id")]
+        public long Id { get; set; }
+
         /// <summary>
         /// Standard suspension traverse speed
         /// </summary>

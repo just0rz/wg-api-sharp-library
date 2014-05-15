@@ -26,40 +26,49 @@ using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails
 {
-    /// <summary>
-    /// Base vehciel module
-    /// </summary>
-    public class Module
+    public class Achievement
     {
         /// <summary>
-        /// Is standard module
+        /// Description
         /// </summary>
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
+        [JsonProperty("description")]
+        public string Description { get; set; }
 
         /// <summary>
-        /// Tier
+        /// Image
         /// </summary>
-        [JsonProperty("level")]
-        public long Tier { get; set; }
+        [JsonProperty("image")]
+        public string ImageURI { get; set; }
 
         /// <summary>
-        /// Name
+        /// Achievement name
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Localized name
+        /// Localized name field
         /// </summary>
         [JsonProperty("name_i18n")]
         public string LocalizedName { get; set; }
 
         /// <summary>
-        /// Purchase cost in credits
+        /// Achievement order
         /// </summary>
-        [JsonProperty("price_credit")]
-        public string Credits { get; set; }
+        [JsonProperty("order")]
+        public long Order { get; set; }
+
+        /// <summary>
+        /// Section
+        /// </summary>
+        [JsonProperty("section")]
+        public string Section { get; set; }
+
+        /// <summary>
+        /// Type
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
         #region Overrides
 

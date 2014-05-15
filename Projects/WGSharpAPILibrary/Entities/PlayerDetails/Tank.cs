@@ -23,35 +23,53 @@ THE SOFTWARE.
  */
 using System;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace WGSharpAPI.Entities.PlayerDetails
 {
-    public class Tank
+    /// <summary>
+    /// Player Tank
+    /// </summary>
+    public class Tank : WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank
     {
+        public Tank()
+        {
+            Achievements = new List<Achievement>();
+        }
+
+        private long masteryBadge = -1;
+        /// <summary>
+        /// Mastery Badges
+        /// -1 - Value not retrieved, 0 — None,  1 — 3rd Class, 2 — 2nd Class, 3 — 1st Class, 4 — Ace Tanker
+        /// </summary>
+        [JsonProperty("mark_of_mastery")]
+        public long MasteryBadge { get { return masteryBadge; } set { masteryBadge = value; } }
+
+        /// <summary>
+        /// Vehicle statistics
+        /// </summary>
+        [JsonProperty("statistics")]
+        public TankStatistics TankStatistics { get; set; }
+
         /// <summary>
         /// Tank owner
         /// </summary>
+        [JsonIgnore]
         public Player Player { get; set; }
 
-        [JsonProperty("achievements")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public Achievements Achievements { get; set; }
+        /// <summary>
+        /// Tank achievements
+        /// </summary>
+        [JsonIgnore]
+        public List<Achievement> Achievements { get; set; }
 
-        [JsonProperty("statistics")]
-        public TankStatistics Statistics { get; set; }
+        #region Overrides
 
-        [JsonProperty("mark_of_mastery")]
-        public long MasteryBadge { get; set; }
+        public override string ToString()
+        {
+            return Id != 0 ? Id.ToString() : base.ToString();
+        }
 
-        [JsonProperty("last_battle_time")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public long LastTimeInBattle { get; set; }
-
-        [JsonProperty("in_garage")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public long InGarage { get; set; }
-
-        [JsonProperty("tank_id")]
-        public long Id { get; set; }
+        #endregion Overrides
     }
 }

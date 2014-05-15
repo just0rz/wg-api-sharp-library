@@ -21,62 +21,61 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using System.Collections.Generic;
 using Newtonsoft.Json;
+using System;
 
-namespace WGSharpAPI.Entities.EncyclopediaDetails
+namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules
 {
-    /// <summary>
-    /// Base vehciel module
-    /// </summary>
-    public class Module
+    public class Turret : Module
     {
         /// <summary>
-        /// Is standard module
+        /// Module ID
         /// </summary>
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
+        [JsonProperty("module_id")]
+        public long Id { get; set; }
 
         /// <summary>
-        /// Tier
+        /// Armor: sides
         /// </summary>
-        [JsonProperty("level")]
-        public long Tier { get; set; }
+        [JsonProperty("armor_board")]
+        public long ArmorSides { get; set; }
 
         /// <summary>
-        /// Name
+        /// Armor: rear
         /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("armor_fedd")]
+        public long ArmorRear { get; set; }
 
         /// <summary>
-        /// Localized name
+        /// Armor: front
         /// </summary>
-        [JsonProperty("name_i18n")]
-        public string LocalizedName { get; set; }
+        [JsonProperty("armor_forehead")]
+        public long ArmorFront { get; set; }
 
         /// <summary>
-        /// Purchase cost in credits
+        /// View Range
         /// </summary>
-        [JsonProperty("price_credit")]
-        public string Credits { get; set; }
+        [JsonProperty("circular_vision_radius")]
+        public long ViewRange { get; set; }
 
-        #region Overrides
+        /// <summary>
+        /// Traverse speed
+        /// </summary>
+        [JsonProperty("rotation_speed")]
+        public long TraverseSpeed { get; set; }
 
-        public override string ToString()
-        {
-            var result = string.Empty;
+        /// <summary>
+        /// Cost of research in experience
+        /// </summary>
+        [JsonProperty("price_xp")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public long? PriceXp { get; set; }
 
-            if (!string.IsNullOrWhiteSpace(LocalizedName))
-                result = LocalizedName;
-            else if (!string.IsNullOrWhiteSpace(Name))
-                result = Name;
-            else
-                result = base.ToString();
-
-            return result;
-        }
-
-        #endregion Overrides
+        /// <summary>
+        /// Cost of research in experience
+        /// </summary>
+        [JsonProperty("weight")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public decimal? Weight { get; set; }
     }
 }

@@ -22,9 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 using Newtonsoft.Json;
+using System;
 
 namespace WGSharpAPI.Entities.PlayerDetails
 {
+    [Obsolete("Deprecated")]
     public class Achievements
     {
         [JsonProperty("armor_piercer")]

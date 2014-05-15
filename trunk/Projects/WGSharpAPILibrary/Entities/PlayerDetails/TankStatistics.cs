@@ -28,47 +28,23 @@ namespace WGSharpAPI.Entities.PlayerDetails
 {
     public class TankStatistics
     {
+        /// <summary>
+        /// Victories
+        /// </summary>
+        [JsonProperty("wins")]
+        public long Wins { get; set; }
 
-        [JsonProperty("clan")]
-        public ClanStatistics Clan { get; set; }
-
+        /// <summary>
+        /// Overall Statistics
+        /// </summary>
         [JsonProperty("all")]
+        [Obsolete("Warning. The field will be disabled.")]
         public OverallStatistics Overall { get; set; }
 
         /// <summary>
-        /// Player Owner
+        /// Battles fought
         /// </summary>
-        [JsonProperty("account_id")]
-        public long AccountId { get; set; }
-
-        [JsonProperty("max_xp")]
-        public long MaxXp { get; set; }
-
-        [JsonProperty("company")]
-        public CompanyStatistics Company { get; set; }
-
         [JsonProperty("battles")]
-        [Obsolete("Method is deprecated and has been removed.")]
         public long Battles { get; set; }
-
-        [JsonProperty("max_frags")]
-        public long MaxFrags { get; set; }
-
-        [JsonProperty("mark_of_mastery")]
-        public long MarkOfMastery { get; set; }
-
-        [JsonProperty("in_garage")]
-        public bool InGarage { get; set; }
-
-        [JsonProperty("tank_id")]
-        public bool TankId { get; set; }
-
-        [JsonProperty("win_and_survived")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public long WinAndSurvived { get; set; }
-
-        [JsonProperty("wins")]
-        [Obsolete("Method is deprecated and has been removed.")]
-        public long Wins { get; set; }
     }
 }

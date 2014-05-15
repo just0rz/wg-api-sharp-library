@@ -30,6 +30,10 @@ using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
 
 namespace WGSharpAPI.Interfaces
 {
+    /// <summary>
+    /// Represents your application identified by an application id.
+    /// You can get one from WG's developer room: http://wargaming.net/developers/
+    /// </summary>
     public interface IWGApplication
     {
         #region Account
@@ -129,14 +133,14 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        IWGResponse<List<Tank>> GetPlayerVehicles(long accountId);
+        IWGResponse<List<WGSharpAPI.Entities.PlayerDetails.Player>> GetPlayerVehicles(long accountId);
 
         /// <summary>
         /// Method returns details on player's vehicles.
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
-        IWGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds);
+        IWGResponse<List<WGSharpAPI.Entities.PlayerDetails.Player>> GetPlayerVehicles(long[] accountIds);
 
         /// <summary>
         /// Method returns details on player's vehicles.
@@ -146,7 +150,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        IWGResponse<List<Tank>> GetPlayerVehicles(long[] accountIds, long[] tankIds, WGLanguageField language, string accessToken, string responseFields);
+        IWGResponse<List<WGSharpAPI.Entities.PlayerDetails.Player>> GetPlayerVehicles(long[] accountIds, long[] tankIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Player Tanks
 
@@ -157,14 +161,14 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        IWGResponse<object> GetPlayerAchievements(long accountId);
+        IWGResponse<List<Player>> GetPlayerAchievements(long accountId);
 
         /// <summary>
         /// Warning. This method runs in test mode. Throws NotImplementedException
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
-        IWGResponse<object> GetPlayerAchievements(long[] accountId);
+        IWGResponse<List<Player>> GetPlayerAchievements(long[] accountId);
 
         /// <summary>
         /// Warning. This method runs in test mode. Throws NotImplementedException
@@ -174,7 +178,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        IWGResponse<object> GetPlayerAchievements(long[] accountIds, WGLanguageField language, string accessToken, string responseFields);
+        IWGResponse<List<Player>> GetPlayerAchievements(long[] accountIds, WGLanguageField language, string accessToken, string responseFields);
 
         #endregion Player Achievements
 
@@ -454,21 +458,21 @@ namespace WGSharpAPI.Interfaces
         /// Method returns list of engines.
         /// </summary>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines();
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>> GetEngines();
 
         /// <summary>
         /// Method returns list of engines.
         /// </summary>
         /// <param name="moduleIds">module id - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines(long moduleId);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>> GetEngines(long moduleId);
 
         /// <summary>
         /// Method returns list of engines.
         /// </summary>
         /// <param name="moduleIds">list of modules - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines(long[] moduleIds);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>> GetEngines(long[] moduleIds);
 
         /// <summary>
         /// Method returns list of engines.
@@ -478,7 +482,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="nation">nation</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Engine>> GetEngines(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>> GetEngines(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
 
         #endregion Engines
 
@@ -488,21 +492,21 @@ namespace WGSharpAPI.Interfaces
         /// Method returns list of turrets.
         /// </summary>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets();
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>> GetTurrets();
 
         /// <summary>
         /// Method returns list of turrets.
         /// </summary>
         /// <param name="moduleIds">module id - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets(long moduleId);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>> GetTurrets(long moduleId);
 
         /// <summary>
         /// Method returns list of turrets.
         /// </summary>
         /// <param name="moduleIds">list of modules - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets(long[] moduleIds);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>> GetTurrets(long[] moduleIds);
 
         /// <summary>
         /// Method returns list of turrets.
@@ -512,7 +516,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="nation">nation</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Turret>> GetTurrets(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>> GetTurrets(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
 
         #endregion Turrets
 
@@ -522,21 +526,21 @@ namespace WGSharpAPI.Interfaces
         /// Method returns list of radios.
         /// </summary>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios();
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>> GetRadios();
 
         /// <summary>
         /// Method returns list of radios.
         /// </summary>
         /// <param name="moduleIds">module id - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios(long moduleId);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>> GetRadios(long moduleId);
 
         /// <summary>
         /// Method returns list of radios.
         /// </summary>
         /// <param name="moduleIds">list of modules - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios(long[] moduleIds);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>> GetRadios(long[] moduleIds);
 
         /// <summary>
         /// Method returns list of radios.
@@ -546,7 +550,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="nation">nation</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Radio>> GetRadios(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>> GetRadios(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
 
         #endregion Radios
 
@@ -556,21 +560,21 @@ namespace WGSharpAPI.Interfaces
         /// Method returns list of suspensions.
         /// </summary>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions();
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>> GetSuspensions();
 
         /// <summary>
         /// Method returns list of suspensions.
         /// </summary>
         /// <param name="moduleIds">module id - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions(long moduleId);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>> GetSuspensions(long moduleId);
 
         /// <summary>
         /// Method returns list of suspensions.
         /// </summary>
         /// <param name="moduleIds">list of modules - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions(long[] moduleIds);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>> GetSuspensions(long[] moduleIds);
 
         /// <summary>
         /// Method returns list of suspensions.
@@ -580,7 +584,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="nation">nation</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Chassis>> GetSuspensions(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>> GetSuspensions(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
 
         #endregion Suspensions
 
@@ -590,21 +594,21 @@ namespace WGSharpAPI.Interfaces
         /// Method returns list of radios.
         /// </summary>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns();
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>> GetGuns();
 
         /// <summary>
         /// Method returns list of radios.
         /// </summary>
         /// <param name="moduleIds">module id - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns(long moduleId);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>> GetGuns(long moduleId);
 
         /// <summary>
         /// Method returns list of radios.
         /// </summary>
         /// <param name="moduleIds">list of modules - not mandatory</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns(long[] moduleIds);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>> GetGuns(long[] moduleIds);
 
         /// <summary>
         /// Method returns list of radios.
@@ -614,7 +618,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="nation">nation</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Gun>> GetGuns(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>> GetGuns(long[] moduleIds, WGLanguageField language, WGNation nation, string responseFields);
 
         #endregion Guns
 
@@ -624,7 +628,7 @@ namespace WGSharpAPI.Interfaces
         /// Warning. This method runs in test mode.
         /// </summary>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>> GetAchievements();
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>> GetAchievements();
 
         /// <summary>
         /// Warning. This method runs in test mode.
@@ -632,7 +636,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="language">language</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievement>> GetAchievements(WGLanguageField language, string responseFields);
+        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>> GetAchievements(WGLanguageField language, string responseFields);
 
         #endregion Achievements
 
@@ -648,7 +652,7 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="accountId">account id</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankStats(long accountId);
+        IWGResponse<List<WGSharpAPI.Entities.PlayerDetails.Tank>> GetTankStats(long accountId);
 
         /// <summary>
         /// Method returns overall statistics, Tank Company statistics, and clan statistics per each vehicle for each user.
@@ -661,7 +665,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="inGarage">Filter by vehicle availability in the Garage. If the parameter is not specified, all vehicles are returned. Valid values: "1" — Return vehicles available in the Garage. "0" — Return vehicles that are no longer in the Garage.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankStats(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage);
+        IWGResponse<List<WGSharpAPI.Entities.PlayerDetails.Tank>> GetTankStats(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage);
 
         #endregion Vehicle statistics
 
@@ -673,7 +677,7 @@ namespace WGSharpAPI.Interfaces
         /// </summary>
         /// <param name="accountId">account id</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankAchievements(long accountId);
+        IWGResponse<Player> GetTankAchievements(long accountId);
 
         /// <summary>
         /// Method returns list of vehicles and achievements per vehicle a user.
@@ -686,7 +690,7 @@ namespace WGSharpAPI.Interfaces
         /// <param name="accessToken">access token</param>
         /// <param name="inGarage">Filter by vehicle availability in the Garage. If the parameter is not specified, all vehicles are returned. Valid values: "1" — Return vehicles available in the Garage. "0" — Return vehicles that are no longer in the Garage.</param>
         /// <returns></returns>
-        IWGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>> GetTankAchievements(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage);
+        IWGResponse<Player> GetTankAchievements(long accountId, long[] tankIds, WGLanguageField language, string responseFields, string accessToken, bool? inGarage);
 
         #endregion Vehicle achievements
 

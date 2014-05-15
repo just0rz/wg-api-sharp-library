@@ -29,40 +29,77 @@ namespace WGSharpAPI.Entities.PlayerDetails
 {
     public class Player
     {
+        public Player()
+        {
+            Achievements = new List<Achievement>();
+            Tanks = new List<Tank>();
+        }
+
+        /// <summary>
+        /// Player account ID
+        /// </summary>
         [JsonProperty("account_id")]
         public long AccountId { get; set; }
 
+        /// <summary>
+        /// Player name
+        /// </summary>
         [JsonProperty("nickname")]
         public string Nickname { get; set; }
 
-        [JsonProperty("clan")]
-        [Obsolete("This field has been removed")]
-        public Clan Clan { get; set; }
-
-        [JsonProperty("achievements")]
-        [Obsolete("Method is deprecated and will be removed soon.")]
-        public Achievements Achievements { get; set; }
-
-        [JsonProperty("statistics")]
-        public Statistics Statistics { get; set; }
-
+        /// <summary>
+        /// Date when player's account was created
+        /// </summary>
         [JsonProperty("created_at")]
         public long CreatedAt { get; set; }
 
+        /// <summary>
+        /// Personal rating
+        /// </summary>
         [JsonProperty("global_rating")]
         public decimal GlobalRating { get; set; }
 
+        /// <summary>
+        /// Last battle time
+        /// </summary>
         [JsonProperty("last_battle_time")]
         public long LastBattleTime { get; set; }
 
+        /// <summary>
+        /// End time of last game session
+        /// </summary>
         [JsonProperty("logout_at")]
         public long LastLogout { get; set; }
 
+        /// <summary>
+        /// Date when player details were updated
+        /// </summary>
         [JsonProperty("updated_at")]
         public long UpdatedAt { get; set; }
 
+        /// <summary>
+        /// Player's achievements
+        /// </summary>
+        [JsonProperty("achievements")]
+        [Obsolete("This field will be removed.")]
+        public Achievements AchievementsOld { get; set; }
+
+        /// <summary>
+        /// Player's private data
+        /// </summary>
         [JsonProperty("private")]
         public PrivateData Private { get; set; }
+
+        /// <summary>
+        /// Player statistics
+        /// </summary>
+        [JsonProperty("statistics")]
+        public Statistics Statistics { get; set; }
+
+        /// <summary>
+        /// Player's achievements
+        /// </summary>
+        public List<Achievement> Achievements { get; set; }
 
         /// <summary>
         /// List of tanks
@@ -73,7 +110,16 @@ namespace WGSharpAPI.Entities.PlayerDetails
 
         public override string ToString()
         {
-            return string.IsNullOrWhiteSpace(Nickname) ? base.ToString() : Nickname;
+            var result = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(Nickname))
+                result = Nickname;
+            else if (AccountId != 0)
+                result = AccountId.ToString();
+            else
+                result = base.ToString();
+
+            return result;
         }
 
         #endregion Overrides

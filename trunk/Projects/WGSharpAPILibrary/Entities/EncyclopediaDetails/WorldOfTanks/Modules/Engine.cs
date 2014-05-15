@@ -21,62 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace WGSharpAPI.Entities.EncyclopediaDetails
+namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules
 {
-    /// <summary>
-    /// Base vehciel module
-    /// </summary>
-    public class Module
+    public class Engine : TankModule
     {
         /// <summary>
-        /// Is standard module
+        /// Chance of Fire
         /// </summary>
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
+        [JsonProperty("fire_starting_chance")]
+        public long ChanceOfFire { get; set; }
 
         /// <summary>
-        /// Tier
+        /// Power
         /// </summary>
-        [JsonProperty("level")]
-        public long Tier { get; set; }
+        [JsonProperty("power")]
+        public long Power { get; set; }
 
         /// <summary>
-        /// Name
+        /// Cost of research in experience
         /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("price_xp")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public long? PriceXp { get; set; }
 
         /// <summary>
-        /// Localized name
+        /// Weight
         /// </summary>
-        [JsonProperty("name_i18n")]
-        public string LocalizedName { get; set; }
-
-        /// <summary>
-        /// Purchase cost in credits
-        /// </summary>
-        [JsonProperty("price_credit")]
-        public string Credits { get; set; }
-
-        #region Overrides
-
-        public override string ToString()
-        {
-            var result = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(LocalizedName))
-                result = LocalizedName;
-            else if (!string.IsNullOrWhiteSpace(Name))
-                result = Name;
-            else
-                result = base.ToString();
-
-            return result;
-        }
-
-        #endregion Overrides
+        [JsonProperty("weight")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public decimal? Weight { get; set; }
     }
 }

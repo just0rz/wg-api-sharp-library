@@ -21,60 +21,26 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using System.Collections.Generic;
-using Newtonsoft.Json;
 
-namespace WGSharpAPI.Entities.EncyclopediaDetails
+namespace WGSharpAPI.Entities.PlayerDetails
 {
-    /// <summary>
-    /// Base vehciel module
-    /// </summary>
-    public class Module
+    public class Achievement
     {
         /// <summary>
-        /// Is standard module
+        /// Achievement name
         /// </summary>
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
-
-        /// <summary>
-        /// Tier
-        /// </summary>
-        [JsonProperty("level")]
-        public long Tier { get; set; }
-
-        /// <summary>
-        /// Name
-        /// </summary>
-        [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// Localized name
+        /// Number of times the player received the achievement
         /// </summary>
-        [JsonProperty("name_i18n")]
-        public string LocalizedName { get; set; }
-
-        /// <summary>
-        /// Purchase cost in credits
-        /// </summary>
-        [JsonProperty("price_credit")]
-        public string Credits { get; set; }
+        public long TimesAchieved { get; set; }
 
         #region Overrides
 
         public override string ToString()
         {
-            var result = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(LocalizedName))
-                result = LocalizedName;
-            else if (!string.IsNullOrWhiteSpace(Name))
-                result = Name;
-            else
-                result = base.ToString();
-
-            return result;
+            return string.IsNullOrWhiteSpace(Name) ? base.ToString() : Name;
         }
 
         #endregion Overrides

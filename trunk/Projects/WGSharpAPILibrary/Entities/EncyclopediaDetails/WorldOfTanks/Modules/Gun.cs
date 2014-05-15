@@ -21,62 +21,44 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using System;
 using System.Collections.Generic;
 using Newtonsoft.Json;
 
-namespace WGSharpAPI.Entities.EncyclopediaDetails
+namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules
 {
-    /// <summary>
-    /// Base vehciel module
-    /// </summary>
-    public class Module
+    public class Gun : TankModule
     {
         /// <summary>
-        /// Is standard module
+        /// Damage
         /// </summary>
-        [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
+        [JsonProperty("damage")]
+        public List<long> Damage { get; set; }
 
         /// <summary>
-        /// Tier
+        /// Penetration
         /// </summary>
-        [JsonProperty("level")]
-        public long Tier { get; set; }
+        [JsonProperty("piercing_power")]
+        public List<long> PiercingPower { get; set; }
 
         /// <summary>
-        /// Name
+        /// Rate of Fire
         /// </summary>
-        [JsonProperty("name")]
-        public string Name { get; set; }
+        [JsonProperty("rate")]
+        public decimal RateOfFire { get; set; }
 
         /// <summary>
-        /// Localized name
+        /// Cost of research in experience
         /// </summary>
-        [JsonProperty("name_i18n")]
-        public string LocalizedName { get; set; }
+        [JsonProperty("price_xp")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public long? PriceXp { get; set; }
 
         /// <summary>
-        /// Purchase cost in credits
+        /// Cost of research in experience
         /// </summary>
-        [JsonProperty("price_credit")]
-        public string Credits { get; set; }
-
-        #region Overrides
-
-        public override string ToString()
-        {
-            var result = string.Empty;
-
-            if (!string.IsNullOrWhiteSpace(LocalizedName))
-                result = LocalizedName;
-            else if (!string.IsNullOrWhiteSpace(Name))
-                result = Name;
-            else
-                result = base.ToString();
-
-            return result;
-        }
-
-        #endregion Overrides
+        [JsonProperty("weight")]
+        [Obsolete("Warning. The field will be disabled.")]
+        public decimal? Weight { get; set; }
     }
 }

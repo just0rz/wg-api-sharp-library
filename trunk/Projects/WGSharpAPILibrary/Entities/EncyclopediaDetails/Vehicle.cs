@@ -25,29 +25,50 @@ using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails
 {
+    /// <summary>
+    /// Base vehicle
+    /// </summary>
     public class Vehicle
     {
+        /// <summary>
+        /// Premium vehicle
+        /// </summary>
         [JsonProperty("is_premium")]
         public bool IsPremium { get; set; }
 
+        /// <summary>
+        /// Tier
+        /// </summary>
         [JsonProperty("level")]
         public long Tier { get; set; }
 
+        /// <summary>
+        /// Name
+        /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        /// <summary>
+        /// Localized name field
+        /// </summary>
         [JsonProperty("name_i18n")]
         public string LocalizedName { get; set; }
 
+        /// <summary>
+        /// Nation
+        /// </summary>
         [JsonProperty("nation")]
         public string Nation { get; set; }
 
+        /// <summary>
+        /// Localized nation field
+        /// </summary>
         [JsonProperty("nation_i18n")]
         public string LocalizedNation { get; set; }
 
-        [JsonProperty("tank_id")]
-        public long Id { get; set; }
-
+        /// <summary>
+        /// Type
+        /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
 
@@ -55,7 +76,16 @@ namespace WGSharpAPI.Entities.EncyclopediaDetails
 
         public override string ToString()
         {
-            return string.IsNullOrWhiteSpace(LocalizedName) ? base.ToString() : LocalizedName;
+            var result = string.Empty;
+
+            if (!string.IsNullOrWhiteSpace(LocalizedName))
+                result = LocalizedName;
+            else if (!string.IsNullOrWhiteSpace(Name))
+                result = Name;
+            else
+                result = base.ToString();
+
+            return result;
         }
 
         #endregion Overrides

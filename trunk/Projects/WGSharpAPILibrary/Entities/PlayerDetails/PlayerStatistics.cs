@@ -27,15 +27,27 @@ namespace WGSharpAPI.Entities.PlayerDetails
 {
     public class Statistics
     {
-        [JsonProperty("clan")]
-        public ClanStatistics Clan { get; set; }
-
+        /// <summary>
+        /// Overall Statistics
+        /// </summary>
         [JsonProperty("all")]
         public OverallStatistics Overall { get; set; }
 
+        /// <summary>
+        /// Clan battles statistics
+        /// </summary>
+        [JsonProperty("clan")]
+        public ClanStatistics Clan { get; set; }
+
+        /// <summary>
+        /// Tank Company battles statistics
+        /// </summary>
         [JsonProperty("company")]
         public CompanyStatistics Company { get; set; }
 
+        /// <summary>
+        /// Maximum experience per battle
+        /// </summary>
         [JsonProperty("max_xp")]
         public long MaxXp { get; set; }
     }

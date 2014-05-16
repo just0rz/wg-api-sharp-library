@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using WGSharpAPI;
 using WGSharpAPI.Interfaces;
 
-namespace SampleWGSharpAPI
+namespace Sample.SearchPlayers
 {
     class Program
     {

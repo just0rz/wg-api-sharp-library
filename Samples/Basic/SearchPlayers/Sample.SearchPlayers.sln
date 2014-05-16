@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual C# Express 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleWGSharpAPI", "SampleWGSharpAPI.csproj", "{333D60BD-F11F-4A3D-B17B-D9545999DCBB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample.SearchPlayers", "Sample.SearchPlayers.csproj", "{333D60BD-F11F-4A3D-B17B-D9545999DCBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,3 +4,5 @@ Solutions/*.suo
 Projects/WGSharpAPILibrary/bin/*
 Release/*
 Tests/WGSharpAPITests/bin/*
+Samples/Basic/SearchPlayers/bin/*
+Samples/Basic/SearchPlayers/obj/*

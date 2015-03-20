@@ -1,3 +1,6 @@
-Tests/WGSharpAPITests/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-Projects/WGSharpAPILibrary/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-Solutions/WGSharpAPI.v11.suo
+Tests/WGSharpAPITests/obj/*
+Projects/WGSharpAPILibrary/obj/*
+Solutions/*.suo
+Projects/WGSharpAPILibrary/bin/*
+Release/*
+Tests/WGSharpAPITests/bin/*

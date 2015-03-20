@@ -9,3 +9,4 @@ Samples/Basic/SearchPlayers/obj/*
 Samples/Basic/SearchPlayers/*.suo
 Samples/Complex/Sample.QueueRequests/bin/*
 Samples/Complex/Sample.QueueRequests/obj/*
+Samples/Complex/Sample.QueueRequests/*.suo

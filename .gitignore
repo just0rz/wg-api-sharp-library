@@ -6,3 +6,6 @@ Release/*
 Tests/WGSharpAPITests/bin/*
 Samples/Basic/SearchPlayers/bin/*
 Samples/Basic/SearchPlayers/obj/*
+Samples/Basic/SearchPlayers/*.suo
+Samples/Complex/Sample.QueueRequests/bin/*
+Samples/Complex/Sample.QueueRequests/obj/*

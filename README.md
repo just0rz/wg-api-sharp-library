@@ -3,6 +3,12 @@
 ## Description ##
 **[WG API Sharp](WGAPISharp)** library is, as its name suggests, a library which helps people who use C# to interact with WarGaming [API](http://wargaming.net/developers/).
 
+## Project status ##
+
+<font color='orange'><b>Beta launched</b></font>
+
+For the moment I have released a beta version. I have covered most of the API exposed methods. I feel that future changes should not shake the entities too much.
+
 ## 3<sup>rd</sup> party ##
 The tools used to develop the library:
   * Visual Studio 2012(home)

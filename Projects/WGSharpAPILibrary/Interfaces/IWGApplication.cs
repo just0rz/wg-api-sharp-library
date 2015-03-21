@@ -52,9 +52,18 @@ namespace WGSharpAPI.Interfaces
         /// Method returns partial list of players. The list is filtered by initial characters of user name and sorted alphabetically.
         /// </summary>
         /// <param name="searchTerm">search string</param>
+        /// <param name="searchTerm">search type: 'startswith' or 'exact'</param>
+        /// <returns></returns>
+        IWGResponse<List<Player>> SearchPlayers(string searchTerm, WGSearchType searchType);
+
+        /// <summary>
+        /// Method returns partial list of players. The list is filtered by initial characters of user name and sorted alphabetically.
+        /// </summary>
+        /// <param name="searchTerm">search string</param>
+        /// <param name="searchTerm">search type: 'startswith' or 'exact'</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        IWGResponse<List<Player>> SearchPlayers(string searchTerm, int limit);
+        IWGResponse<List<Player>> SearchPlayers(string searchTerm, WGSearchType searchType, int limit);
 
         /// <summary>
         /// Method returns partial list of players. The list is filtered by initial characters of user name and sorted alphabetically.
@@ -62,9 +71,10 @@ namespace WGSharpAPI.Interfaces
         /// <param name="searchTerm">search string</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <param name="language">language</param>
+        /// <param name="searchTerm">search type: 'startswith' or 'exact'</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        IWGResponse<List<Player>> SearchPlayers(string searchTerm, string responseFields, WGLanguageField language, int limit);
+        IWGResponse<List<Player>> SearchPlayers(string searchTerm, string responseFields, WGLanguageField language, WGSearchType searchType, int limit);
 
         #endregion Search Players
 

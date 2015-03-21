@@ -32,6 +32,7 @@ using WGSharpAPI.Enums;
 using WGSharpAPI.Interfaces;
 using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
 using WotEncyclopedia = WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks;
+using System.Diagnostics.CodeAnalysis;
 
 namespace WGSharpAPI
 {
@@ -84,18 +85,30 @@ namespace WGSharpAPI
         /// <returns></returns>
         public IWGResponse<List<Player>> SearchPlayers(string searchTerm)
         {
-            return SearchPlayers(searchTerm, null, WGLanguageField.EN, 100);
+            return SearchPlayers(searchTerm, null, WGLanguageField.EN, WGSearchType.StartsWith, 100);
+        }
+
+        /// <summary>
+        /// Method returns partial list of players. The list is filtered by initial characters of user name and sorted alphabetically.
+        /// </summary>
+        /// <param name="searchTerm">search type: 'startswith' or 'exact'</param>
+        /// <param name="searchTerm">search string</param>
+        /// <returns></returns>
+        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, WGSearchType searchType)
+        {
+            return SearchPlayers(searchTerm, null, WGLanguageField.EN, searchType, 100);
         }
 
         /// <summary>
         /// Method returns partial list of players. The list is filtered by initial characters of user name and sorted alphabetically.
         /// </summary>
         /// <param name="searchTerm">search string</param>
+        /// <param name="searchTerm">search type: 'startswith' or 'exact'</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, int limit)
+        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, WGSearchType searchType, int limit)
         {
-            return SearchPlayers(searchTerm, null, WGLanguageField.EN, limit);
+            return SearchPlayers(searchTerm, null, WGLanguageField.EN, searchType, limit);
         }
 
         /// <summary>
@@ -104,11 +117,12 @@ namespace WGSharpAPI
         /// <param name="searchTerm">search string</param>
         /// <param name="responseFields">fields to be returned.</param>
         /// <param name="language">language</param>
+        /// <param name="searchTerm">search type: 'startswith' or 'exact'</param>
         /// <param name="limit">Maximum number of results to be returned. limit max value is 100</param>
         /// <returns></returns>
-        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, string responseFields, WGLanguageField language, int limit)
+        public IWGResponse<List<Player>> SearchPlayers(string searchTerm, string responseFields, WGLanguageField language, WGSearchType searchType, int limit)
         {
-            var requestURI = CreatePlayerSearchRequestURI(searchTerm, language, responseFields, limit);
+            var requestURI = CreatePlayerSearchRequestURI(searchTerm, language, responseFields, searchType, limit);
 
             var output = GetRequestResponse(requestURI);
 
@@ -117,7 +131,7 @@ namespace WGSharpAPI
             return obj;
         }
 
-        private string CreatePlayerSearchRequestURI(string searchTerm, WGLanguageField language, string responseFields, int limit)
+        private string CreatePlayerSearchRequestURI(string searchTerm, WGLanguageField language, string responseFields, WGSearchType searchType, int limit)
         {
             var target = "account/list";
 
@@ -128,7 +142,9 @@ namespace WGSharpAPI
             if (!string.IsNullOrWhiteSpace(responseFields))
                 sb.AppendFormat("&fields={0}", responseFields);
 
-            sb.AppendFormat("&search={0}&limit={1}", searchTerm, limit);
+            var searchTypeField = Enum.GetName(typeof(WGSearchType), searchType).ToLowerInvariant();
+
+            sb.AppendFormat("&type={0}&search={1}&limit={2}", searchTypeField, searchTerm, limit);
 
             var requestURI = sb.ToString();
 
@@ -222,7 +238,8 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        [Obsolete("Method is deprecated and will be removed soon.")]
+        [Obsolete("Method has been removed.")]
+        [ExcludeFromCodeCoverage]
         public IWGResponse<object> GetPlayerRatings(long accountId)
         {
             return GetPlayerRatings(new[] { accountId });
@@ -233,7 +250,8 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
-        [Obsolete("Method is deprecated and will be removed soon.")]
+        [Obsolete("Method has been removed.")]
+        [ExcludeFromCodeCoverage]
         public IWGResponse<object> GetPlayerRatings(long[] accountIds)
         {
             return GetPlayerRatings(accountIds, WGLanguageField.EN, null, null);
@@ -247,12 +265,13 @@ namespace WGSharpAPI
         /// <param name="accessToken">access token</param>
         /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
         /// <returns></returns>
-        [Obsolete("Method is deprecated and will be removed soon.")]
+        [Obsolete("Method has been removed.")]
         public IWGResponse<object> GetPlayerRatings(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
         {
             throw new NotImplementedException();
         }
 
+        [ExcludeFromCodeCoverage]
         private string CreatePlayerRatingsRequestURI(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
         {
             var target = "account/ratings";
@@ -375,7 +394,6 @@ namespace WGSharpAPI
 
         /// <summary>
         /// Returns a list of player achievements.
-        /// Warning. This method runs in test mode.
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
@@ -386,7 +404,6 @@ namespace WGSharpAPI
 
         /// <summary>
         /// Returns a list of player achievements.
-        /// Warning. This method runs in test mode.
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
@@ -397,7 +414,6 @@ namespace WGSharpAPI
 
         /// <summary>
         /// Returns a list of player achievements.
-        /// Warning. This method runs in test mode.
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <param name="language">language</param>

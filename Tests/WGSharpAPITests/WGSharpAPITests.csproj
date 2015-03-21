@@ -53,6 +53,12 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="Accounts\PlayerAchievementsTests.cs" />
+    <Compile Include="Accounts\SearchPlayersTests.cs" />
+    <Compile Include="Accounts\PlayerInfoTests.cs" />
+    <Compile Include="Accounts\PlayerRatingsTests.cs" />
+    <Compile Include="Accounts\PlayerVehiclesTests.cs" />
+    <Compile Include="BaseTestClass.cs" />
     <Compile Include="DateTimeToolsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

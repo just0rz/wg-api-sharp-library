@@ -496,6 +496,7 @@ namespace WGSharpAPI
         /// <param name="username">username</param>
         /// <param name="password">password</param>
         /// <returns></returns>
+        [ExcludeFromCodeCoverage]
         public string AccessToken(string username, string password)
         {
             //var target = "auth/login";
@@ -510,6 +511,7 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accessToken">access token</param>
         /// <returns></returns>
+        [ExcludeFromCodeCoverage]
         public string ProlongToken(string accessToken)
         {
             //var target = "auth/prolongate";
@@ -524,6 +526,7 @@ namespace WGSharpAPI
         /// <param name="username">username</param>
         /// <param name="password">password</param>
         /// <returns></returns>
+        [ExcludeFromCodeCoverage]
         public string Logout(string accessToken)
         {
             //var target = "auth/logout";
@@ -1759,7 +1762,7 @@ namespace WGSharpAPI
                 sb.AppendFormat("&nation={0}", Enum.GetName(typeof(WGNation), nation).ToLowerInvariant());
 
             if (moduleIds.Length > 0)
-                sb.AppendFormat("&tank_id={0}", string.Join(",", moduleIds));
+                sb.AppendFormat("&module_id={0}", string.Join(",", moduleIds));
 
             var requestURI = sb.ToString();
 

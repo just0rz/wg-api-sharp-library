@@ -60,6 +60,16 @@
     <Compile Include="Accounts\PlayerVehiclesTests.cs" />
     <Compile Include="BaseTestClass.cs" />
     <Compile Include="DateTimeToolsTests.cs" />
+    <Compile Include="Encyclopedia\AchievementsTests.cs" />
+    <Compile Include="Encyclopedia\GunsTests.cs" />
+    <Compile Include="Encyclopedia\SuspensionsTests.cs" />
+    <Compile Include="Encyclopedia\RadiosTests.cs" />
+    <Compile Include="Encyclopedia\TurretsTests.cs" />
+    <Compile Include="Encyclopedia\EnginesTests.cs" />
+    <Compile Include="Encyclopedia\VehicleDetailsTests.cs" />
+    <Compile Include="Encyclopedia\ListOfVehiclesTests.cs" />
+    <Compile Include="PlayersVehicles\TankAchievementsTests.cs" />
+    <Compile Include="PlayersVehicles\VehicleStatisticsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

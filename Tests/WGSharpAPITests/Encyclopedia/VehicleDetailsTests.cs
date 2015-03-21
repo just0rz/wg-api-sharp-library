@@ -24,54 +24,42 @@ THE SOFTWARE.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WGSharpAPI.Enums;
 
-namespace WGSharpAPITests.Accounts
+namespace WGSharpAPITests.Encyclopedia
 {
     [TestClass]
-    public class PlayerVehiclesTests : BaseTestClass
+    public class VehicleDetailsTests : BaseTestClass
     {
         [TestCategory("Integration test"), TestMethod]
-        public void Account_tanks_get_player_vehicles()
+        public void Encyclopedia_tankinfo_get_1_tank_details()
         {
-            var result = WGApplication.GetPlayerVehicles(accountId);
-
-            if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
-                Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
+            var result = WGApplication.GetVehicleDetails(grilleTankId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(result.Data.Count, 1);
             Assert.AreEqual(result.Status, "ok");
-            Assert.IsNotNull(result.Data[0].Tanks);
-            Assert.IsTrue(result.Data[0].Tanks.Count > 0);
         }
 
         [TestCategory("Integration test"), TestMethod]
-        public void Account_tanks_get_vehicles_for_list_of_players()
+        public void Encyclopedia_tankinfo_get_list_of_tank_details()
         {
-            var result = WGApplication.GetPlayerVehicles(new[] { accountId });
-
-            if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
-                Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
+            var result = WGApplication.GetVehicleDetails(new[] { grilleTankId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(result.Data.Count, 1);
             Assert.AreEqual(result.Status, "ok");
-            Assert.IsNotNull(result.Data[0].Tanks);
-            Assert.IsTrue(result.Data[0].Tanks.Count > 0);
         }
 
         [TestCategory("Integration test"), TestMethod]
-        public void Account_tanks_get_player_vehicles_specify_all_parameters()
+        public void Encyclopedia_tankinfo_specify_all_parameters_get_list_of_tank_details()
         {
-            var result = WGApplication.GetPlayerVehicles(new[] { accountId }, new long[] { grilleTankId }, WGLanguageField.EN, null, null);
-
-            if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
-                Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
+            var result = WGApplication.GetVehicleDetails(new[] { grilleTankId }, WGLanguageField.EN, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(result.Data.Count, 1);
             Assert.AreEqual(result.Status, "ok");
-            Assert.IsNotNull(result.Data[0].Tanks);
-            Assert.IsTrue(result.Data[0].Tanks.Count > 0);
         }
     }
 }

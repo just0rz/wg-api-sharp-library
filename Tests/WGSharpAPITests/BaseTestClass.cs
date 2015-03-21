@@ -37,7 +37,12 @@ namespace WGSharpAPITests
         // My account details :) - you may modify this
         protected static readonly long accountId = 508637087; // account id
         protected static readonly long createdAt = 1361472166; // unix timestamp
-        protected static readonly long kv1sTankId = 5649; // KV-1S tank id
+        protected static readonly long grilleTankId = 5649; // Grille tank id
+        protected static readonly long grilleEngineId = 13333; // Grille engine module id
+        protected static readonly long grilleRadioId = 2071; // Grille radio module id
+        protected static readonly long grilleSuspensionId = 11538; // Grille suspension module id
+        protected static readonly long grilleGunId = 1556; // Grille gun module id
+        protected static readonly long t54TurretId = 14595; // T-54 turret module id
 
         public BaseTestClass()
         {

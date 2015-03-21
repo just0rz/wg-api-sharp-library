@@ -34,7 +34,7 @@ namespace WGSharpAPI.Entities.EncyclopediaDetails
         /// Is standard module
         /// </summary>
         [JsonProperty("is_default")]
-        public bool IsDefault { get; set; }
+        public bool? IsDefault { get; set; }
 
         /// <summary>
         /// Tier

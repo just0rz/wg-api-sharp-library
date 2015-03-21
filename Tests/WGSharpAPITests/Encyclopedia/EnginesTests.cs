@@ -24,54 +24,64 @@ THE SOFTWARE.
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WGSharpAPI.Enums;
 
-namespace WGSharpAPITests.Accounts
+namespace WGSharpAPITests.Encyclopedia
 {
     [TestClass]
-    public class PlayerVehiclesTests : BaseTestClass
+    public class RadiosTests : BaseTestClass
     {
         [TestCategory("Integration test"), TestMethod]
-        public void Account_tanks_get_player_vehicles()
+        public void Encyclopedia_tankengines_get_all_engines()
         {
-            var result = WGApplication.GetPlayerVehicles(accountId);
-
-            if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
-                Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
+            var result = WGApplication.GetEngines();
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
+            Assert.IsTrue(result.Count > 1);
+            Assert.IsTrue(result.Data.Count > 1);
             Assert.AreEqual(result.Status, "ok");
-            Assert.IsNotNull(result.Data[0].Tanks);
-            Assert.IsTrue(result.Data[0].Tanks.Count > 0);
         }
 
         [TestCategory("Integration test"), TestMethod]
-        public void Account_tanks_get_vehicles_for_list_of_players()
+        public void Encyclopedia_tankengines_get_engines_by_list_of_id()
         {
-            var result = WGApplication.GetPlayerVehicles(new[] { accountId });
-
-            if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
-                Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
+            var result = WGApplication.GetEngines(new[] { grilleEngineId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(result.Data.Count, 1);
             Assert.AreEqual(result.Status, "ok");
-            Assert.IsNotNull(result.Data[0].Tanks);
-            Assert.IsTrue(result.Data[0].Tanks.Count > 0);
         }
 
         [TestCategory("Integration test"), TestMethod]
-        public void Account_tanks_get_player_vehicles_specify_all_parameters()
+        public void Encyclopedia_tankengines_get_1_engine_by_id()
         {
-            var result = WGApplication.GetPlayerVehicles(new[] { accountId }, new long[] { grilleTankId }, WGLanguageField.EN, null, null);
-
-            if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
-                Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
+            var result = WGApplication.GetEngines(grilleEngineId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(result.Data.Count, 1);
             Assert.AreEqual(result.Status, "ok");
-            Assert.IsNotNull(result.Data[0].Tanks);
-            Assert.IsTrue(result.Data[0].Tanks.Count > 0);
+        }
+
+        [TestCategory("Integration test"), TestMethod]
+        public void Encyclopedia_tankengines_get_engines_by_list_of_id_specify_all_parameters()
+        {
+            var result = WGApplication.GetEngines(new[] { grilleTankId }, WGLanguageField.EN, WGNation.All, "name");
+
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(result.Data.Count, 1);
+            Assert.AreEqual(result.Status, "ok");
+        }
+
+        [TestCategory("Integration test"), TestMethod]
+        public void Encyclopedia_tankengines_get_engines_by_list_of_id_specify_all_parameters_for_specific_nation()
+        {
+            var result = WGApplication.GetEngines(new[] { grilleTankId }, WGLanguageField.EN, WGNation.Germany, "name");
+
+            Assert.IsNotNull(result.Data);
+            Assert.AreEqual(result.Count, 1);
+            Assert.AreEqual(result.Data.Count, 1);
+            Assert.AreEqual(result.Status, "ok");
         }
     }
 }

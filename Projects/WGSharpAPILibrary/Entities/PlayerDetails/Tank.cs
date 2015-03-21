@@ -51,6 +51,44 @@ namespace WGSharpAPI.Entities.PlayerDetails
         public TankStatistics TankStatistics { get; set; }
 
         /// <summary>
+        /// Overall Statistics
+        /// </summary>
+        [JsonProperty("all")]
+        public OverallStatistics Overall { get; set; }
+
+        /// <summary>
+        /// Clan battles statistics
+        /// </summary>
+        [JsonProperty("clan")]
+        public ClanStatistics Clan { get; set; }
+
+        /// <summary>
+        /// Tank Company battles statistics
+        /// </summary>
+        [JsonProperty("company")]
+        public CompanyStatistics Company { get; set; }
+
+        /// <summary>
+        /// Team battles statistics
+        /// </summary>
+        [JsonProperty("team")]
+        public TeamStatistics Team { get; set; }
+
+        /// <summary>
+        /// Maximum destroyed in battle
+        /// </summary>
+        [JsonProperty("max_frags")]
+        public int MaxFrags { get; set; }
+
+        /// <summary>
+        /// Maximum experience per battle
+        /// </summary>
+        [JsonProperty("max_xp")]
+        public int MaxXp { get; set; }
+
+        // ToDo: Add support for "frags" and "in_garage"
+
+        /// <summary>
         /// Tank owner
         /// </summary>
         [JsonIgnore]

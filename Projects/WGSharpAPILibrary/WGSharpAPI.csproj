@@ -61,6 +61,7 @@
     <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Modules\Turret.cs" />
     <Compile Include="Entities\EncyclopediaDetails\Vehicle.cs" />
     <Compile Include="Entities\PlayerDetails\Achievement.cs" />
+    <Compile Include="Entities\PlayerDetails\TeamStatistics.cs" />
     <Compile Include="Entities\PlayerDetails\Player.cs" />
     <Compile Include="Entities\PlayerDetails\Achievements.cs" />
     <Compile Include="Entities\PlayerDetails\Clan.cs" />

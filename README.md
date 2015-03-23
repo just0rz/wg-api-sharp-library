@@ -1,7 +1,7 @@
 # WG API Sharp library #
 
 ## Description ##
-**[WG API Sharp](WGAPISharp)** library is, as its name suggests, a library which helps people who use C# to interact with WarGaming [API](http://wargaming.net/developers/).
+**[WG API Sharp](WGAPISharp)** is a library which should help people using .Net/C# to interact with WarGaming [API](http://wargaming.net/developers/). For the moment the main target is to cover all methods exposed related to World of Tanks, but in the future(when I'm fully happy with it) I will extend it to support the rest too.
 
 ## Project status ##
 
@@ -19,4 +19,4 @@ The tools used to develop the library:
   * [Tortoise SVN](http://tortoisesvn.net/) - <strong>NO LONGER</strong> since moved to github
 
 ## Disclaimer ##
-I am in no way affiliated with [WarGaming](WarGaming) company. This library can be considered like a wrapper over the original [API](http://wargaming.net/developers/). I have only made it easier for people to access it.
+I am in no way affiliated with [WarGaming](WarGaming) company. This library can be considered a wrapper over the original [API](http://wargaming.net/developers/). I have only made it easier for people to access it.

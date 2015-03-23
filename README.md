@@ -20,4 +20,4 @@ The tools used to develop the library:
   * [Tortoise SVN](http://tortoisesvn.net/) - <strong>NO LONGER</strong> since moved to github
 
 ## Disclaimer ##
-I am in no way affiliated with [WarGaming](WarGaming) company. This library can be considered a wrapper over the original [API](http://wargaming.net/developers/). I have only made it easier for people to access it.
+I am in no way affiliated with [WarGaming](WarGaming) company. This library can be considered a wrapper over the original [API](http://wargaming.net/developers/). I have only tried to make it easier for people to access it.

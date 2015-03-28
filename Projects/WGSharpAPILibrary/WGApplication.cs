@@ -397,9 +397,26 @@ namespace WGSharpAPI
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        public IWGResponse<List<Player>> GetPlayerAchievements(long accountId)
+        public IWGResponse<List<Achievement>> GetPlayerAchievements(long accountId)
         {
-            return GetPlayerAchievements(new[] { accountId });
+            var result = GetPlayerAchievements(new[] { accountId });
+
+            var partialResult = new WGResponse<List<Achievement>>
+            {
+                Status = result.Status,
+                Count = result.Count,
+                Data = new List<Achievement>(),
+            };
+
+            // if we get a bad/empty answer
+            if (result.Status != "ok" || result.Count == 0 || result.Data.Count == 0)
+                return partialResult;
+
+            // otherwise populate our object
+            partialResult.Count = result.Data[0].Achievements.Count;
+            partialResult.Data = result.Data[0].Achievements;
+
+            return partialResult;
         }
 
         /// <summary>
@@ -458,8 +475,6 @@ namespace WGSharpAPI
             }
 
             return obj;
-
-            throw new NotImplementedException("Warning. This method runs in test mode.");
         }
 
         private string CreatePlayerAchievementsRequestURI(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)

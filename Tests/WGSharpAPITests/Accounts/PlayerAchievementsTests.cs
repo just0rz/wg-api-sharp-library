@@ -34,13 +34,13 @@ namespace WGSharpAPITests.Accounts
         {
             var result = WGApplication.GetPlayerAchievements(accountId);
 
-            if (result.Data != null && result.Data[0] != null && result.Data[0].Achievements.Count == 0)
+            if (result.Data != null && result.Data.Count == 0)
                 Assert.Inconclusive("The selected player doesn't seem to have ANY achievements. This makes the test useless, you might want to select a different accountId.");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
+            Assert.IsTrue(result.Count > 1);
             Assert.AreEqual(result.Status, "ok");
-            Assert.IsTrue(result.Data[0].Achievements.Count > 0);
+            Assert.IsTrue(result.Data.Count > 0);
         }
 
         [TestCategory("Integration test"), TestMethod]

@@ -168,21 +168,21 @@ namespace WGSharpAPI.Interfaces
         #region Player Achievements
 
         /// <summary>
-        /// Warning. This method runs in test mode. Throws NotImplementedException
+        /// Returns a list of player achievements.
         /// </summary>
         /// <param name="accountId">player account id</param>
         /// <returns></returns>
-        IWGResponse<List<Player>> GetPlayerAchievements(long accountId);
+        IWGResponse<List<Achievement>> GetPlayerAchievements(long accountId);
 
         /// <summary>
-        /// Warning. This method runs in test mode. Throws NotImplementedException
+        /// Returns a list of player achievements.
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <returns></returns>
         IWGResponse<List<Player>> GetPlayerAchievements(long[] accountId);
 
         /// <summary>
-        /// Warning. This method runs in test mode. Throws NotImplementedException
+        /// Returns a list of player achievements.
         /// </summary>
         /// <param name="accountIds">list of player account ids</param>
         /// <param name="language">language</param>

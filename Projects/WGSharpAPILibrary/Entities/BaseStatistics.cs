@@ -22,10 +22,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 using Newtonsoft.Json;
+using WGSharpAPI.Enums;
 
 namespace WGSharpAPI.Entities
 {
-    public class BaseStatistics
+    public abstract class BaseStatistics
     {
         /// <summary>
         /// Average experience per battle
@@ -122,5 +123,8 @@ namespace WGSharpAPI.Entities
         /// </summary>
         [JsonProperty("xp")]
         public long Xp { get; set; }
+
+        [JsonIgnore]
+        public abstract StatisticsType StatisticsType { get; }
     }
 }

@@ -26,14 +26,8 @@ using Newtonsoft.Json;
 
 namespace WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules
 {
-    public class Turret : Module
+    public class Turret : TankModule
     {
-        /// <summary>
-        /// Module ID
-        /// </summary>
-        [JsonProperty("module_id")]
-        public long Id { get; set; }
-
         /// <summary>
         /// Armor: sides
         /// </summary>

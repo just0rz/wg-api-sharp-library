@@ -19,7 +19,7 @@ The tools used to develop the library:
   * [Git Extensions](http://sourceforge.net/projects/gitextensions/)
   * [KDiff3](http://kdiff3.sourceforge.net/)
   * [Json.NET](http://james.newtonking.com/json)
-  * [Tortoise SVN](http://tortoisesvn.net/) - <strong>NO LONGER</strong> since moved to github
+  * <del>[Tortoise SVN](http://tortoisesvn.net/)</del>
 
 ## Disclaimer ##
-I am in no way affiliated with [WarGaming](WarGaming) company. This library can be considered a wrapper over the original [API](http://wargaming.net/developers/). I have only tried to make it easier for people to access it.
+I am in no way affiliated with [WarGaming](WarGaming) company. I have only created a wrapper for the original [API](http://wargaming.net/developers/).

@@ -37,10 +37,9 @@ namespace WGSharpAPITests.Accounts
             var result = WGApplication.SearchPlayers("Just0rz");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
-            Assert.AreEqual(result.Data[0].AccountId, accountId);
-            Assert.AreEqual(result.Data[0].Nickname, "Just0rz");
+            Assert.AreEqual("ok", result.Status);
+            Assert.AreEqual(accountId, result.Data[0].AccountId);
+            Assert.AreEqual("Just0rz", result.Data[0].Nickname);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -49,10 +48,9 @@ namespace WGSharpAPITests.Accounts
             var result = WGApplication.SearchPlayers("Just0rz", WGSharpAPI.Enums.WGSearchType.Exact);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
-            Assert.AreEqual(result.Data[0].AccountId, accountId);
-            Assert.AreEqual(result.Data[0].Nickname, "Just0rz");
+            Assert.AreEqual("ok", result.Status);
+            Assert.AreEqual(accountId, result.Data[0].AccountId);
+            Assert.AreEqual("Just0rz", result.Data[0].Nickname);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -61,10 +59,9 @@ namespace WGSharpAPITests.Accounts
             var result = WGApplication.SearchPlayers("Just0rz", WGSharpAPI.Enums.WGSearchType.Exact, 1);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
-            Assert.AreEqual(result.Data[0].AccountId, accountId);
-            Assert.AreEqual(result.Data[0].Nickname, "Just0rz");
+            Assert.AreEqual("ok", result.Status);
+            Assert.AreEqual(accountId, result.Data[0].AccountId);
+            Assert.AreEqual("Just0rz", result.Data[0].Nickname);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -73,7 +70,6 @@ namespace WGSharpAPITests.Accounts
             var result = WGApplication.SearchPlayers("Just0rz", "account_id", WGSharpAPI.Enums.WGLanguageField.EN, WGSharpAPI.Enums.WGSearchType.Exact, 1);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
             Assert.AreEqual(result.Status, "ok");
             Assert.AreEqual(result.Data[0].AccountId, accountId);
             Assert.IsNull(result.Data[0].Nickname);
@@ -82,12 +78,11 @@ namespace WGSharpAPITests.Accounts
         [TestCategory("Integration test"), TestMethod]
         public void Account_list_search_less_than_3_chars_startswith()
         {
-            var expectedResult = new WGResponse<List<Player>> { Count = 0, Status = "error", };
+            var expectedResult = new WGResponse<List<Player>> { Status = "error", };
 
             var result = WGApplication.SearchPlayers("Ju");
 
-            Assert.AreEqual(result.Count, expectedResult.Count);
-            Assert.AreEqual(result.Status, expectedResult.Status);
+            Assert.AreEqual(expectedResult.Status, result.Status);
             Assert.IsNull(result.Data);
         }
     }

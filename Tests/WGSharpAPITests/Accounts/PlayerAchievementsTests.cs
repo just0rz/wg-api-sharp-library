@@ -38,7 +38,6 @@ namespace WGSharpAPITests.Accounts
                 Assert.Inconclusive("The selected player doesn't seem to have ANY achievements. This makes the test useless, you might want to select a different accountId.");
 
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Count > 1);
             Assert.AreEqual(result.Status, "ok");
             Assert.IsTrue(result.Data.Count > 0);
         }
@@ -52,7 +51,6 @@ namespace WGSharpAPITests.Accounts
                 Assert.Inconclusive("The selected player doesn't seem to have ANY achievements. This makes the test useless, you might want to select a different accountId.");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
             Assert.AreEqual(result.Status, "ok");
             Assert.IsTrue(result.Data[0].Achievements.Count > 0);
         }
@@ -66,7 +64,6 @@ namespace WGSharpAPITests.Accounts
                 Assert.Inconclusive("The selected player doesn't seem to have ANY achievements. This makes the test useless, you might want to select a different accountId.");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
             Assert.AreEqual(result.Status, "ok");
             Assert.IsTrue(result.Data[0].Achievements.Count > 0);
         }

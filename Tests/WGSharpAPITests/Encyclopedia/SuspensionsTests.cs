@@ -35,9 +35,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetSuspensions();
 
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Count > 1);
             Assert.IsTrue(result.Data.Count > 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -46,9 +45,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetSuspensions(new[] { grilleSuspensionId });
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -57,9 +55,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetSuspensions(grilleSuspensionId);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -68,9 +65,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetSuspensions(new[] { grilleSuspensionId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -79,9 +75,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetSuspensions(new[] { grilleSuspensionId }, WGLanguageField.EN, WGNation.Germany, "name");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
     }
 }

@@ -27,8 +27,6 @@ namespace WGSharpAPI.Interfaces
     {
         string Status { get; set; }
 
-        int Count { get; set; }
-
         T Data { get; set; }
     }
 }

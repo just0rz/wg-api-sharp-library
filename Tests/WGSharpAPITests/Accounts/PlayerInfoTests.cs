@@ -37,8 +37,7 @@ namespace WGSharpAPITests.Accounts
             var result = WGApplication.GetPlayerInfo(accountId);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
             Assert.AreEqual(result.Data[0].AccountId, accountId);
             Assert.AreEqual(result.Data[0].CreatedAt, createdAtDate.DateToWGTimesptamp());
         }
@@ -50,8 +49,7 @@ namespace WGSharpAPITests.Accounts
             var result = WGApplication.GetPlayerInfo(new[] { accountId });
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
             Assert.AreEqual(result.Data[0].AccountId, accountId);
             Assert.AreEqual(result.Data[0].CreatedAt, createdAtDate.DateToWGTimesptamp());
         }
@@ -63,8 +61,7 @@ namespace WGSharpAPITests.Accounts
             var result = WGApplication.GetPlayerInfo(new[] { accountId }, WGLanguageField.EN, null, "account_id,created_at");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
             Assert.AreEqual(result.Data[0].AccountId, accountId);
             Assert.AreEqual(result.Data[0].CreatedAt, createdAtDate.DateToWGTimesptamp());
         }

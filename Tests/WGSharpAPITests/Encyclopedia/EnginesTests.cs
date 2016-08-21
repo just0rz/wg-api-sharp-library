@@ -35,9 +35,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetEngines();
 
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Count > 1);
             Assert.IsTrue(result.Data.Count > 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -46,9 +45,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetEngines(new[] { grilleEngineId });
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -57,9 +55,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetEngines(grilleEngineId);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -68,9 +65,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetEngines(new[] { grilleTankId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -79,9 +75,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetEngines(new[] { grilleTankId }, WGLanguageField.EN, WGNation.Germany, "name");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
     }
 }

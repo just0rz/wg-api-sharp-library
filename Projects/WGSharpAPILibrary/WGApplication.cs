@@ -200,7 +200,6 @@ namespace WGSharpAPI
 
             var response = new WGResponse<List<Player>>()
             {
-                Count = obj.Count,
                 Status = obj.Status,
                 Data = players
             };
@@ -337,8 +336,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.PlayerDetails.Player>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.PlayerDetails.Player>(wgRawResponse.Count)
+                Data = new List<WGSharpAPI.Entities.PlayerDetails.Player>()
             };
 
             if (obj.Status != "ok")
@@ -404,16 +402,14 @@ namespace WGSharpAPI
             var partialResult = new WGResponse<List<Achievement>>
             {
                 Status = result.Status,
-                Count = result.Count,
                 Data = new List<Achievement>(),
             };
 
             // if we get a bad/empty answer
-            if (result.Status != "ok" || result.Count == 0 || result.Data.Count == 0)
+            if (result.Status != "ok" || result.Data.Count == 0)
                 return partialResult;
 
             // otherwise populate our object
-            partialResult.Count = result.Data[0].Achievements.Count;
             partialResult.Data = result.Data[0].Achievements;
 
             return partialResult;
@@ -448,8 +444,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Player>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<Player>(wgRawResponse.Count)
+                Data = new List<Player>()
             };
 
             if (obj.Status != "ok")
@@ -665,8 +660,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Clan>>()
             {
                 Status = rawResponse.Status,
-                Count = rawResponse.Count,
-                Data = new List<Clan>(rawResponse.Count)
+                Data = new List<Clan>(),
             };
 
             // were there any problems?
@@ -788,8 +782,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Battle>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<Battle>(wgRawResponse.Count)
+                Data = new List<Battle>()
             };
 
             if (obj.Status != "ok")
@@ -955,8 +948,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Province>>()
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<Province>(wgRawResponse.Count)
+                Data = new List<Province>()
             };
 
             // any errors? stop what we're doing and return the object
@@ -1045,9 +1037,8 @@ namespace WGSharpAPI
 
             var obj = new WGResponse<List<long>>
             {
-                Count = wgRawResponse.Count,
                 Status = wgRawResponse.Status,
-                Data = new List<long>(wgRawResponse.Count)
+                Data = new List<long>()
             };
 
             if (obj.Status != "ok")
@@ -1131,8 +1122,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Member>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<Member>(wgRawResponse.Count)
+                Data = new List<Member>()
             };
 
             if (obj.Status != "ok")
@@ -1207,8 +1197,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(),
             };
 
             if (obj.Status != "ok")
@@ -1282,8 +1271,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(),
             };
 
             if (obj.Status != "ok")
@@ -1371,8 +1359,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>(),
             };
 
             if (obj.Status != "ok")
@@ -1464,8 +1451,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>(),
             };
 
             if (obj.Status != "ok")
@@ -1557,8 +1543,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>(),
             };
 
             if (obj.Status != "ok")
@@ -1650,8 +1635,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>(),
             };
 
             if (obj.Status != "ok")
@@ -1743,8 +1727,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>(),
             };
 
             if (obj.Status != "ok")
@@ -1814,8 +1797,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>(wgRawResponse.Count),
+                Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>(),
             };
 
             if (obj.Status != "ok")
@@ -1890,8 +1872,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Tank>>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
-                Data = new List<Tank>(wgRawResponse.Count)
+                Data = new List<Tank>()
             };
 
             if (obj.Status != "ok")
@@ -1960,7 +1941,6 @@ namespace WGSharpAPI
             var obj = new WGResponse<Player>
             {
                 Status = wgRawResponse.Status,
-                Count = wgRawResponse.Count,
                 Data = new Player { AccountId = accountId }
             };
 

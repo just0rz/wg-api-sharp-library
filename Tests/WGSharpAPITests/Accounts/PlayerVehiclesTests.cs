@@ -38,7 +38,6 @@ namespace WGSharpAPITests.Accounts
                 Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
             Assert.AreEqual(result.Status, "ok");
             Assert.IsNotNull(result.Data[0].Tanks);
             Assert.IsTrue(result.Data[0].Tanks.Count > 0);
@@ -53,7 +52,6 @@ namespace WGSharpAPITests.Accounts
                 Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
             Assert.AreEqual(result.Status, "ok");
             Assert.IsNotNull(result.Data[0].Tanks);
             Assert.IsTrue(result.Data[0].Tanks.Count > 0);
@@ -68,7 +66,6 @@ namespace WGSharpAPITests.Accounts
                 Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
             Assert.AreEqual(result.Status, "ok");
             Assert.IsNotNull(result.Data[0].Tanks);
             Assert.IsTrue(result.Data[0].Tanks.Count > 0);

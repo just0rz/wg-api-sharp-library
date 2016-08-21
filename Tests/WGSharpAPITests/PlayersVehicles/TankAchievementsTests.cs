@@ -12,9 +12,8 @@ namespace WGSharpAPITests.PlayersVehicles
             var result = WGApplication.GetTankAchievements(accountId);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
             Assert.IsTrue(result.Data.Tanks.Count > 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -23,9 +22,7 @@ namespace WGSharpAPITests.PlayersVehicles
             var result = WGApplication.GetTankAchievements(accountId, new[] { grilleTankId }, WGSharpAPI.Enums.WGLanguageField.EN, "tank_id,achievements", null, null);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Tanks.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
         }
     }
 }

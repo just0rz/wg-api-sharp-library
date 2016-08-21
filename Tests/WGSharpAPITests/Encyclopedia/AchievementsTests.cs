@@ -35,9 +35,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetAchievements();
 
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Count > 1);
             Assert.IsTrue(result.Data.Count > 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -46,9 +45,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetAchievements(WGLanguageField.EN, "name");
 
             Assert.IsNotNull(result.Data);
-            Assert.IsTrue(result.Count > 1);
             Assert.IsTrue(result.Data.Count > 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual("ok", result.Status);
         }
     }
 }

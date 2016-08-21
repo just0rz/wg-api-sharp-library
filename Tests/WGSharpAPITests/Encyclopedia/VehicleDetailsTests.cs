@@ -35,9 +35,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetVehicleDetails(grilleTankId);
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -46,9 +45,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetVehicleDetails(new[] { grilleTankId });
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
 
         [TestCategory("Integration test"), TestMethod]
@@ -57,9 +55,8 @@ namespace WGSharpAPITests.Encyclopedia
             var result = WGApplication.GetVehicleDetails(new[] { grilleTankId }, WGLanguageField.EN, "name");
 
             Assert.IsNotNull(result.Data);
-            Assert.AreEqual(result.Count, 1);
-            Assert.AreEqual(result.Data.Count, 1);
-            Assert.AreEqual(result.Status, "ok");
+            Assert.AreEqual(1, result.Data.Count);
+            Assert.AreEqual("ok", result.Status);
         }
     }
 }

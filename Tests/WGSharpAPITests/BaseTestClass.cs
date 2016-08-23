@@ -59,7 +59,7 @@ namespace WGSharpAPITests
         public void TestSetup()
         {
             // we don't want to kill WG's servers because we're doing real calls to their API
-            Thread.Sleep(1500);
+            Thread.Sleep(5000);
         }
 
         [TestCleanup]

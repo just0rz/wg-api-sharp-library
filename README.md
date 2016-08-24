@@ -14,11 +14,12 @@ For the moment I have released a beta version. I have covered most of the API ex
 
 ## 3<sup>rd</sup> party ##
 The tools used to develop the library:
-  * Visual Studio 2012(home)
+  * Visual Studio 2015
   * [Git](http://git-scm.com/)
-  * [Git Extensions](http://sourceforge.net/projects/gitextensions/)
-  * [KDiff3](http://kdiff3.sourceforge.net/)
+  * [Github Desktop](https://desktop.github.com/)
   * [Json.NET](http://james.newtonking.com/json)
+  * <del>[Git Extensions](http://sourceforge.net/projects/gitextensions/)</del>
+  * <del>[KDiff3](http://kdiff3.sourceforge.net/)</del>
   * <del>[Tortoise SVN](http://tortoisesvn.net/)</del>
 
 ## Disclaimer ##

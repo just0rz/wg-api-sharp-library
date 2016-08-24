@@ -21,32 +21,19 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using System;
-using System.ComponentModel;
-using System.Linq;
-using System.Reflection;
+using Newtonsoft.Json;
+using System.Globalization;
 
-namespace WGSharpAPI.Tools
+namespace WGSharpAPI
 {
-    public static class EnumHelper<T>
+    public class Meta
     {
-        public static string GetEnumDescription(T enumValue)
+        [JsonProperty("count")]
+        public int Count { get; set; }
+
+        public override string ToString()
         {
-            var TEnumFields = typeof(T).GetFields(BindingFlags.Public | BindingFlags.Static);
-            var TEnumField = TEnumFields.First(t => t.Name.Equals(enumValue.ToString()));
-
-            var customAttribute = TEnumField.GetCustomAttributes(typeof(DescriptionAttribute), false).FirstOrDefault();
-
-            if (customAttribute != null)
-                return ((DescriptionAttribute)customAttribute).Description;
-
-            return TEnumField.Name;
-        }
-
-        static EnumHelper()
-        {
-            if (!typeof(T).IsEnum)
-                throw new ArgumentException("EnumHelper likes only enums");
+            return string.Format(CultureInfo.InvariantCulture, "Count = {0}", Count);
         }
     }
 }

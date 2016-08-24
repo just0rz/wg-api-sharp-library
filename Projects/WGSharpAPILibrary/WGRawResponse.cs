@@ -1,7 +1,7 @@
 ﻿/*
 The MIT License (MIT)
 
-Copyright (c) 2014 Iulian Grosu
+Copyright (c) 2016 Iulian Grosu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -27,7 +27,7 @@ namespace WGSharpAPI
     {
         public string Status { get; set; }
 
-        public object Meta { get; set; }
+        public Meta Meta { get; set; }
 
         public object Data { get; set; }
     }

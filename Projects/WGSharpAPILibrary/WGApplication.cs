@@ -1,7 +1,7 @@
 ﻿/*
 The MIT License (MIT)
 
-Copyright (c) 2014 Iulian Grosu
+Copyright (c) 2016 Iulian Grosu
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -201,7 +201,8 @@ namespace WGSharpAPI
             var response = new WGResponse<List<Player>>()
             {
                 Status = obj.Status,
-                Data = players
+                Meta = obj.Meta,
+                Data = players,
             };
 
             return response;
@@ -336,7 +337,8 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.PlayerDetails.Player>>
             {
                 Status = wgRawResponse.Status,
-                Data = new List<WGSharpAPI.Entities.PlayerDetails.Player>()
+                Meta = wgRawResponse.Meta,
+                Data = new List<WGSharpAPI.Entities.PlayerDetails.Player>(),
             };
 
             if (obj.Status != "ok")
@@ -444,6 +446,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Player>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<Player>()
             };
 
@@ -651,15 +654,16 @@ namespace WGSharpAPI
             var output = GetRequestResponse(requestURI);
 
             // this is our raw response which we will parse later on
-            var rawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
 
             // JObject accepts Language-INtegrated Queries over it, so it's our friend
-            var jObject = rawResponse.Data as JObject;
+            var jObject = wgRawResponse.Data as JObject;
 
             // copy the response details from the raw response to an actual response
             var obj = new WGResponse<List<Clan>>()
             {
-                Status = rawResponse.Status,
+                Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<Clan>(),
             };
 
@@ -777,12 +781,12 @@ namespace WGSharpAPI
             var output = GetRequestResponse(requestURI);
 
             var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
-
-
+            
             var obj = new WGResponse<List<Battle>>
             {
                 Status = wgRawResponse.Status,
-                Data = new List<Battle>()
+                Meta = wgRawResponse.Meta,
+                Data = new List<Battle>(),
             };
 
             if (obj.Status != "ok")
@@ -948,6 +952,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Province>>()
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<Province>()
             };
 
@@ -1122,6 +1127,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Member>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<Member>()
             };
 
@@ -1197,6 +1203,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(),
             };
 
@@ -1271,6 +1278,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>(),
             };
 
@@ -1359,6 +1367,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>(),
             };
 
@@ -1451,6 +1460,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>(),
             };
 
@@ -1543,6 +1553,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>(),
             };
 
@@ -1635,6 +1646,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>(),
             };
 
@@ -1727,6 +1739,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>(),
             };
 
@@ -1797,6 +1810,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>(),
             };
 
@@ -1872,6 +1886,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<List<Tank>>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new List<Tank>()
             };
 
@@ -1941,6 +1956,7 @@ namespace WGSharpAPI
             var obj = new WGResponse<Player>
             {
                 Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
                 Data = new Player { AccountId = accountId }
             };
 

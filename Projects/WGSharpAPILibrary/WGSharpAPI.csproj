@@ -84,6 +84,7 @@
     <Compile Include="Interfaces\IWGApplication.cs" />
     <Compile Include="Interfaces\IWGRequest.cs" />
     <Compile Include="Interfaces\IWGResponse.cs" />
+    <Compile Include="Meta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tools\DateTimeTools.cs" />
     <Compile Include="Tools\EnumHelper.cs" />

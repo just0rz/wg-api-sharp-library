@@ -23,16 +23,18 @@ THE SOFTWARE.
  */
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using WGSharpAPI.Entities.ClanDetails;
 using WGSharpAPI.Entities.PlayerDetails;
+using WGSharpAPI.Entities.PlayerRatings;
 using WGSharpAPI.Enums;
 using WGSharpAPI.Interfaces;
+using WGSharpAPI.Tools;
 using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
 using WotEncyclopedia = WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks;
-using System.Diagnostics.CodeAnalysis;
 
 namespace WGSharpAPI
 {
@@ -189,7 +191,7 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var obj = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var obj = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var players = new List<Player>();
 
@@ -231,70 +233,6 @@ namespace WGSharpAPI
 
         #endregion Player Info
 
-        #region Player Ratings
-
-        /// <summary>
-        /// Method returns details on player's ratings.
-        /// </summary>
-        /// <param name="accountId">player account id</param>
-        /// <returns></returns>
-        [Obsolete("Method has been removed.")]
-        [ExcludeFromCodeCoverage]
-        public IWGResponse<object> GetPlayerRatings(long accountId)
-        {
-            return GetPlayerRatings(new[] { accountId });
-        }
-
-        /// <summary>
-        /// Method returns details on player's ratings.
-        /// </summary>
-        /// <param name="accountIds">list of player account ids</param>
-        /// <returns></returns>
-        [Obsolete("Method has been removed.")]
-        [ExcludeFromCodeCoverage]
-        public IWGResponse<object> GetPlayerRatings(long[] accountIds)
-        {
-            return GetPlayerRatings(accountIds, WGLanguageField.EN, null, null);
-        }
-
-        /// <summary>
-        /// Method returns details on player's ratings.
-        /// </summary>
-        /// <param name="accountIds">list of player account ids</param>
-        /// <param name="language">language</param>
-        /// <param name="accessToken">access token</param>
-        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
-        /// <returns></returns>
-        [Obsolete("Method has been removed.")]
-        public IWGResponse<object> GetPlayerRatings(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
-        {
-            throw new NotImplementedException();
-        }
-
-        [ExcludeFromCodeCoverage]
-        private string CreatePlayerRatingsRequestURI(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
-        {
-            var target = "account/ratings";
-
-            var generalUri = GetGeneralUri(target, language);
-
-            var sb = new StringBuilder(generalUri);
-
-            if (!string.IsNullOrWhiteSpace(responseFields))
-                sb.AppendFormat("&fields={0}", responseFields);
-
-            if (!string.IsNullOrWhiteSpace(accessToken))
-                sb.AppendFormat("&access_token={0}", accessToken);
-
-            sb.AppendFormat("&account_id={0}", string.Join(",", accountIds));
-
-            var requestURI = sb.ToString();
-
-            return requestURI;
-        }
-
-        #endregion Player Ratings
-
         #region Player Vehicles
 
         /// <summary>
@@ -332,7 +270,7 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.PlayerDetails.Player>>
             {
@@ -441,7 +379,7 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<Player>>
             {
@@ -499,6 +437,157 @@ namespace WGSharpAPI
         #endregion Player Achievements
 
         #endregion Account
+
+        #region Player Ratings
+
+        #region Types of rating
+
+        /// <summary>
+        /// Method returns dictionary of rating periods and ratings details.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<TypeOfRating>> GetTypesOfRating()
+        {
+            return GetTypesOfRating(RatingBattleType.Default, WGLanguageField.EN, null);
+        }
+
+        /// <summary>
+        /// Method returns dictionary of rating periods and ratings details.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<TypeOfRating>> GetTypesOfRating(RatingBattleType ratingBattleType)
+        {
+            return GetTypesOfRating(ratingBattleType, WGLanguageField.EN, null);
+        }
+
+        /// <summary>
+        /// Method returns dictionary of rating periods and ratings details.
+        /// </summary>
+        /// <returns></returns>
+        public IWGResponse<List<TypeOfRating>> GetTypesOfRating(RatingBattleType ratingBattleType, WGLanguageField language, string responseFields)
+        {
+            var requestURI = CreateTypesOfRatingRequestURI(ratingBattleType, language, responseFields);
+
+            var output = GetRequestResponse(requestURI);
+
+            var wgRawResponse = JsonConvert.DeserializeObject<WGResponse<object>>(output);
+
+            var obj = new WGResponse<List<TypeOfRating>>
+            {
+                Status = wgRawResponse.Status,
+                Meta = wgRawResponse.Meta,
+                Data = new List<TypeOfRating>(),
+            };
+
+            if (obj.Status != "ok")
+                return obj;
+
+            var jObject = wgRawResponse.Data as JObject;
+
+            foreach (var jObjTypeOfRating in jObject.Children())
+            {
+                var typeOfRating = new TypeOfRating
+                {
+                    RankFields = jObjTypeOfRating.First["rank_fields"].ToObject<List<string>>(),
+                    Threshold = jObjTypeOfRating.First["threshold"].ToObject<int>(),
+                    Type = PlayerRatingType.Any,
+                };
+
+                var playerRatingString = jObjTypeOfRating.First["type"].ToObject<string>();
+
+                if (playerRatingString == "1") { typeOfRating.Type = PlayerRatingType.OneDay; }
+                else if (playerRatingString == "7") { typeOfRating.Type = PlayerRatingType.Week; }
+                else if (playerRatingString == "28") { typeOfRating.Type = PlayerRatingType.Month; }
+                else { typeOfRating.Type = PlayerRatingType.Any; }
+
+                obj.Data.Add(typeOfRating);
+            }
+
+            return obj;
+        }
+
+        [ExcludeFromCodeCoverage]
+        private string CreateTypesOfRatingRequestURI(RatingBattleType ratingBattleType, WGLanguageField language, string responseFields)
+        {
+            var target = "ratings/types";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            sb.AppendFormat("&battleType={0}", EnumHelper<RatingBattleType>.GetEnumDescription(ratingBattleType));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Types of rating
+
+        /// <summary>
+        /// Method returns details on player's ratings.
+        /// </summary>
+        /// <param name="accountId">player account id</param>
+        /// <returns></returns>
+        [Obsolete("Method has been removed.")]
+        [ExcludeFromCodeCoverage]
+        public IWGResponse<object> GetPlayerRatings(long accountId)
+        {
+            return GetPlayerRatings(new[] { accountId });
+        }
+
+        /// <summary>
+        /// Method returns details on player's ratings.
+        /// </summary>
+        /// <param name="accountIds">list of player account ids</param>
+        /// <returns></returns>
+        [Obsolete("Method has been removed.")]
+        [ExcludeFromCodeCoverage]
+        public IWGResponse<object> GetPlayerRatings(long[] accountIds)
+        {
+            return GetPlayerRatings(accountIds, WGLanguageField.EN, null, null);
+        }
+
+        /// <summary>
+        /// Method returns details on player's ratings.
+        /// </summary>
+        /// <param name="accountIds">list of player account ids</param>
+        /// <param name="language">language</param>
+        /// <param name="accessToken">access token</param>
+        /// <param name="responseFields">fields to be returned. Null or string.Empty for all</param>
+        /// <returns></returns>
+        [Obsolete("Method has been removed.")]
+        public IWGResponse<object> GetPlayerRatings(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            throw new NotImplementedException();
+        }
+
+        [ExcludeFromCodeCoverage]
+        private string CreatePlayerRatingsRequestURI(long[] accountIds, WGLanguageField language, string accessToken, string responseFields)
+        {
+            var target = "account/ratings";
+
+            var generalUri = GetGeneralUri(target, language);
+
+            var sb = new StringBuilder(generalUri);
+
+            if (!string.IsNullOrWhiteSpace(responseFields))
+                sb.AppendFormat("&fields={0}", responseFields);
+
+            if (!string.IsNullOrWhiteSpace(accessToken))
+                sb.AppendFormat("&access_token={0}", accessToken);
+
+            sb.AppendFormat("&account_id={0}", string.Join(",", accountIds));
+
+            var requestURI = sb.ToString();
+
+            return requestURI;
+        }
+
+        #endregion Player Ratings
 
         #region Authentication
 
@@ -654,7 +743,7 @@ namespace WGSharpAPI
             var output = GetRequestResponse(requestURI);
 
             // this is our raw response which we will parse later on
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             // JObject accepts Language-INtegrated Queries over it, so it's our friend
             var jObject = wgRawResponse.Data as JObject;
@@ -780,8 +869,8 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
-            
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
+
             var obj = new WGResponse<List<Battle>>
             {
                 Status = wgRawResponse.Status,
@@ -946,7 +1035,7 @@ namespace WGSharpAPI
             var output = GetRequestResponse(requestURI);
 
             // get the raw response
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             // this is the response we will return
             var obj = new WGResponse<List<Province>>()
@@ -1038,7 +1127,7 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<long>>
             {
@@ -1122,7 +1211,7 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<Member>>
             {
@@ -1198,7 +1287,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
             {
@@ -1273,7 +1362,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Tank>>
             {
@@ -1362,7 +1451,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Engine>>
             {
@@ -1455,7 +1544,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Turret>>
             {
@@ -1548,7 +1637,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Radio>>
             {
@@ -1641,7 +1730,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Chassis>>
             {
@@ -1734,7 +1823,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Modules.Gun>>
             {
@@ -1805,7 +1894,7 @@ namespace WGSharpAPI
 
             var output = this.GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks.Achievements.TankAchievement>>
             {
@@ -1881,7 +1970,7 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<IWGResponse<object>>(output);
 
             var obj = new WGResponse<List<Tank>>
             {
@@ -1951,7 +2040,7 @@ namespace WGSharpAPI
 
             var output = GetRequestResponse(requestURI);
 
-            var wgRawResponse = JsonConvert.DeserializeObject<WGRawResponse>(output);
+            var wgRawResponse = JsonConvert.DeserializeObject<WGResponse<object>>(output);
 
             var obj = new WGResponse<Player>
             {

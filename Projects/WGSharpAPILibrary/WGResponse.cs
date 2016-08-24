@@ -32,5 +32,7 @@ namespace WGSharpAPI
         public Meta Meta { get; set; }
 
         public T Data { get; set; }
+
+        public Error Error { get; set; }
     }
 }

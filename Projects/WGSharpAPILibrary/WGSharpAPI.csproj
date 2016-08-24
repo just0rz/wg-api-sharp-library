@@ -74,13 +74,16 @@
     <Compile Include="Entities\BaseStatistics.cs" />
     <Compile Include="Entities\PlayerDetails\Tank.cs" />
     <Compile Include="Entities\PlayerDetails\TankStatistics.cs" />
+    <Compile Include="Entities\PlayerRatings\TypeOfRating.cs" />
     <Compile Include="Enums\PlayerRatingType.cs" />
+    <Compile Include="Enums\RatingBattleType.cs" />
     <Compile Include="Enums\StatisticsType.cs" />
     <Compile Include="Enums\WGBattleType.cs" />
     <Compile Include="Enums\WGLanguageField.cs" />
     <Compile Include="Enums\WGNation.cs" />
     <Compile Include="Enums\WGSearchType.cs" />
     <Compile Include="Enums\WGTimeDelta.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="Interfaces\IWGApplication.cs" />
     <Compile Include="Interfaces\IWGRequest.cs" />
     <Compile Include="Interfaces\IWGResponse.cs" />
@@ -91,7 +94,6 @@
     <Compile Include="WGApplication.cs" />
     <Compile Include="Enums\WGRequestMethod.cs" />
     <Compile Include="Enums\WGRequestProtocol.cs" />
-    <Compile Include="WGRawResponse.cs" />
     <Compile Include="WGRequest.cs" />
     <Compile Include="WGResponse.cs" />
     <Compile Include="WGSettings.cs" />

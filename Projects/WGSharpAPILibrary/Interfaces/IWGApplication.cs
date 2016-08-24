@@ -25,6 +25,7 @@ using System;
 using System.Collections.Generic;
 using WGSharpAPI.Entities.ClanDetails;
 using WGSharpAPI.Entities.PlayerDetails;
+using WGSharpAPI.Entities.PlayerRatings;
 using WGSharpAPI.Enums;
 using Clan = WGSharpAPI.Entities.ClanDetails.Clan;
 using WotEncyclopedia = WGSharpAPI.Entities.EncyclopediaDetails.WorldOfTanks;
@@ -194,6 +195,32 @@ namespace WGSharpAPI.Interfaces
         #endregion Player Achievements
 
         #endregion Account
+
+        #region Player Ratings
+
+        #region Types of rating
+
+        /// <summary>
+        /// Method returns dictionary of rating periods and ratings details.
+        /// </summary>
+        /// <returns></returns>
+        IWGResponse<List<TypeOfRating>> GetTypesOfRating();
+
+        /// <summary>
+        /// Method returns dictionary of rating periods and ratings details.
+        /// </summary>
+        /// <returns></returns>
+        IWGResponse<List<TypeOfRating>> GetTypesOfRating(RatingBattleType ratingBattleType);
+
+        /// <summary>
+        /// Method returns dictionary of rating periods and ratings details.
+        /// </summary>
+        /// <returns></returns>
+        IWGResponse<List<TypeOfRating>> GetTypesOfRating(RatingBattleType ratingBattleType, WGLanguageField language, string responseFields);
+
+        #endregion Types of rating
+
+        #endregion Player Ratings
 
         #region Authentication
 

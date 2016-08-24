@@ -27,6 +27,10 @@ namespace WGSharpAPI.Interfaces
     {
         string Status { get; set; }
 
+        Meta Meta { get; set; }
+
         T Data { get; set; }
+
+        Error Error { get; set; }
     }
 }

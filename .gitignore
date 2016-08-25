@@ -11,5 +11,6 @@ Samples/Complex/Sample.QueueRequests/bin/*
 Samples/Complex/Sample.QueueRequests/obj/*
 Samples/Complex/Sample.QueueRequests/*.suo
 Solutions/TestResults/*
+Solutions/packages/*
 *.dll
 *.suo

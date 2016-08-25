@@ -448,7 +448,7 @@ namespace WGSharpAPI
         /// <returns></returns>
         public IWGResponse<List<TypeOfRating>> GetTypesOfRating()
         {
-            return GetTypesOfRating(RatingBattleType.Default, WGLanguageField.EN, null);
+            return GetTypesOfRating(RatingBattleType.Default);
         }
 
         /// <summary>

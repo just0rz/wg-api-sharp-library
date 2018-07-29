@@ -22,27 +22,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace WGSharpAPITests.PlayersVehicles
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class VehicleStatisticsTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void PlayerVehicles_tanksstats_get_all()
         {
-            var result = WGApplication.GetTankStats(accountId);
+            var result = WGApplication.GetTankStats(TestConstants.Just0rzAccount.AccountId);
 
             Assert.IsNotNull(result.Data); 
             Assert.IsTrue(result.Data.Count > 1); 
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void PlayerVehicles_tanksstats_get_all_specify_all_parameters()
         {
-            var result = WGApplication.GetTankStats(accountId, new[] { grilleTankId }, WGSharpAPI.Enums.WGLanguageField.EN, "tank_id", null, null);
+            var result = WGApplication.GetTankStats(TestConstants.Just0rzAccount.AccountId, new[] { TestConstants.Just0rzAccount.GrilleTankId }, WGSharpAPI.Enums.WGLanguageField.EN, "tank_id", null, null);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);

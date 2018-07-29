@@ -21,38 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class VehicleDetailsTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankinfo_get_1_tank_details()
         {
-            var result = WGApplication.GetVehicleDetails(grilleTankId);
+            var result = WGApplication.GetVehicleDetails(TestConstants.Just0rzAccount.GrilleTankId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankinfo_get_list_of_tank_details()
         {
-            var result = WGApplication.GetVehicleDetails(new[] { grilleTankId });
+            var result = WGApplication.GetVehicleDetails(new[] { TestConstants.Just0rzAccount.GrilleTankId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankinfo_specify_all_parameters_get_list_of_tank_details()
         {
-            var result = WGApplication.GetVehicleDetails(new[] { grilleTankId }, WGLanguageField.EN, "name");
+            var result = WGApplication.GetVehicleDetails(new[] { TestConstants.Just0rzAccount.GrilleTankId }, WGLanguageField.EN, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);

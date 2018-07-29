@@ -21,15 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class ListOfVehiclesTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tanks_get_all_tanks()
         {
             var result = WGApplication.GetAllVehicles();
@@ -39,7 +39,7 @@ namespace WGSharpAPITests.Encyclopedia
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tanks_specify_all_parameters_get_all_tanks()
         {
             var result = WGApplication.GetAllVehicles(WGLanguageField.EN, "name");

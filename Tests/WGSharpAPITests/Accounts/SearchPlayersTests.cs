@@ -21,61 +21,61 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System.Collections.Generic;
 using WGSharpAPI;
 using WGSharpAPI.Entities.PlayerDetails;
 
 namespace WGSharpAPITests.Accounts
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class SearchPlayersTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_list_return_1_valid_user()
         {
-            var result = WGApplication.SearchPlayers("Just0rz");
+            var result = WGApplication.SearchPlayers(TestConstants.Just0rzAccount.Username);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual("ok", result.Status);
-            Assert.AreEqual(accountId, result.Data[0].AccountId);
-            Assert.AreEqual("Just0rz", result.Data[0].Nickname);
+            Assert.AreEqual(TestConstants.Just0rzAccount.AccountId, result.Data[0].AccountId);
+            Assert.AreEqual(TestConstants.Just0rzAccount.Username, result.Data[0].Nickname);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_list_return_1_valid_user_using_a_specific_searchType()
         {
-            var result = WGApplication.SearchPlayers("Just0rz", WGSharpAPI.Enums.WGSearchType.Exact);
+            var result = WGApplication.SearchPlayers(TestConstants.Just0rzAccount.Username, WGSharpAPI.Enums.WGSearchType.Exact);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual("ok", result.Status);
-            Assert.AreEqual(accountId, result.Data[0].AccountId);
-            Assert.AreEqual("Just0rz", result.Data[0].Nickname);
+            Assert.AreEqual(TestConstants.Just0rzAccount.AccountId, result.Data[0].AccountId);
+            Assert.AreEqual(TestConstants.Just0rzAccount.Username, result.Data[0].Nickname);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_list_return_1_valid_user_using_a_specific_searchType_and_result_limit()
         {
             var result = WGApplication.SearchPlayers("Just0rz", WGSharpAPI.Enums.WGSearchType.Exact, 1);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual("ok", result.Status);
-            Assert.AreEqual(accountId, result.Data[0].AccountId);
-            Assert.AreEqual("Just0rz", result.Data[0].Nickname);
+            Assert.AreEqual(TestConstants.Just0rzAccount.AccountId, result.Data[0].AccountId);
+            Assert.AreEqual(TestConstants.Just0rzAccount.Username, result.Data[0].Nickname);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_list_return_1_valid_user_with_specified_responseFields()
         {
-            var result = WGApplication.SearchPlayers("Just0rz", "account_id", WGSharpAPI.Enums.WGLanguageField.EN, WGSharpAPI.Enums.WGSearchType.Exact, 1);
+            var result = WGApplication.SearchPlayers(TestConstants.Just0rzAccount.Username, "account_id", WGSharpAPI.Enums.WGLanguageField.EN, WGSharpAPI.Enums.WGSearchType.Exact, 1);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(result.Status, "ok");
-            Assert.AreEqual(result.Data[0].AccountId, accountId);
+            Assert.AreEqual(TestConstants.Just0rzAccount.AccountId, result.Data[0].AccountId);
             Assert.IsNull(result.Data[0].Nickname);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_list_search_less_than_3_chars_startswith()
         {
             var expectedResult = new WGResponse<List<Player>> { Status = "error", };

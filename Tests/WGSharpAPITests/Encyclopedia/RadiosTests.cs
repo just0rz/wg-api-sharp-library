@@ -21,15 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class EnginesTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankradios_get_all_radios()
         {
             var result = WGApplication.GetRadios();
@@ -39,40 +39,40 @@ namespace WGSharpAPITests.Encyclopedia
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankradios_get_radios_by_list_of_id()
         {
-            var result = WGApplication.GetRadios(new[] { grilleRadioId });
+            var result = WGApplication.GetRadios(new[] { TestConstants.Just0rzAccount.GrilleRadioId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankradios_get_1_radio_by_id()
         {
-            var result = WGApplication.GetRadios(grilleRadioId);
+            var result = WGApplication.GetRadios(TestConstants.Just0rzAccount.GrilleRadioId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankradios_get_radios_by_list_of_id_specify_all_parameters()
         {
-            var result = WGApplication.GetRadios(new[] { grilleRadioId }, WGLanguageField.EN, WGNation.All, "name");
+            var result = WGApplication.GetRadios(new[] { TestConstants.Just0rzAccount.GrilleRadioId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankradios_get_radios_by_list_of_id_specify_all_parameters_for_specific_nation()
         {
-            var result = WGApplication.GetRadios(new[] { grilleRadioId }, WGLanguageField.EN, WGNation.Germany, "name");
+            var result = WGApplication.GetRadios(new[] { TestConstants.Just0rzAccount.GrilleRadioId }, WGLanguageField.EN, WGNation.Germany, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);

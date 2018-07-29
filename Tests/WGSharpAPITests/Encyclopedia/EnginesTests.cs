@@ -21,15 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [TestClass]
+    [Category("Integration tests")]
     public class RadiosTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankengines_get_all_engines()
         {
             var result = WGApplication.GetEngines();
@@ -39,40 +39,40 @@ namespace WGSharpAPITests.Encyclopedia
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankengines_get_engines_by_list_of_id()
         {
-            var result = WGApplication.GetEngines(new[] { grilleEngineId });
+            var result = WGApplication.GetEngines(new[] { TestConstants.Just0rzAccount.GrilleEngineId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankengines_get_1_engine_by_id()
         {
-            var result = WGApplication.GetEngines(grilleEngineId);
+            var result = WGApplication.GetEngines(TestConstants.Just0rzAccount.GrilleEngineId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankengines_get_engines_by_list_of_id_specify_all_parameters()
         {
-            var result = WGApplication.GetEngines(new[] { grilleTankId }, WGLanguageField.EN, WGNation.All, "name");
+            var result = WGApplication.GetEngines(new[] { TestConstants.Just0rzAccount.GrilleTankId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankengines_get_engines_by_list_of_id_specify_all_parameters_for_specific_nation()
         {
-            var result = WGApplication.GetEngines(new[] { grilleTankId }, WGLanguageField.EN, WGNation.Germany, "name");
+            var result = WGApplication.GetEngines(new[] { TestConstants.Just0rzAccount.GrilleTankId }, WGLanguageField.EN, WGNation.Germany, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);

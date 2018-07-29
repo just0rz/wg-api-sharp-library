@@ -21,16 +21,16 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using System;
 using WGSharpAPI.Tools;
 
 namespace WGSharpAPITests.Helpers
 {
-    [TestClass]
+    [Category(TestConstants.Category.Dev)]
     public class DateTimeToolsTests
     {
-        [TestCategory("Unit test"), TestMethod]
+        [Test]
         public void DateFromWGTimestamp()
         {
             long incomingTimestamp = 10;
@@ -42,7 +42,7 @@ namespace WGSharpAPITests.Helpers
             Assert.AreEqual(date, expectedDate);
         }
 
-        [TestCategory("Unit test"), TestMethod]
+        [Test]
         public void DateToWGTimesptamp()
         {
             var incomingDateTime = new DateTime(1970, 1, 1, 0, 0, 10, DateTimeKind.Utc);

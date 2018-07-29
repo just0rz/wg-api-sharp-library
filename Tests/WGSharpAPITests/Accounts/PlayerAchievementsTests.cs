@@ -21,18 +21,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Accounts
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class PlayerAchievementsTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_achievements_return_achievements()
         {
-            var result = WGApplication.GetPlayerAchievements(accountId);
+            var result = WGApplication.GetPlayerAchievements(TestConstants.Just0rzAccount.AccountId);
 
             if (result.Data != null && result.Data.Count == 0)
                 Assert.Inconclusive("The selected player doesn't seem to have ANY achievements. This makes the test useless, you might want to select a different accountId.");
@@ -42,10 +42,10 @@ namespace WGSharpAPITests.Accounts
             Assert.IsTrue(result.Data.Count > 0);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_achievements_for_a_list_of_players_return_achievements()
         {
-            var result = WGApplication.GetPlayerAchievements(new[] { accountId });
+            var result = WGApplication.GetPlayerAchievements(new[] { TestConstants.Just0rzAccount.AccountId });
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Achievements.Count == 0)
                 Assert.Inconclusive("The selected player doesn't seem to have ANY achievements. This makes the test useless, you might want to select a different accountId.");
@@ -55,10 +55,10 @@ namespace WGSharpAPITests.Accounts
             Assert.IsTrue(result.Data[0].Achievements.Count > 0);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_achievements_specify_all_parameters_return_achievements()
         {
-            var result = WGApplication.GetPlayerAchievements(new[] { accountId }, WGLanguageField.EN, null, null);
+            var result = WGApplication.GetPlayerAchievements(new[] { TestConstants.Just0rzAccount.AccountId }, WGLanguageField.EN, null, null);
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Achievements.Count == 0)
                 Assert.Inconclusive("The selected player doesn't seem to have ANY achievements. This makes the test useless, you might want to select a different accountId.");

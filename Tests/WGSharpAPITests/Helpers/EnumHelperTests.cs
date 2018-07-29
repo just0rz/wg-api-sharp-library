@@ -22,12 +22,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Tools;
 
 namespace WGSharpAPITests.Helpers
 {
-    [TestClass]
+    [Category(TestConstants.Category.Dev)]
     public class EnumHelperTests
     {
         public enum MyTestEnum
@@ -37,7 +37,7 @@ namespace WGSharpAPITests.Helpers
             NoFlag,
         }
 
-        [TestCategory("Unit test"), TestMethod]
+        [Test]
         public void GetEnumDescription_FromEnumWithDescriptionAttribute_ReturnsDescriptionString()
         {
             var expectedDescription = "ValidFlag";
@@ -46,7 +46,7 @@ namespace WGSharpAPITests.Helpers
             Assert.AreEqual(expectedDescription, enumDescription);
         }
 
-        [TestCategory("Unit test"), TestMethod]
+        [Test]
         public void GetEnumDescription_FromEnumWithoutDescriptionAttribute_ReturnsEnumToString()
         {
             var expectedDescription = "NoFlag";
@@ -55,18 +55,10 @@ namespace WGSharpAPITests.Helpers
             Assert.AreEqual(expectedDescription, enumDescription);
         }
 
-        [TestCategory("Unit test"), TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        [Test]
         public void GetEnumDescription_FromADifferentTypeThanEnum_ThrowsException()
         {
-            try
-            {
-                var enumDescription = EnumHelper<int>.GetEnumDescription(1);
-            }
-            catch (TypeInitializationException ex)
-            {
-                throw ex.InnerException;
-            }
+            Assert.Throws<ArgumentException>(() => EnumHelper<int>.GetEnumDescription(1));
         }
     }
 }

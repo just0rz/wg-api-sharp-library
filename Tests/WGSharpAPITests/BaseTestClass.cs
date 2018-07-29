@@ -21,54 +21,42 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Threading;
+using NUnit.Framework;
 using WGSharpAPI;
 
 namespace WGSharpAPITests
 {
+    [TestFixture]
     public class BaseTestClass
     {
-        // you may change this, but don't make it public
-        private static readonly string _applicationId = "demo";
-
         protected WGApplication WGApplication = null;
-
-        // My account details :) - you may modify this
-        protected static readonly long accountId = 508637087; // account id
-        protected static readonly long createdAt = 1361472166; // unix timestamp
-        protected static readonly long grilleTankId = 5649; // Grille tank id
-        protected static readonly long grilleEngineId = 13333; // Grille engine module id
-        protected static readonly long grilleRadioId = 2071; // Grille radio module id
-        protected static readonly long grilleSuspensionId = 11538; // Grille suspension module id
-        protected static readonly long grilleGunId = 1556; // Grille gun module id
-        protected static readonly long t54TurretId = 14595; // T-54 turret module id
-
+        
         public BaseTestClass()
         {
             TestClassSetup();
         }
 
-        [ClassInitialize]
+        [OneTimeSetUp]
         public void TestClassSetup()
         {
-            WGApplication = new WGApplication(_applicationId);
+            WGApplication = new WGApplication(TestConstants.Application.ID);
         }
 
-        [TestInitialize]
+        [SetUp]
         public void TestSetup()
         {
             // we don't want to kill WG's servers because we're doing real calls to their API
             Thread.Sleep(5000);
         }
 
-        [TestCleanup]
+        [TearDown]
         public void TestCleanup()
         {
 
         }
 
-        [ClassCleanup]
+        [OneTimeTearDown]
         public void TestClassCleanup()
         {
         }

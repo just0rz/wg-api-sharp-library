@@ -21,49 +21,49 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 using WGSharpAPI.Tools;
 
 namespace WGSharpAPITests.Accounts
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class PlayerInfoTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_info_return_playerInfo()
         {
-            var createdAtDate = ToolsExtensions.DateFromWGTimestamp(createdAt);
-            var result = WGApplication.GetPlayerInfo(accountId);
+            var createdAtDate = ToolsExtensions.DateFromWGTimestamp(TestConstants.Just0rzAccount.CreatedAt);
+            var result = WGApplication.GetPlayerInfo(TestConstants.Just0rzAccount.AccountId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual("ok", result.Status);
-            Assert.AreEqual(result.Data[0].AccountId, accountId);
-            Assert.AreEqual(result.Data[0].CreatedAt, createdAtDate.DateToWGTimesptamp());
+            Assert.AreEqual(TestConstants.Just0rzAccount.AccountId, result.Data[0].AccountId, "Unexpected accountId.");
+            Assert.AreEqual(createdAtDate.DateToWGTimesptamp(), result.Data[0].CreatedAt, "Unexpected createdAt.");
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_info_return_listof_playerInfo()
         {
-            var createdAtDate = ToolsExtensions.DateFromWGTimestamp(createdAt);
-            var result = WGApplication.GetPlayerInfo(new[] { accountId });
+            var createdAtDate = ToolsExtensions.DateFromWGTimestamp(TestConstants.Just0rzAccount.CreatedAt);
+            var result = WGApplication.GetPlayerInfo(new[] { TestConstants.Just0rzAccount.AccountId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual("ok", result.Status);
-            Assert.AreEqual(result.Data[0].AccountId, accountId);
-            Assert.AreEqual(result.Data[0].CreatedAt, createdAtDate.DateToWGTimesptamp());
+            Assert.AreEqual(TestConstants.Just0rzAccount.AccountId, result.Data[0].AccountId, "Unexpected accountId.");
+            Assert.AreEqual(createdAtDate.DateToWGTimesptamp(), result.Data[0].CreatedAt, "Unexpected createdAt.");
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_info_return_listof_playerInfo_using_all_parameters_except_accessToken()
         {
-            var createdAtDate = ToolsExtensions.DateFromWGTimestamp(createdAt);
-            var result = WGApplication.GetPlayerInfo(new[] { accountId }, WGLanguageField.EN, null, "account_id,created_at");
+            var createdAtDate = ToolsExtensions.DateFromWGTimestamp(TestConstants.Just0rzAccount.CreatedAt);
+            var result = WGApplication.GetPlayerInfo(new[] { TestConstants.Just0rzAccount.AccountId }, WGLanguageField.EN, null, "account_id,created_at");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual("ok", result.Status);
-            Assert.AreEqual(result.Data[0].AccountId, accountId);
-            Assert.AreEqual(result.Data[0].CreatedAt, createdAtDate.DateToWGTimesptamp());
+            Assert.AreEqual(TestConstants.Just0rzAccount.AccountId, result.Data[0].AccountId, "Unexpected accountId.");
+            Assert.AreEqual(createdAtDate.DateToWGTimesptamp(), result.Data[0].CreatedAt, "Unexpected createdAt.");
         }
     }
 }

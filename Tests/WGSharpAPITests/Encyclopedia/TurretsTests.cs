@@ -21,15 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class TurretsTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankturrets_get_all_turrets()
         {
             var result = WGApplication.GetTurrets();
@@ -39,40 +39,40 @@ namespace WGSharpAPITests.Encyclopedia
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankturrets_get_turrets_by_list_of_id()
         {
-            var result = WGApplication.GetTurrets(new[] { t54TurretId });
+            var result = WGApplication.GetTurrets(new[] { TestConstants.Just0rzAccount.T54TurretId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankturrets_get_1_turret_by_id()
         {
-            var result = WGApplication.GetTurrets(t54TurretId);
+            var result = WGApplication.GetTurrets(TestConstants.Just0rzAccount.T54TurretId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankturrets_get_turrets_by_list_of_id_specify_all_parameters()
         {
-            var result = WGApplication.GetTurrets(new[] { t54TurretId }, WGLanguageField.EN, WGNation.All, "name");
+            var result = WGApplication.GetTurrets(new[] { TestConstants.Just0rzAccount.T54TurretId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankturrets_get_turrets_by_list_of_id_specify_all_parameters_for_specific_nation()
         {
-            var result = WGApplication.GetTurrets(new[] { t54TurretId }, WGLanguageField.EN, WGNation.USSR, "name");
+            var result = WGApplication.GetTurrets(new[] { TestConstants.Just0rzAccount.T54TurretId }, WGLanguageField.EN, WGNation.USSR, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);

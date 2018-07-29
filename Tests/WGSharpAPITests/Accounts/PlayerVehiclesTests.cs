@@ -21,18 +21,18 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Accounts
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class PlayerVehiclesTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_tanks_get_player_vehicles()
         {
-            var result = WGApplication.GetPlayerVehicles(accountId);
+            var result = WGApplication.GetPlayerVehicles(TestConstants.Just0rzAccount.AccountId);
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
                 Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
@@ -43,10 +43,10 @@ namespace WGSharpAPITests.Accounts
             Assert.IsTrue(result.Data[0].Tanks.Count > 0);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_tanks_get_vehicles_for_list_of_players()
         {
-            var result = WGApplication.GetPlayerVehicles(new[] { accountId });
+            var result = WGApplication.GetPlayerVehicles(new[] { TestConstants.Just0rzAccount.AccountId });
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
                 Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");
@@ -57,10 +57,10 @@ namespace WGSharpAPITests.Accounts
             Assert.IsTrue(result.Data[0].Tanks.Count > 0);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Account_tanks_get_player_vehicles_specify_all_parameters()
         {
-            var result = WGApplication.GetPlayerVehicles(new[] { accountId }, new long[] { grilleTankId }, WGLanguageField.EN, null, null);
+            var result = WGApplication.GetPlayerVehicles(new[] { TestConstants.Just0rzAccount.AccountId }, new long[] { TestConstants.Just0rzAccount.GrilleTankId }, WGLanguageField.EN, null, null);
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
                 Assert.Inconclusive("The selected player doesn't seem to have ANY tanks in his garage. This makes the test useless, you may try selecting a different accountId.");

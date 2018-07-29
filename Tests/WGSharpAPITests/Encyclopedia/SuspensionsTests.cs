@@ -21,15 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class SuspensionsTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tanksuspensions_get_all_suspensions()
         {
             var result = WGApplication.GetSuspensions();
@@ -39,40 +39,40 @@ namespace WGSharpAPITests.Encyclopedia
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tanksuspensions_get_suspensions_by_list_of_id()
         {
-            var result = WGApplication.GetSuspensions(new[] { grilleSuspensionId });
+            var result = WGApplication.GetSuspensions(new[] { TestConstants.Just0rzAccount.GrilleSuspensionId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tanksuspensions_get_1_suspension_by_id()
         {
-            var result = WGApplication.GetSuspensions(grilleSuspensionId);
+            var result = WGApplication.GetSuspensions(TestConstants.Just0rzAccount.GrilleSuspensionId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tanksuspensions_get_suspensions_by_list_of_id_specify_all_parameters()
         {
-            var result = WGApplication.GetSuspensions(new[] { grilleSuspensionId }, WGLanguageField.EN, WGNation.All, "name");
+            var result = WGApplication.GetSuspensions(new[] { TestConstants.Just0rzAccount.GrilleSuspensionId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tanksuspensions_get_suspensions_by_list_of_id_specify_all_parameters_for_specific_nation()
         {
-            var result = WGApplication.GetSuspensions(new[] { grilleSuspensionId }, WGLanguageField.EN, WGNation.Germany, "name");
+            var result = WGApplication.GetSuspensions(new[] { TestConstants.Just0rzAccount.GrilleSuspensionId }, WGLanguageField.EN, WGNation.Germany, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);

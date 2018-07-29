@@ -21,15 +21,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class GunsTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankguns_get_all_guns()
         {
             var result = WGApplication.GetGuns();
@@ -39,40 +39,40 @@ namespace WGSharpAPITests.Encyclopedia
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankguns_get_guns_by_list_of_id()
         {
-            var result = WGApplication.GetGuns(new[] { grilleGunId });
+            var result = WGApplication.GetGuns(new[] { TestConstants.Just0rzAccount.GrilleGunId });
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankguns_get_1_gun_by_id()
         {
-            var result = WGApplication.GetGuns(grilleGunId);
+            var result = WGApplication.GetGuns(TestConstants.Just0rzAccount.GrilleGunId);
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankguns_get_guns_by_list_of_id_specify_all_parameters()
         {
-            var result = WGApplication.GetGuns(new[] { grilleGunId }, WGLanguageField.EN, WGNation.All, "name");
+            var result = WGApplication.GetGuns(new[] { TestConstants.Just0rzAccount.GrilleGunId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);
             Assert.AreEqual("ok", result.Status);
         }
 
-        [TestCategory("Integration test"), TestMethod]
+        [Test]
         public void Encyclopedia_tankguns_get_guns_by_list_of_id_specify_all_parameters_for_specific_nation()
         {
-            var result = WGApplication.GetGuns(new[] { grilleGunId }, WGLanguageField.EN, WGNation.Germany, "name");
+            var result = WGApplication.GetGuns(new[] { TestConstants.Just0rzAccount.GrilleGunId }, WGLanguageField.EN, WGNation.Germany, "name");
 
             Assert.IsNotNull(result.Data);
             Assert.AreEqual(1, result.Data.Count);

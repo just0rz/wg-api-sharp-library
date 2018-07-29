@@ -1,5 +1,4 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-/*
+﻿/*
 The MIT License (MIT)
 
 Copyright (c) 2016 Iulian Grosu
@@ -23,18 +22,20 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 using System;
+using NUnit.Framework;
 using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Accounts
 {
-    [TestClass]
+    [Category(TestConstants.Category.Integration)]
     public class PlayerRatingsTests : BaseTestClass
     {
-        [TestCategory("Integration test"), TestMethod]
-        [ExpectedException(typeof(NotImplementedException))]
+        [Test]
         public void Account_player_ratings_send_all_parameters_method_removed()
         {
-            WGApplication.GetPlayerRatings(new[] { accountId }, WGLanguageField.EN, null, null);
+#pragma warning disable CS0618 // Type or member is obsolete
+            Assert.Throws<NotImplementedException>(() => WGApplication.GetPlayerRatings(new[] { TestConstants.Just0rzAccount.AccountId }, WGLanguageField.EN, null, null));
+#pragma warning restore CS0618 // Type or member is obsolete
         }
     }
 }

@@ -1565,7 +1565,8 @@ namespace WGSharpAPI
                 sb.Append('/');
             }
 
-            sb.Append($"{target}/?application_id={_applicationId}&language={languageField}");
+            var additionalInfo = $"{target}/?application_id={_applicationId}&language={languageField}";
+            sb.Append(additionalInfo);
 
             var result = sb.ToString();
 

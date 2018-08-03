@@ -58,7 +58,7 @@ namespace WGSharpAPITests.Helpers
         [Test]
         public void GetEnumDescription_FromADifferentTypeThanEnum_ThrowsException()
         {
-            Assert.Throws<ArgumentException>(() => EnumHelper<int>.GetEnumDescription(1));
+            Assert.Throws<TypeInitializationException>(() => EnumHelper<int>.GetEnumDescription(1));
         }
     }
 }

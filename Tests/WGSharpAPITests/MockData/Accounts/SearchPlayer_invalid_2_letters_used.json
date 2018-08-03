@@ -1,0 +1,9 @@
+{
+  "status": "error",
+  "error": {
+    "field": "search",
+    "message": "NOT_ENOUGH_SEARCH_LENGTH",
+    "code": 407,
+    "value": "Ju"
+  }
+}

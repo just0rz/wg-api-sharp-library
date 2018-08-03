@@ -34,30 +34,48 @@ namespace WGSharpAPI
     {
         private WebRequest _webrequest;
 
+        public bool IsConsumed { get; private set; }
+        public string RequestURI { get; set; }
+
         /// <summary>
         /// We don't want a parameterless constructor
         /// </summary>
-        private WGRequest() { }
+        private WGRequest()
+        {
+            IsConsumed = false;
+        }
 
         public WGRequest(string requestURI)
             : this()
         {
-            _webrequest = HttpWebRequest.Create(requestURI);
+            RequestURI = requestURI;
         }
 
         public string GetResponse()
         {
-            var response = _webrequest.GetResponse();
-
-            var responseStream = response.GetResponseStream();
             string output = string.Empty;
-            using (StreamReader reader = new StreamReader(responseStream))
+            if (!IsConsumed)
             {
-                output = reader.ReadToEnd();
+                _webrequest = WebRequest.Create(RequestURI);
+                IsConsumed = true;
+                using (var response = _webrequest.GetResponse())
+                {
+
+                    var responseStream = response.GetResponseStream();
+                    using (StreamReader reader = new StreamReader(responseStream))
+                    {
+                        output = reader.ReadToEnd();
+                    }
+                    response.Close();
+                }
             }
-            response.Close();
 
             return output;
+        }
+
+        public static IWGRequest GetRequest()
+        {
+            return new WGRequest();
         }
     }
 }

@@ -25,6 +25,8 @@ namespace WGSharpAPI.Interfaces
 {
     public interface IWGRequest
     {
+        string RequestURI { get; set; }
+        bool IsConsumed { get; }
         string GetResponse();
     }
 }

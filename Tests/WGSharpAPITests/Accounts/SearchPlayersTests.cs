@@ -21,19 +21,40 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
 using WGSharpAPI;
 using WGSharpAPI.Entities.PlayerDetails;
+using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPITests.Accounts
 {
-    [Category(TestConstants.Category.Integration)]
+    [Category(TestConstants.Category.Dev)]
     public class SearchPlayersTests : BaseTestClass
     {
+        MockRepository _mock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mock = new MockRepository(MockBehavior.Default);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _mock = null;
+        }
+
         [Test]
         public void Account_list_return_1_valid_user()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.SearchPlayers(TestConstants.Just0rzAccount.Username);
 
             Assert.IsNotNull(result.Data);
@@ -45,6 +66,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_list_return_1_valid_user_using_a_specific_searchType()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayer_1_exact_result));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.SearchPlayers(TestConstants.Just0rzAccount.Username, WGSharpAPI.Enums.WGSearchType.Exact);
 
             Assert.IsNotNull(result.Data);
@@ -56,6 +82,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_list_return_1_valid_user_using_a_specific_searchType_and_result_limit()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayer_1_exact_result));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.SearchPlayers("Just0rz", WGSharpAPI.Enums.WGSearchType.Exact, 1);
 
             Assert.IsNotNull(result.Data);
@@ -67,6 +98,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_list_return_1_valid_user_with_specified_responseFields()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayer_1_account_id_result_only));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.SearchPlayers(TestConstants.Just0rzAccount.Username, "account_id", WGSharpAPI.Enums.WGLanguageField.EN, WGSharpAPI.Enums.WGSearchType.Exact, 1);
 
             Assert.IsNotNull(result.Data);
@@ -78,6 +114,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_list_search_less_than_3_chars_startswith()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayer_invalid_2_letters_used));
+            WGApplication.Request = wgRequestMock.Object;
+
             var expectedResult = new WGResponse<List<Player>> { Status = "error", };
 
             var result = WGApplication.SearchPlayers("Ju");

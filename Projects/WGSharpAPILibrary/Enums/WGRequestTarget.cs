@@ -21,43 +21,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
-using System;
-using System.IO;
-using System.Threading;
-using NUnit.Framework;
-using WGSharpAPI;
-
-namespace WGSharpAPITests
+namespace WGSharpAPI.Enums
 {
-    [TestFixture]
-    public class BaseTestClass
+    public enum WGRequestTarget
     {
-        protected WGApplication WGApplication = null;
-        
-        [OneTimeSetUp]
-        public void TestClassSetup()
-        {
-            var dir = Path.GetDirectoryName(typeof(BaseTestClass).Assembly.Location);
-            Environment.CurrentDirectory = dir;
-
-            Assert.NotNull(TestConstants.Application.ID, "You need to change this with your application's ID, but DON'T make it public.");
-            Assert.AreNotEqual(string.Empty, TestConstants.Application.ID, "You need to change this with your application's ID, but DON'T make it public.");
-            WGApplication = new WGApplication(TestConstants.Application.ID);
-        }
-
-        [SetUp]
-        public void TestSetup()
-        {
-        }
-
-        [TearDown]
-        public void TestCleanup()
-        {
-        }
-
-        [OneTimeTearDown]
-        public void TestClassCleanup()
-        {
-        }
+        WorldOfTanks,
+        WorldOfWarships,
+        WorldOfPlanes,
     }
 }

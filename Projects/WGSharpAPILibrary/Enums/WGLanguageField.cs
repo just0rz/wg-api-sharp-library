@@ -21,21 +21,37 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using System.ComponentModel;
+
 namespace WGSharpAPI.Enums
 {
     public enum WGLanguageField
     {
+        [Description("en")]
         EN,
+        [Description("ru")]
         RU,
+        [Description("pl")]
         PL,
+        [Description("de")]
         DE,
+        [Description("fr")]
         FR,
+        [Description("es")]
         ES,
+        [Description("zh_cn")]
         ZH_CN,
+        [Description("zh_tw")]
+        ZH_TW,
+        [Description("tr")]
         TR,
+        [Description("cs")]
         CS,
+        [Description("th")]
         TH,
+        [Description("vi")]
         VI,
+        [Description("ko")]
         KO,
     }
 }

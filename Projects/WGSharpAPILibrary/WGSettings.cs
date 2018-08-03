@@ -27,27 +27,43 @@ namespace WGSharpAPI
 {
     public class WGSettings
     {
-        private WGRequestMethod _requestMethod;
-        public WGRequestMethod RequsetMethod { get { return _requestMethod; } }
+        public WGRequestMethod RequsetMethod { get; }
+        public WGRequestProtocol RequestProtocol { get; }
+        public WGRequestTarget RequestTarget { get; }
+        public int MaxRequestsPerSecond { get; } // not used
 
-        private WGRequestProtocol _requestProtocol;
-        public WGRequestProtocol RequestProtocol { get { return _requestProtocol; } }
-
-        private int _maxRequestsPerSecond;
-        public int MaxRequestsPerSecond { get { return _maxRequestsPerSecond; } }
-
-        public WGSettings()
+        public string BaseApiUri
         {
-            _requestMethod = WGRequestMethod.GET;
-            _requestProtocol = WGRequestProtocol.HTTP;
-            _maxRequestsPerSecond = 10;
+            get
+            {
+                switch (RequestTarget)
+                {
+                    case WGRequestTarget.WorldOfTanks:
+                        return "api.worldoftanks.eu/wot";
+                    case WGRequestTarget.WorldOfWarships:
+                        return "api.worldofwarships.eu/wows";
+                    case WGRequestTarget.WorldOfPlanes:
+                        return "api.worldofwarplanes.eu/wowp";
+                    default:
+                        return null;
+                }
+            }
         }
 
-        public WGSettings(WGRequestMethod requestMethod, WGRequestProtocol requestProtocol, int maxRequestsPerSecond)
+        public WGSettings() : this(WGRequestMethod.GET, WGRequestProtocol.HTTP, 10)
         {
-            _requestMethod = requestMethod;
-            _requestProtocol = requestProtocol;
-            _maxRequestsPerSecond = maxRequestsPerSecond;
+        }
+
+        public WGSettings(WGRequestMethod requestMethod, WGRequestProtocol requestProtocol, int maxRequestsPerSecond) : this(requestMethod, requestProtocol, maxRequestsPerSecond, WGRequestTarget.WorldOfTanks)
+        {
+        }
+
+        public WGSettings(WGRequestMethod requestMethod, WGRequestProtocol requestProtocol, int maxRequestsPerSecond, WGRequestTarget requestTarget)
+        {
+            RequsetMethod = requestMethod;
+            RequestProtocol = requestProtocol;
+            MaxRequestsPerSecond = maxRequestsPerSecond;
+            RequestTarget = requestTarget;
         }
     }
 }

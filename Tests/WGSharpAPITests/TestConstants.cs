@@ -1,4 +1,6 @@
 ﻿
+using System;
+
 namespace WGSharpAPITests
 {
     public static class TestConstants
@@ -29,5 +31,15 @@ namespace WGSharpAPITests
             public const string ID = "demo";
         }
 
+        public static class JsonResponse
+        {
+            public static string MockDataRoot = $"{Environment.CurrentDirectory}\\MockData\\";
+            public static string AccountsRoot = $"{MockDataRoot}Accounts\\";
+
+            public static string SearchPlayerResult_1_valid = $"{AccountsRoot}SearchPlayer_1_valid.json";
+            public static string SearchPlayer_1_exact_result = $"{AccountsRoot}SearchPlayer_1_exact_result.json";
+            public static string SearchPlayer_1_account_id_result_only = $"{AccountsRoot}SearchPlayer_1_account_id_result_only.json"; 
+            public static string SearchPlayer_invalid_2_letters_used = $"{AccountsRoot}SearchPlayer_invalid_2_letters_used.json"; 
+        }
     }
 }

@@ -91,7 +91,6 @@
     <Compile Include="Tools\DateTimeTools.cs" />
     <Compile Include="Tools\EnumHelper.cs" />
     <Compile Include="WgApplication\WGApplication.cs" />
-    <Compile Include="WgApplication\WGApplication.Players.cs" />
     <Compile Include="Enums\WGRequestMethod.cs" />
     <Compile Include="Enums\WGRequestProtocol.cs" />
     <Compile Include="WGRawResponse.cs" />
@@ -109,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <Compile Include="WgApplication\WGApplication.Players.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

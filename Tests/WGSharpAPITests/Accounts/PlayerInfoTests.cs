@@ -21,8 +21,10 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using Moq;
 using NUnit.Framework;
 using WGSharpAPI.Enums;
+using WGSharpAPI.Interfaces;
 using WGSharpAPI.Tools;
 
 namespace WGSharpAPITests.Accounts
@@ -30,9 +32,28 @@ namespace WGSharpAPITests.Accounts
     [Category(TestConstants.Category.Integration)]
     public class PlayerInfoTests : BaseTestClass
     {
+        MockRepository _mock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mock = new MockRepository(MockBehavior.Default);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _mock = null; 
+        }
+
         [Test]
         public void Account_info_return_playerInfo()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_NoPrivate));
+            WGApplication.Request = wgRequestMock.Object;
+
             var createdAtDate = ToolsExtensions.DateFromWGTimestamp(TestConstants.Just0rzAccount.CreatedAt);
             var result = WGApplication.GetPlayerInfo(TestConstants.Just0rzAccount.AccountId);
 
@@ -45,6 +66,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_info_return_listof_playerInfo()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_NoPrivate));
+            WGApplication.Request = wgRequestMock.Object;
+
             var createdAtDate = ToolsExtensions.DateFromWGTimestamp(TestConstants.Just0rzAccount.CreatedAt);
             var result = WGApplication.GetPlayerInfo(new[] { TestConstants.Just0rzAccount.AccountId });
 
@@ -57,6 +83,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_info_return_listof_playerInfo_using_all_parameters_except_accessToken()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_NoPrivate));
+            WGApplication.Request = wgRequestMock.Object;
+
             var createdAtDate = ToolsExtensions.DateFromWGTimestamp(TestConstants.Just0rzAccount.CreatedAt);
             var result = WGApplication.GetPlayerInfo(new[] { TestConstants.Just0rzAccount.AccountId }, WGLanguageField.EN, null, "account_id,created_at");
 

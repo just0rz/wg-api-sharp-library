@@ -21,17 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using Moq;
 using NUnit.Framework;
 using WGSharpAPI.Enums;
+using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPITests.Accounts
 {
     [Category(TestConstants.Category.Integration)]
     public class PlayerVehiclesTests : BaseTestClass
     {
+        MockRepository _mock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mock = new MockRepository(MockBehavior.Default);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _mock = null;
+        }
+
         [Test]
         public void Account_tanks_get_player_vehicles()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_Vehicles));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetPlayerVehicles(TestConstants.Just0rzAccount.AccountId);
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
@@ -46,6 +67,12 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_tanks_get_vehicles_for_list_of_players()
         {
+
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_Vehicles));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetPlayerVehicles(new[] { TestConstants.Just0rzAccount.AccountId });
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)
@@ -60,6 +87,12 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_tanks_get_player_vehicles_specify_all_parameters()
         {
+
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_Vehicles));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetPlayerVehicles(new[] { TestConstants.Just0rzAccount.AccountId }, new long[] { TestConstants.Just0rzAccount.GrilleTankId }, WGLanguageField.EN, null, null);
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Tanks.Count == 0)

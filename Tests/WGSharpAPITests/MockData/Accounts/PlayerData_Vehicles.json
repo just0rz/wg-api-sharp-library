@@ -1,0 +1,768 @@
+{
+  "status": "ok",
+  "meta": { "count": 1 },
+  "data": {
+    "508637087": [
+      {
+        "statistics": {
+          "wins": 434,
+          "battles": 751
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 6161
+      },
+      {
+        "statistics": {
+          "wins": 386,
+          "battles": 664
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 5649
+      },
+      {
+        "statistics": {
+          "wins": 289,
+          "battles": 510
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 2817
+      },
+      {
+        "statistics": {
+          "wins": 245,
+          "battles": 471
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 10001
+      },
+      {
+        "statistics": {
+          "wins": 223,
+          "battles": 431
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 7937
+      },
+      {
+        "statistics": {
+          "wins": 143,
+          "battles": 286
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 9745
+      },
+      {
+        "statistics": {
+          "wins": 152,
+          "battles": 252
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 12561
+      },
+      {
+        "statistics": {
+          "wins": 140,
+          "battles": 246
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 4881
+      },
+      {
+        "statistics": {
+          "wins": 95,
+          "battles": 214
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 2849
+      },
+      {
+        "statistics": {
+          "wins": 124,
+          "battles": 199
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 2353
+      },
+      {
+        "statistics": {
+          "wins": 98,
+          "battles": 184
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 5137
+      },
+      {
+        "statistics": {
+          "wins": 85,
+          "battles": 169
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 529
+      },
+      {
+        "statistics": {
+          "wins": 63,
+          "battles": 151
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 18449
+      },
+      {
+        "statistics": {
+          "wins": 77,
+          "battles": 145
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 5393
+      },
+      {
+        "statistics": {
+          "wins": 81,
+          "battles": 144
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 4353
+      },
+      {
+        "statistics": {
+          "wins": 57,
+          "battles": 127
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 13345
+      },
+      {
+        "statistics": {
+          "wins": 77,
+          "battles": 123
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 11777
+      },
+      {
+        "statistics": {
+          "wins": 55,
+          "battles": 107
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 6657
+      },
+      {
+        "statistics": {
+          "wins": 55,
+          "battles": 96
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 513
+      },
+      {
+        "statistics": {
+          "wins": 49,
+          "battles": 93
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 2321
+      },
+      {
+        "statistics": {
+          "wins": 49,
+          "battles": 90
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 4113
+      },
+      {
+        "statistics": {
+          "wins": 46,
+          "battles": 84
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 8977
+      },
+      {
+        "statistics": {
+          "wins": 48,
+          "battles": 83
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 1553
+      },
+      {
+        "statistics": {
+          "wins": 36,
+          "battles": 83
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 273
+      },
+      {
+        "statistics": {
+          "wins": 47,
+          "battles": 82
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 6417
+      },
+      {
+        "statistics": {
+          "wins": 34,
+          "battles": 79
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 18961
+      },
+      {
+        "statistics": {
+          "wins": 30,
+          "battles": 65
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 4369
+      },
+      {
+        "statistics": {
+          "wins": 37,
+          "battles": 63
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 54785
+      },
+      {
+        "statistics": {
+          "wins": 25,
+          "battles": 55
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 13841
+      },
+      {
+        "statistics": {
+          "wins": 24,
+          "battles": 55
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 14097
+      },
+      {
+        "statistics": {
+          "wins": 27,
+          "battles": 50
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 14145
+      },
+      {
+        "statistics": {
+          "wins": 33,
+          "battles": 49
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 1809
+      },
+      {
+        "statistics": {
+          "wins": 23,
+          "battles": 47
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 6465
+      },
+      {
+        "statistics": {
+          "wins": 20,
+          "battles": 46
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 8961
+      },
+      {
+        "statistics": {
+          "wins": 25,
+          "battles": 42
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 2833
+      },
+      {
+        "statistics": {
+          "wins": 23,
+          "battles": 41
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 4625
+      },
+      {
+        "statistics": {
+          "wins": 20,
+          "battles": 38
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 2065
+      },
+      {
+        "statistics": {
+          "wins": 12,
+          "battles": 35
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 5153
+      },
+      {
+        "statistics": {
+          "wins": 20,
+          "battles": 32
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 3089
+      },
+      {
+        "statistics": {
+          "wins": 24,
+          "battles": 32
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 1041
+      },
+      {
+        "statistics": {
+          "wins": 12,
+          "battles": 27
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 5409
+      },
+      {
+        "statistics": {
+          "wins": 12,
+          "battles": 24
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 3105
+      },
+      {
+        "statistics": {
+          "wins": 15,
+          "battles": 23
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 8785
+      },
+      {
+        "statistics": {
+          "wins": 11,
+          "battles": 23
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 14353
+      },
+      {
+        "statistics": {
+          "wins": 13,
+          "battles": 18
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 6673
+      },
+      {
+        "statistics": {
+          "wins": 12,
+          "battles": 18
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 12817
+      },
+      {
+        "statistics": {
+          "wins": 12,
+          "battles": 18
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 9041
+      },
+      {
+        "statistics": {
+          "wins": 12,
+          "battles": 17
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 6433
+      },
+      {
+        "statistics": {
+          "wins": 9,
+          "battles": 16
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 3121
+      },
+      {
+        "statistics": {
+          "wins": 8,
+          "battles": 16
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 10273
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 15
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 1537
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 12
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 6401
+      },
+      {
+        "statistics": {
+          "wins": 5,
+          "battles": 11
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 2881
+      },
+      {
+        "statistics": {
+          "wins": 5,
+          "battles": 11
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 15137
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 11
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 5121
+      },
+      {
+        "statistics": {
+          "wins": 7,
+          "battles": 11
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 3073
+      },
+      {
+        "statistics": {
+          "wins": 7,
+          "battles": 10
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 289
+      },
+      {
+        "statistics": {
+          "wins": 6,
+          "battles": 10
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 3393
+      },
+      {
+        "statistics": {
+          "wins": 5,
+          "battles": 10
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 7761
+      },
+      {
+        "statistics": {
+          "wins": 5,
+          "battles": 9
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 8017
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 9
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 5953
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 8
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 2145
+      },
+      {
+        "statistics": {
+          "wins": 7,
+          "battles": 8
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 7681
+      },
+      {
+        "statistics": {
+          "wins": 5,
+          "battles": 8
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 4897
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 8
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 3345
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 7
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 1633
+      },
+      {
+        "statistics": {
+          "wins": 2,
+          "battles": 7
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 4609
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 7
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 9761
+      },
+      {
+        "statistics": {
+          "wins": 2,
+          "battles": 6
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 4401
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 6
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 10497
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 6
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 8273
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 6
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 1057
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 6
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 353
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 5
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 6913
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 5
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 1329
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 5
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 6177
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 5
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 785
+      },
+      {
+        "statistics": {
+          "wins": 4,
+          "battles": 5
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 5665
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 4
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 3841
+      },
+      {
+        "statistics": {
+          "wins": 2,
+          "battles": 4
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 385
+      },
+      {
+        "statistics": {
+          "wins": 2,
+          "battles": 4
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 14657
+      },
+      {
+        "statistics": {
+          "wins": 3,
+          "battles": 4
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 609
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 3
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 3329
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 3
+        },
+        "mark_of_mastery": 4,
+        "tank_id": 545
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 3
+        },
+        "mark_of_mastery": 0,
+        "tank_id": 4865
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 3
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 1825
+      },
+      {
+        "statistics": {
+          "wins": 0,
+          "battles": 2
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 129
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 2
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 81
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 2
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 577
+      },
+      {
+        "statistics": {
+          "wins": 0,
+          "battles": 2
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 56577
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 2
+        },
+        "mark_of_mastery": 2,
+        "tank_id": 3601
+      },
+      {
+        "statistics": {
+          "wins": 2,
+          "battles": 2
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 55073
+      },
+      {
+        "statistics": {
+          "wins": 0,
+          "battles": 1
+        },
+        "mark_of_mastery": 0,
+        "tank_id": 60689
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 1
+        },
+        "mark_of_mastery": 1,
+        "tank_id": 833
+      },
+      {
+        "statistics": {
+          "wins": 1,
+          "battles": 1
+        },
+        "mark_of_mastery": 3,
+        "tank_id": 1345
+      }
+    ]
+  }
+}

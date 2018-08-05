@@ -21,17 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using Moq;
 using NUnit.Framework;
 using WGSharpAPI.Enums;
+using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPITests.Accounts
 {
     [Category(TestConstants.Category.Integration)]
     public class PlayerAchievementsTests : BaseTestClass
     {
+        MockRepository _mock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mock = new MockRepository(MockBehavior.Default);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _mock = null;
+        }
+
         [Test]
         public void Account_achievements_return_achievements()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_Achievements));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetPlayerAchievements(TestConstants.Just0rzAccount.AccountId);
 
             if (result.Data != null && result.Data.Count == 0)
@@ -45,6 +66,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_achievements_for_a_list_of_players_return_achievements()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_Achievements));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetPlayerAchievements(new[] { TestConstants.Just0rzAccount.AccountId });
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Achievements.Count == 0)
@@ -58,6 +84,11 @@ namespace WGSharpAPITests.Accounts
         [Test]
         public void Account_achievements_specify_all_parameters_return_achievements()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.PlayerData_Achievements));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetPlayerAchievements(new[] { TestConstants.Just0rzAccount.AccountId }, WGLanguageField.EN, null, null);
 
             if (result.Data != null && result.Data[0] != null && result.Data[0].Achievements.Count == 0)

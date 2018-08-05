@@ -107,6 +107,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="MockData\Accounts\PlayerData_Achievements.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MockData\Accounts\PlayerData_NoPrivate.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MockData\Accounts\PlayerData_Vehicles.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="MockData\Accounts\SearchPlayer_invalid_2_letters_used.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

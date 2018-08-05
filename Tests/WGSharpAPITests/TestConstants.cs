@@ -39,7 +39,10 @@ namespace WGSharpAPITests
             public static string SearchPlayerResult_1_valid = $"{AccountsRoot}SearchPlayer_1_valid.json";
             public static string SearchPlayer_1_exact_result = $"{AccountsRoot}SearchPlayer_1_exact_result.json";
             public static string SearchPlayer_1_account_id_result_only = $"{AccountsRoot}SearchPlayer_1_account_id_result_only.json"; 
-            public static string SearchPlayer_invalid_2_letters_used = $"{AccountsRoot}SearchPlayer_invalid_2_letters_used.json"; 
+            public static string SearchPlayer_invalid_2_letters_used = $"{AccountsRoot}SearchPlayer_invalid_2_letters_used.json";
+            public static string PlayerData_NoPrivate = $"{AccountsRoot}PlayerData_NoPrivate.json";
+            public static string PlayerData_Vehicles = $"{AccountsRoot}PlayerData_Vehicles.json";
+            public static string PlayerData_Achievements = $"{AccountsRoot}PlayerData_Achievements.json";
         }
     }
 }

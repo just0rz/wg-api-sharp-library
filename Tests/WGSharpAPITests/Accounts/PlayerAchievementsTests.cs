@@ -28,7 +28,7 @@ using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPITests.Accounts
 {
-    [Category(TestConstants.Category.Integration)]
+    [Category(TestConstants.Category.Dev)]
     public class PlayerAchievementsTests : BaseTestClass
     {
         MockRepository _mock;

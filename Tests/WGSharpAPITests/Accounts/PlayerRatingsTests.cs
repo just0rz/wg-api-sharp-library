@@ -27,7 +27,7 @@ using WGSharpAPI.Enums;
 
 namespace WGSharpAPITests.Accounts
 {
-    [Category(TestConstants.Category.Integration)]
+    [Category(TestConstants.Category.Dev)]
     public class PlayerRatingsTests : BaseTestClass
     {
         [Test]

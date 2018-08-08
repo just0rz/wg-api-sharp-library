@@ -22,16 +22,37 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
 using System;
+using Moq;
 using NUnit.Framework;
+using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPITests.PlayersVehicles
 {
     [Category(TestConstants.Category.Integration)]
     public class TankAchievementsTests : BaseTestClass
     {
+        MockRepository _mock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mock = new MockRepository(MockBehavior.Default);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _mock = null;
+        }
+
         [Test]
         public void PlayerVehicles_tanksachievements_get_all()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetTankAchievements(TestConstants.Just0rzAccount.AccountId);
 
             Assert.IsNotNull(result.Data);
@@ -42,6 +63,11 @@ namespace WGSharpAPITests.PlayersVehicles
         [Test]
         public void PlayerVehicles_tanksachievements_get_all_specify_all_parameters()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetTankAchievements(TestConstants.Just0rzAccount.AccountId, new[] { TestConstants.Just0rzAccount.GrilleTankId }, WGSharpAPI.Enums.WGLanguageField.EN, "tank_id,achievements", null, null);
 
             Assert.IsNotNull(result.Data);

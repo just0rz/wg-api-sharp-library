@@ -21,17 +21,38 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
  */
+using Moq;
 using NUnit.Framework;
 using WGSharpAPI.Enums;
+using WGSharpAPI.Interfaces;
 
 namespace WGSharpAPITests.Encyclopedia
 {
-    [Category(TestConstants.Category.Integration)]
+    [Category(TestConstants.Category.Dev)]
     public class GunsTests : BaseTestClass
     {
+        MockRepository _mock;
+
+        [SetUp]
+        public void SetUp()
+        {
+            _mock = new MockRepository(MockBehavior.Default);
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            _mock = null;
+        }
+
         [Test]
         public void Encyclopedia_tankguns_get_all_guns()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetGuns();
 
             Assert.IsNotNull(result.Data);
@@ -42,6 +63,11 @@ namespace WGSharpAPITests.Encyclopedia
         [Test]
         public void Encyclopedia_tankguns_get_guns_by_list_of_id()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetGuns(new[] { TestConstants.Just0rzAccount.GrilleGunId });
 
             Assert.IsNotNull(result.Data);
@@ -52,6 +78,11 @@ namespace WGSharpAPITests.Encyclopedia
         [Test]
         public void Encyclopedia_tankguns_get_1_gun_by_id()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetGuns(TestConstants.Just0rzAccount.GrilleGunId);
 
             Assert.IsNotNull(result.Data);
@@ -62,6 +93,11 @@ namespace WGSharpAPITests.Encyclopedia
         [Test]
         public void Encyclopedia_tankguns_get_guns_by_list_of_id_specify_all_parameters()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetGuns(new[] { TestConstants.Just0rzAccount.GrilleGunId }, WGLanguageField.EN, WGNation.All, "name");
 
             Assert.IsNotNull(result.Data);
@@ -72,6 +108,11 @@ namespace WGSharpAPITests.Encyclopedia
         [Test]
         public void Encyclopedia_tankguns_get_guns_by_list_of_id_specify_all_parameters_for_specific_nation()
         {
+            var wgRequestMock = _mock.Create<IWGRequest>(MockBehavior.Loose);
+            wgRequestMock.SetupGet(x => x.IsConsumed).Returns(false);
+            wgRequestMock.Setup(x => x.GetResponse()).Returns(TestHelper.LoadJson(TestConstants.JsonResponse.SearchPlayerResult_1_valid));
+            WGApplication.Request = wgRequestMock.Object;
+
             var result = WGApplication.GetGuns(new[] { TestConstants.Just0rzAccount.GrilleGunId }, WGLanguageField.EN, WGNation.Germany, "name");
 
             Assert.IsNotNull(result.Data);

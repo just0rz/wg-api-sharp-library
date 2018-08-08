@@ -29,7 +29,7 @@ using WGSharpAPI.Tools;
 
 namespace WGSharpAPITests.Accounts
 {
-    [Category(TestConstants.Category.Integration)]
+    [Category(TestConstants.Category.Dev)]
     public class PlayerInfoTests : BaseTestClass
     {
         MockRepository _mock;

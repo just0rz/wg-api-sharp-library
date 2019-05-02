@@ -9,7 +9,7 @@ For more details about the roadmap, etc. I use the [wiki](https://github.com/jus
 ## Project status ##
 
 <font color='orange'><b>Beta launched</b></font>
-![Build status](http://just.go.ro:9550/buildStatus/icon?job=WG%20API%20Sharp%20Library)
+![Build status](http://just.go.ro:9550/buildStatus/icon?job=WG+Sharp+API%2FWG+API+Sharp+Library)
 
 For the moment I have released a beta version.
 

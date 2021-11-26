@@ -1,121 +1,14 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project Sdk="Microsoft.NET.Sdk">
+
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{61032D9F-AB26-47F8-9E29-E4BE46C5B709}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>WGSharpAPI</RootNamespace>
-    <AssemblyName>WGSharpAPI</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>..\..\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
+
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\..\Solutions\packages\Newtonsoft.Json.11.0.2\lib\net40\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Entities\ClanDetails\Clan.cs" />
-    <Compile Include="Entities\ClanDetails\Battle.cs" />
-    <Compile Include="Entities\ClanDetails\Emblem.cs" />
-    <Compile Include="Entities\ClanDetails\Member.cs" />
-    <Compile Include="Entities\ClanDetails\Province.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\Module.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\Achievement.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Achievements\AchievementOption.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Achievements\TankAchievement.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Modules\Chassis.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Modules\Engine.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Modules\Gun.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Modules\Radio.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Tank.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Modules\TankModule.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\WorldOfTanks\Modules\Turret.cs" />
-    <Compile Include="Entities\EncyclopediaDetails\Vehicle.cs" />
-    <Compile Include="Entities\PlayerDetails\Achievement.cs" />
-    <Compile Include="Entities\PlayerDetails\TeamStatistics.cs" />
-    <Compile Include="Entities\PlayerDetails\Player.cs" />
-    <Compile Include="Entities\PlayerDetails\Achievements.cs" />
-    <Compile Include="Entities\PlayerDetails\Clan.cs" />
-    <Compile Include="Entities\PlayerDetails\ClanStatistics.cs" />
-    <Compile Include="Entities\PlayerDetails\CompanyStatistics.cs" />
-    <Compile Include="Entities\PlayerDetails\OverallStatistics.cs" />
-    <Compile Include="Entities\PlayerDetails\PrivateData.cs" />
-    <Compile Include="Entities\PlayerDetails\PlayerStatistics.cs" />
-    <Compile Include="Entities\BaseStatistics.cs" />
-    <Compile Include="Entities\PlayerDetails\Tank.cs" />
-    <Compile Include="Entities\PlayerDetails\TankStatistics.cs" />
-    <Compile Include="Enums\PlayerRatingType.cs" />
-    <Compile Include="Enums\StatisticsType.cs" />
-    <Compile Include="Enums\WGBattleType.cs" />
-    <Compile Include="Enums\WGRequestTarget.cs" />
-    <Compile Include="Enums\WGLanguageField.cs" />
-    <Compile Include="Enums\WGNation.cs" />
-    <Compile Include="Enums\WGSearchType.cs" />
-    <Compile Include="Enums\WGTimeDelta.cs" />
-    <Compile Include="Interfaces\IWGApplication.cs" />
-    <Compile Include="Interfaces\IWGRequest.cs" />
-    <Compile Include="Interfaces\IWGResponse.cs" />
-    <Compile Include="Meta.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tools\DateTimeTools.cs" />
-    <Compile Include="Tools\EnumHelper.cs" />
-    <Compile Include="WgApplication\WGApplication.cs" />
-    <Compile Include="Enums\WGRequestMethod.cs" />
-    <Compile Include="Enums\WGRequestProtocol.cs" />
-    <Compile Include="WGRawResponse.cs" />
-    <Compile Include="WGRequest.cs" />
-    <Compile Include="WGResponse.cs" />
-    <Compile Include="WGSettings.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="license.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Entities\EncyclopediaDetails\WorldOfWarplanes\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-    <Compile Include="WgApplication\WGApplication.Players.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+
 </Project>
+
